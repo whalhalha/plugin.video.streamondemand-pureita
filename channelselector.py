@@ -253,10 +253,8 @@ def channels_list():
     itemlist.append( Item( title="StreamBlog"    , channel="streamblog"         , language="IT" , category="S,F,A"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"streamblog.png" ))
     itemlist.append( Item( title="Streaming01"    , channel="streaming01"         , language="IT" , category="F"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"streaming01.png" ))
     itemlist.append( Item( title="Tantifilm"        , channel="tantifilm"       , language="IT"    , category="F, HD"       , type="generic"     ,thumbnail=THUMBNAIL_REMOTE+"tantifilm.png"))
+    itemlist.append( Item( title="Ricerca su Youtube"        , channel="youtube"       , language="IT"    , category="F,S,A,D,VOS,D"       , type="generic"     ,thumbnail=THUMBNAIL_REMOTE+"youtube.png"))
 	
-
-
-
     return itemlist
 
 def addfolder(nombre,channelname,accion,category="",thumbnailname="",thumbnail="",folder=True):
