@@ -30,9 +30,9 @@ key1 = "AIzaSyDXWo8-scFY-Ugcn2A0vGo8023hpcWtXto"
 ## Googleapi search
 api_search = "https://www.googleapis.com/youtube/v3/search" + \
              "?q=%s" + \
-             "&regionCode=ES" + \
+             "&regionCode=IT" + \
              "&part=snippet" + \
-             "&hl=es_ES" + \
+             "&hl=it_IT" + \
              "&key=" + key0 + \
              "&type=video" + \
              "&maxResults=%s" + \
