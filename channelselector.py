@@ -223,7 +223,7 @@ def channels_list():
     itemlist.append( Item( title="Asian Sub-Ita"      , channel="asiansubita"           , language="IT"    , category="F,S,VOS"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"asiansubita.png"))
     itemlist.append( Item( title="Casa-Cinema"         , channel="casacinema"           , language="IT"    , category="F,S,A,VOS"   , type="generic" , thumbnail=THUMBNAIL_REMOTE+"casacinema.png" ))
     itemlist.append( Item( title="CineBlog 01"         , channel="cineblog01"           , language="IT"    , category="F,S,A,VOS,HD"   , type="generic"  ))
-    #itemlist.append( Item( title="CineBlog01.FM"       , channel="cineblogfm"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"cineblogfm.png"   ))
+    itemlist.append( Item( title="CineBlog01.FM"       , channel="cineblogfm"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"cineblogfm.png"   ))
     itemlist.append( Item( title="Cinemagratis"        , channel="cinemagratis"       , language="IT"    , category="F"       , type="generic"     ,thumbnail=THUMBNAIL_REMOTE+"cinemagratis.png"))
     #itemlist.append( Item( title="Cinestreaming01"    , channel="cinestreaming01"         , language="IT" , category="F"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"cinestreaming01.png" ))
     itemlist.append( Item( title="Documentari Streaming"  , channel="documentaristreaming"           , language="IT"    , category="D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"documentaristreaming.png"   ))
