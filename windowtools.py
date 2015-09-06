@@ -44,3 +44,5 @@ ACTION_MOUSEMOVE2      = 107 # Mouse has moved
 ACTION_PREVIOUS_MENU2  = 92 #'Back'
 ACTION_CONTEXT_MENU    = 117 # pops up the context menu
 ACTION_CONTEXT_MENU2   = 229 # pops up the context menu (remote control "title" button)
+ACTION_MOUSE_LEFT_CLICK = 100
+ACTION_MOUSE_RIGHT_CLICK = 101

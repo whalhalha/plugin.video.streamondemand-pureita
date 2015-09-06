@@ -87,7 +87,7 @@ class MenuWindow(xbmcgui.WindowXML):
         self.setFocusId(100)
 
     def onAction(self, action):
-        plugintools.log("MenuWindow.onAction action.id="+repr(action.getId())+" action.buttonCode="+repr(action.getButtonCode()))
+        #plugintools.log("MenuWindow.onAction action.id="+repr(action.getId())+" action.buttonCode="+repr(action.getButtonCode()))
 
         pos = self.control_list.getSelectedPosition()
         item = self.itemlist[pos]
@@ -130,8 +130,9 @@ class MenuWindow(xbmcgui.WindowXML):
 
     def onClick( self, control_id ):
         plugintools.log("MenuWindow.onClick "+repr(control_id))
-        pass
-
+        if control_id == ACTION_MOUSE_LEFT_CLICK:
+			self.onAction(ACTION_SELECT_ITEM)
+			
     def onControl(self, control):
         plugintools.log("MenuWindow.onClick "+repr(control))
         pass

@@ -78,7 +78,7 @@ class ChannelWindow(xbmcgui.WindowXML):
         self.setFocusId(100)
 
     def onAction(self, action):
-        plugintools.log("ChannelWindow.onAction action.id="+repr(action.getId())+" action.buttonCode="+repr(action.getButtonCode()))
+        #plugintools.log("ChannelWindow.onAction action.id="+repr(action.getId())+" action.buttonCode="+repr(action.getButtonCode()))
         
         if action == ACTION_PARENT_DIR or action==ACTION_PREVIOUS_MENU or action==ACTION_PREVIOUS_MENU2:
             self.close()
@@ -116,7 +116,8 @@ class ChannelWindow(xbmcgui.WindowXML):
 
     def onClick( self, control_id ):
         plugintools.log("ChannelWindow.onClick "+repr(control_id))
-        pass
+        if control_id == ACTION_MOUSE_LEFT_CLICK:
+			self.onAction(ACTION_SELECT_ITEM)
 
     def onControl(self, control):
         plugintools.log("ChannelWindow.onClick "+repr(control))
