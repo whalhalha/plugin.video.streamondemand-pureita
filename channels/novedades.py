@@ -27,11 +27,11 @@ def mainlist(item,preferred_thumbnail="squares"):
     logger.info("pelisalacarta.channels.novedades mainlist")
 
     itemlist = []
-    itemlist.append( Item(channel=__channel__, action="peliculas"            , title="Películas", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_peliculas.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="peliculas_infantiles" , title="Para niños", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_infantiles.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="series"               , title="Episodios de series", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_series.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="anime"                , title="Episodios de anime", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_anime.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="documentales"         , title="Documentales", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_documentales.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="peliculas"            , title="Film", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_peliculas.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="peliculas_infantiles" , title="Per Bambini", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_infantiles.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="series"               , title="Episodi di Serie TV", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_series.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="anime"                , title="Episodi di Anime", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_anime.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="documentales"         , title="Documentari", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_documentales.png",viewmode="movie"))
 
     return itemlist
 
@@ -40,21 +40,13 @@ def peliculas(item):
 
     itemlist = []
 
-    import zpeliculas
-    item.url = "http://www.zpeliculas.com"
-    itemlist.extend( zpeliculas.peliculas(item) )
+    import cineblog01
+    item.url = "www.cb01.eu"
+    itemlist.extend( cineblog01.peliculasrobalo(item) )
 
-    import cinetux
-    item.url = "http://www.cinetux.org/"
-    itemlist.extend( cinetux.peliculas(item) )
-
-    import divxatope
-    item.url = "http://www.divxatope.com/categoria/peliculas-castellano"
-    itemlist.extend( divxatope.lista(item) )
-
-    import gnula
-    item.url = "http://gnula.nu/peliculas-online/lista-de-peliculas-online-parte-1/"
-    itemlist.extend( gnula.peliculas(item)[:20] )
+    import itafilmtv
+    item.url = "http://www.itafilm.tv/"
+    itemlist.extend( itafilmtv.fichas(item) )
 
     sorted_itemlist = []
 
@@ -73,21 +65,9 @@ def peliculas_infantiles(item):
 
     itemlist = []
 
-    import zpeliculas
-    item.url = "http://www.zpeliculas.com/peliculas/p-animacion/"
-    itemlist.extend( zpeliculas.peliculas(item) )
-
-    import cinetux
-    item.url = "http://www.cinetux.org/genero/infantil"
-    itemlist.extend( cinetux.peliculas(item) )
-
-    import gnula
-    item.url = "http://gnula.nu/generos/lista-de-peliculas-del-genero-infantil/"
-    itemlist.extend( gnula.peliculas(item)[:20] )
-
-    import oranline
-    item.url = "http://www.oranline.com/Películas/infantil/"
-    itemlist.extend( oranline.peliculas(item) )
+    import guardaserie
+    item.url = "http://www.guardaserie.net/lista-serie-tv-guardaserie/"
+    itemlist.extend( guardaserie.cartoni(item) )
 
     sorted_itemlist = []
 
@@ -106,13 +86,13 @@ def series(item):
 
     itemlist = []
 
-    import divxatope
-    item.url = "http://www.divxatope.com/categoria/series"
-    itemlist.extend( divxatope.lista(item) )
+    import serietvsubita
+    item.url = "http://serietvsubita.net/"
+    itemlist.extend( serietvsubita.episodios(item) )
 
-    import seriesflv
-    item.url = "es"
-    itemlist.extend( seriesflv.ultimos_episodios(item) )
+    import guardaserie
+    item.url = "http://www.guardaserie.net/lista-serie-tv-guardaserie/"
+    itemlist.extend( guardaserie.fichas(item) )
 
     sorted_itemlist = []
 
@@ -131,13 +111,13 @@ def anime(item):
 
     itemlist = []
 
-    import animeid
-    item.url = "http://animeid.tv/"
-    itemlist.extend( animeid.novedades_episodios(item) )
+    import animesubita
+    item.url = "ttp://www.animesubita.info/"
+    itemlist.extend( animesubita.novedades(item) )
 
-    import animeflv
-    item.url = "http://animeflv.net/"
-    itemlist.extend( animeflv.novedades(item) )
+    import cineblog01
+    item.url = "http://www.cineblog01.cc/anime/"
+    itemlist.extend( cineblog01.listanime(item) )
 
     sorted_itemlist = []
 
@@ -156,13 +136,9 @@ def documentales(item):
 
     itemlist = []
 
-    import documaniatv
-    item.url = "http://www.documaniatv.com/newvideos.html"
-    itemlist.extend( documaniatv.novedades(item) )
-
-    import oranline
-    item.url = "http://oranline.com/Pel%C3%ADculas/documentales/"
-    itemlist.extend( oranline.peliculas(item) )
+    import documentaristreaming
+    item.url = "http://documentaristreaming.net/"
+    itemlist.extend( documentaristreaming.peliculas(item) )
 
     sorted_itemlist = []
 
