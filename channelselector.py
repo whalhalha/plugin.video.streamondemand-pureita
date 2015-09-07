@@ -250,7 +250,7 @@ def channels_list():
     itemlist.append( Item( title="Pianeta Streaming"   , channel="pianetastreaming"           , language="IT"    , category="F"   , type="generic" ,thumbnail=THUMBNAIL_REMOTE+"pianetastreaming.png" ))
     itemlist.append( Item( title="Pirate Streaming"    , channel="piratestreaming"           , language="IT"    , category="F,S"   , type="generic"  ))
     itemlist.append( Item( title="PortaleHD"    , channel="portalehd"           , language="IT"    , category="F"   , type="generic", thumbnail=THUMBNAIL_REMOTE+"portalehd.png"  ))
-    #itemlist.append( Item( title="Serie HD"     , channel="seriehd"       , language="IT"    , category="S"        , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"seriehd.png"   ))
+    itemlist.append( Item( title="Serie HD"     , channel="seriehd"       , language="IT"    , category="S"        , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"seriehd.png"   ))
     itemlist.append( Item( title="Serie TV Sub ITA"    , channel="serietvsubita"         , language="IT" , category="S,VOS"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"serietvsubita.png" ))
     itemlist.append( Item( title="StreamBlog"    , channel="streamblog"         , language="IT" , category="S,F,A"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"streamblog.png" ))
     itemlist.append( Item( title="Streaming01"    , channel="streaming01"         , language="IT" , category="F"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"streaming01.png" ))
