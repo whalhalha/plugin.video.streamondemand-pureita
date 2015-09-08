@@ -155,7 +155,7 @@ def findvid(item):
     data = scrapertools.cache_page(item.url)
     data = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
     if data != "":
-        from lib.jsbeautifier.unpackers import packer
+        from jsbeautifier.unpackers import packer
         data = packer.unpack(data).replace(r'\\/', '/')
         itemlist = servertools.find_video_items(data=data)
 
