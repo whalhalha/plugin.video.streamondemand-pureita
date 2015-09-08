@@ -724,7 +724,7 @@ def play(item):
         data = scrapertools.get_match(data, 'window.location.href = "([^"]+)";')
         print "##### play go.php data ##\n%s\n##" % data
     elif "/link/" in item.url:
-        from lib.jsbeautifier.unpackers import packer
+        from jsbeautifier.unpackers import packer
 
         try:
             data = scrapertools.get_match(data, "(eval.function.p,a,c,k,e,.*?)</script>")
