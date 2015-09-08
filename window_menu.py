@@ -87,7 +87,7 @@ class MenuWindow(xbmcgui.WindowXML):
         self.setFocusId(100)
 
     def onAction(self, action):
-        #plugintools.log("MenuWindow.onAction action.id="+repr(action.getId())+" action.buttonCode="+repr(action.getButtonCode()))
+        plugintools.log("MenuWindow.onAction action.id="+repr(action.getId())+" action.buttonCode="+repr(action.getButtonCode()))
 
         pos = self.control_list.getSelectedPosition()
         item = self.itemlist[pos]
@@ -95,6 +95,9 @@ class MenuWindow(xbmcgui.WindowXML):
             self.getControl(301).setImage(item.thumbnail)
             self.getControl(302).setText(item.title)
             self.getControl(303).setText(item.plot)
+
+        ## Botón izquierdo del ratón para la lista de menús de los canales y todos los sus niveles hasta el visionado o descarga.
+        if action == 100: action = ACTION_SELECT_ITEM
 
         if action == ACTION_PARENT_DIR or action==ACTION_PREVIOUS_MENU or action==ACTION_PREVIOUS_MENU2:
             self.close()
@@ -129,10 +132,9 @@ class MenuWindow(xbmcgui.WindowXML):
         pass
 
     def onClick( self, control_id ):
-        plugintools.log("MenuWindow.onClick "+repr(control_id))
-        if control_id == ACTION_MOUSE_LEFT_CLICK:
-			self.onAction(ACTION_SELECT_ITEM)
-			
+        plugintools.log("ChannelWindow.onClick "+repr(control_id))
+        pass
+	
     def onControl(self, control):
         plugintools.log("MenuWindow.onClick "+repr(control))
         pass
