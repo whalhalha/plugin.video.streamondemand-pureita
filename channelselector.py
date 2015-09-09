@@ -236,6 +236,7 @@ def channels_list():
     itemlist.append( Item( title="Film per tutti"      , channel="filmpertutti"           , language="IT"    , category="F,S,A"    , type="generic"     ))
     itemlist.append( Item( title="Film Senza Limiti"   , channel="filmsenzalimiti"       , language="IT"    , category="F"        , type="generic"     ))
     itemlist.append( Item( title="FilmSubito"          , channel="filmsubitotv"           , language="IT"    , category="F,S,A,D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"filmsubitotv.png" ))
+    itemlist.append( Item( title="FoxyCinema"          , channel="foxycinema"           , language="IT"    , category="F,S,A,D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"foxycinema.png" ))
     itemlist.append( Item( title="Guardaserie.net"     , channel="guardaserie"       , language="IT"    , category="F,S,A"        , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"guardaserie.png"   ))
     itemlist.append( Item( title="GuardareFilm"         , channel="guardarefilm"           , language="IT"    , category="F,S,A"    , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"guardarefilm.png"))
     itemlist.append( Item( title="Hubberfilm"          , channel="hubberfilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"hubberfilm.png"))
