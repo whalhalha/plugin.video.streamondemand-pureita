@@ -31,7 +31,7 @@ def mainlist(item):
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi Film Inseriti[/COLOR]", action="peliculas", url="http://www.foxycinema.org/film.html", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
     #itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Categoria[/COLOR]", action="categorias", url="http://www.fastvideo.tv/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
-    #itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
 
     
     return itemlist
@@ -58,9 +58,9 @@ def categorias(item):
 
 def search(item,texto):
     logger.info("[foxycinema.py] "+item.url+" search "+texto)
-    item.url = "http://www.fastvideo.tv/?s="+texto
+    item.url = "http://www.foxycinema.org/search?q="+texto+"&Search="
     try:
-        return peliculas(item)
+        return peliculasearch(item)
     # Se captura la excepción, para no interrumpir al buscador global si un canal falla
     except:
         import sys
@@ -105,3 +105,31 @@ def peliculas(item):
 
     return itemlist
 
+def peliculasearch(item):
+    logger.info("pelisalacarta.foxycinema peliculas")
+    itemlist = []
+
+    # Descarga la pagina
+    data = scrapertools.cache_page(item.url)
+
+    # Extrae las entradas (carpetas)
+    patron = '<h1 class="uk-article-title">\s*'
+    patron += '<a href="(.*?)" title=".*?">(.*?)</a>'
+    matches = re.compile(patron,re.DOTALL).findall(data)
+    scrapertools.printMatches(matches)
+
+    for scrapedurl,scrapedtitle in matches:
+        scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
+        if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"]")
+        itemlist.append( Item(channel=__channel__, action="findvideos", title=scrapedtitle, url=sito+scrapedurl , folder=True) )
+
+    # Extrae el paginador
+    patronvideos  = '<li><a class="next" href="(.*?)" title="Avanti"><i class="uk-icon-angle-right"></i></a></li>'
+    matches = re.compile(patronvideos,re.DOTALL).findall(data)
+    scrapertools.printMatches(matches)
+
+    if len(matches)>0:
+        scrapedurl = urlparse.urljoin(item.url,matches[0])
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo>>[/COLOR]" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
+
+    return itemlist
