@@ -4,7 +4,7 @@
 # Canal para altadefinizioneclick
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # ------------------------------------------------------------
-import urllib2, re, urlparse
+import urllib2, re
 import time
 
 from core import logger
@@ -37,14 +37,12 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, title="Al Cinema", action="fichas", url=host + "/al-cinema/" ) )
-    itemlist.append( Item( channel=__channel__, title="Nuove Uscite", action="fichas", url=host + "/nuove-uscite/" ) )
-    itemlist.append( Item( channel=__channel__, title="Sub-ITA", action="fichas", url=host + "/sub-ita/" ) )
-    itemlist.append( Item( channel=__channel__, title="Genere", action="categorias", url=host ) )	
-    itemlist.append( Item( channel=__channel__, title="Anno", action="categorias1", url=host ) )
-    itemlist.append( Item( channel=__channel__, title="Qualità", action="categorias2", url=host ) )
-    itemlist.append( Item( channel=__channel__, title="Ricerca...", action="search", url=host ) )
-	
+    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Al Cinema[/COLOR]", action="fichas", url=host + "/al-cinema/" ,thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png") )
+    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Film per Genere[/COLOR]", action="genere", url=host , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png") )
+    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Film per Anno[/COLOR]", action="anno", url=host, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png" ) )
+    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Film Sub-Ita[/COLOR]", action="fichas", url=host + "/sub-ita/", extra="sub" , thumbnail="http://i.imgur.com/qUENzxl.png") )
+    itemlist.append( Item( channel=__channel__, title="[COLOR orange]Cerca...[/COLOR]", action="search", url=host , thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
+
     return itemlist
 
 def search( item, texto ):
@@ -62,6 +60,65 @@ def search( item, texto ):
             logger.error("%s" % line)
         return []
 
+def genere(item):
+    logger.info("[altadefinizioneclick.py] genere")
+    itemlist = []
+
+    data = anti_cloudflare( item.url )
+
+    ## ------------------------------------------------
+    cookies = ""
+    matches = re.compile( '(.altadefinizione.click.*?)\n', re.DOTALL ).findall( config.get_cookie_data() )
+    for cookie in matches:
+        name = cookie.split( '\t' )[5]
+        value = cookie.split( '\t' )[6]
+        cookies+= name + "=" + value + ";"
+    headers.append( ['Cookie',cookies[:-1]] )
+    import urllib
+    _headers = urllib.urlencode( dict( headers ) )
+    ## ------------------------------------------------
+
+    data = scrapertools.find_single_match(data,'<option value="http://altadefinizione.click">Seleziona Categoria Film</option>(.*?)</form>')
+
+    patron  = '<option value="(.*?)">(.*?)</option>'
+    matches = re.compile(patron,re.DOTALL).findall(data)
+    scrapertools.printMatches(matches)
+
+    for scrapedurl,scrapedtitle in matches:
+        itemlist.append( Item(channel=__channel__, action="fichas", title=scrapedtitle, url=scrapedurl, folder=True))
+
+    return itemlist
+
+def anno(item):
+    logger.info("[altadefinizioneclick.py] genere")
+    itemlist = []
+
+    data = anti_cloudflare( item.url )
+
+    ## ------------------------------------------------
+    cookies = ""
+    matches = re.compile( '(.altadefinizione.click.*?)\n', re.DOTALL ).findall( config.get_cookie_data() )
+    for cookie in matches:
+        name = cookie.split( '\t' )[5]
+        value = cookie.split( '\t' )[6]
+        cookies+= name + "=" + value + ";"
+    headers.append( ['Cookie',cookies[:-1]] )
+    import urllib
+    _headers = urllib.urlencode( dict( headers ) )
+    ## ------------------------------------------------
+
+    data = scrapertools.find_single_match(data,'<ul class="listSubCat" id="Anno">(.*?)</div>')
+
+    patron  = '<li><a href="(.*?)">(.*?)</a></li>'
+    matches = re.compile(patron,re.DOTALL).findall(data)
+    scrapertools.printMatches(matches)
+
+    for scrapedurl,scrapedtitle in matches:
+        itemlist.append( Item(channel=__channel__, action="fichas", title=scrapedtitle, url=scrapedurl, folder=True))
+
+    return itemlist
+
+
 def fichas( item ):
     logger.info( "[altadefinizioneclick.py] fichas" )
 
@@ -69,20 +126,18 @@ def fichas( item ):
 
     # Descarga la pagina
     data = anti_cloudflare( item.url )
-	
-	    ## fix - calidad
+    ## fix - calidad
     data = re.sub(
         r'<div class="wrapperImage"[^<]+<a',
         '<div class="wrapperImage"><fix>SD</fix><a',
         data
     )
     ## fix - IMDB
-    #data = re.sub(
-     #   r'</h\d> </div>',
-      #  '<fix>IMDB: 0.0</fix>',
-      #  data
-    #)
-
+    data = re.sub(
+        r'<h5> </div>',
+        '<fix>IMDB: 0.0</fix>',
+        data
+    )
     ## ------------------------------------------------
     cookies = ""
     matches = re.compile( '(.altadefinizione.click.*?)\n', re.DOTALL ).findall( config.get_cookie_data() )
@@ -133,127 +188,9 @@ def fichas( item ):
     ## Paginación
     next_page = scrapertools.find_single_match( data, '<a class="next page-numbers" href="([^"]+)">' )
     if next_page != "":
-        itemlist.append( Item( channel=__channel__, action="fichas" , title=">> Successivo" , url=next_page ) )
+        itemlist.append( Item( channel=__channel__, action="fichas" , title="[COLOR orange]Successivo >>[/COLOR]" , url=next_page ,thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
 
     return itemlist
-	
-def categorias(item):
-    logger.info("[altadefinizioneclick.py] categorias")
-    itemlist = []
-
-    data = anti_cloudflare(item.url)
-
- 
-
-    # Narrow search by selecting only the combo
-    bloque = scrapertools.get_match(data, '<ul class="listSubCat" id="Film">(.*?)</ul>')
-
-    # The categories are the options for the combo  
-    patron = '<li><a href="([^"]+)">([^<]+)</a></li>'
-    matches = re.compile(patron, re.DOTALL).findall(bloque)
-    scrapertools.printMatches(matches)
-
-    for url, titulo in matches:
-        scrapedtitle = titulo
-        scrapedurl = urlparse.urljoin(item.url, url)
-        scrapedthumbnail = ""
-
-        itemlist.append(
-            Item(channel=__channel__,
-                 action="fichas",
-                 title=scrapedtitle,
-                 url=scrapedurl,
-                 thumbnail=scrapedthumbnail))
-
-    return itemlist
-	
-def categorias1(item):
-    logger.info("[altadefinizioneclick.py] categorias1")
-    itemlist = []
-
-    data = anti_cloudflare(item.url)
-
- 
-
-    # Narrow search by selecting only the combo
-    bloque = scrapertools.get_match(data, '<ul class="listSubCat" id="Anno">(.*?)</ul>')
-
-    # The categories are the options for the combo  
-    patron = '<li><a href="([^"]+)">([^<]+)</a></li>'
-    matches = re.compile(patron, re.DOTALL).findall(bloque)
-    scrapertools.printMatches(matches)
-
-    for url, titulo in matches:
-        scrapedtitle = titulo
-        scrapedurl = urlparse.urljoin(item.url, url)
-        scrapedthumbnail = ""
-
-        itemlist.append(
-            Item(channel=__channel__,
-                 action="fichas",
-                 title=scrapedtitle,
-                 url=scrapedurl,
-                 thumbnail=scrapedthumbnail))
-
-    return itemlist
-	
-def categorias2(item):
-    logger.info("[altadefinizioneclick.py] categorias2")
-    itemlist = []
-
-    data = anti_cloudflare(item.url)
-
- 
-
-    # Narrow search by selecting only the combo
-    bloque = scrapertools.get_match(data, '<ul class="listSubCat" id="Qualita">(.*?)</ul>')
-
-    # The categories are the options for the combo  
-    patron = '<li><a href="([^"]+)">([^<]+)</a></li>'
-    matches = re.compile(patron, re.DOTALL).findall(bloque)
-    scrapertools.printMatches(matches)
-
-    for url, titulo in matches:
-        scrapedtitle = titulo
-        scrapedurl = urlparse.urljoin(item.url, url)
-        scrapedthumbnail = ""
-
-        itemlist.append(
-            Item(channel=__channel__,
-                 action="fichas",
-                 title=scrapedtitle,
-                 url=scrapedurl,
-                 thumbnail=scrapedthumbnail))
-
-    return itemlist
-		
-
-
-# def findvideos( item ):
-#     logger.info( "[altadefinizioneclick.py] findvideos" )
-#
-#     itemlist = []
-#
-#     ## Descarga la página
-#     data = anti_cloudflare( item.url )
-#
-#     locate = scrapertools.get_match( data, '<iframe width="100%" height="500px" src="([^"]+)" allowfullscreen></iframe>' )
-#
-#     try:
-#         data = anti_cloudflare( locate )
-#         scrapedurl = scrapertools.get_match( data, '<source src="([^"]+)"' )
-#     except: scrapedurl = locate
-#
-#     server = scrapedurl.split( '/' )[2].split( '.' )
-#     if len(server) == 3: server = server[1]
-#     else: server = server[0]
-#
-#     title = "[" + server + "] " + item.fulltitle
-#
-#     itemlist.append( Item( channel=__channel__, action="play" , title=title, url=scrapedurl, thumbnail=item.thumbnail, fulltitle=item.fulltitle, show=item.show, folder=False ) )
-#
-#     return itemlist
-
 
 def findvideos( item ):
     logger.info( "[altadefinizioneclick.py] findvideos" )
@@ -284,15 +221,7 @@ def anti_cloudflare(url):
 
     if 'refresh' in resp_headers:
         time.sleep(int(resp_headers['refresh'][:1]))
-
-        # dict_headers = {v[0]: v[1] for v in headers}
-        # dict_headers['cookie'] = resp_headers['set-cookie'].split(';')[0]
-
-        # resp_headers = scrapertools.get_headers_from_response(sito + resp_headers['refresh'][7:], headers=[[k, v] for k, v in dict_headers.iteritems()])
+        
         scrapertools.get_headers_from_response(host + "/" + resp_headers['refresh'][7:], headers=headers)
-        # resp_headers = {v[0]: v[1] for v in resp_headers}
-
-        # dict_headers['cookie'] = dict_headers['cookie'] + resp_headers['set-cookie'].split(';')[0]
-        # headers = [[k, v] for k, v in dict_headers.iteritems()]
 
     return scrapertools.cache_page(url, headers=headers)

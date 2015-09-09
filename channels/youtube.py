@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # pelisalacarta - XBMC Plugin
-# Canal para youtube para mis criaturas
+# Canal para youtube
 # Buscador simple para visonar o descargar desde YouTube
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
@@ -17,8 +17,8 @@ from platformcode import library
 __channel__ = "youtube"
 __category__ = "F,S,D,A"
 __type__ = "generic"
-__title__ = "Ricerca su Youtube"
-__language__ = "IT"
+__title__ = "Buscar en YouTube"
+__language__ = "ES"
 
 ## Normal page
 page_url = "https://www.youtube.com/watch?v=%s"
@@ -30,9 +30,9 @@ key1 = "AIzaSyDXWo8-scFY-Ugcn2A0vGo8023hpcWtXto"
 ## Googleapi search
 api_search = "https://www.googleapis.com/youtube/v3/search" + \
              "?q=%s" + \
-             "&regionCode=IT" + \
+             "&regionCode=ES" + \
              "&part=snippet" + \
-             "&hl=it_IT" + \
+             "&hl=es_ES" + \
              "&key=" + key0 + \
              "&type=video" + \
              "&maxResults=%s" + \
@@ -58,7 +58,7 @@ def mainlist(item):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, action="search", title="Cerca..." ) )
+    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR azure]Cerca musica, trailers, concerti e spettacoli su [/COLOR]You[COLOR red]Tube[/COLOR] ...", thumbnail="http://i.klepeer.com/icons/you_tube_icon.png" ) )
 
     return itemlist
 
@@ -104,6 +104,6 @@ def fichas(item):
 
     ## Paginación
     url = api_search % (texto, "50", nextPageToken)
-    itemlist.append( Item( channel=__channel__, title=">> Successivo", url=url, action="fichas", folder=True ) )
+    itemlist.append( Item( channel=__channel__, title=">> Página siguiente", url=url, action="fichas", folder=True ) )
 
     return itemlist

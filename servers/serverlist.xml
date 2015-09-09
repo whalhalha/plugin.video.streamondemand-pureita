@@ -1,0 +1,24 @@
+# This xml file was created only for test purposes
+# while sorting out the server update system.
+# It has no importance and does not do anything in the final system applied.
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<servers>
+﻿<server>
+    <id>nowvideo</id>
+    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/servers/nowvideo.py</update_url>
+    <active>true</active>
+    <version>1</version>
+    <date>07/09/2015</date>
+    <changes>PRUEBA</changes>
+</server>
+
+<server>
+    <id>rapidvideo</id>
+    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/servers/rapidvideo.py</update_url>
+    <active>true</active>
+    <version>1</version>
+    <date>07/09/2015</date>
+    <changes>PRUEBA</changes>
+</server>
+
+</servers>

@@ -23,7 +23,7 @@ def mainlist(item,preferred_thumbnail="squares"):
     logger.info("pelisalacarta.channels.buscador mainlist")
 
     itemlist = []
-    itemlist.append( Item(channel=__channel__ , action="search"  , title="[COLOR yellow]Avvia una nuova ricerca...[/COLOR]" ))
+    itemlist.append( Item(channel=__channel__ , action="search"  , title="[COLOR yellow]Effettuare una nuova ricerca...[/COLOR]" ))
 
     saved_searches_list = get_saved_searches(item.channel)
 
@@ -31,7 +31,7 @@ def mainlist(item,preferred_thumbnail="squares"):
         itemlist.append( Item(channel=__channel__ , action="do_search"  , title=' "'+saved_search_text+'"', extra=saved_search_text ))
 
     if len(saved_searches_list)>0:
-        itemlist.append( Item(channel=__channel__ , action="clear_saved_searches"  , title="[COLOR red]Cancella ricerche effettuate[/COLOR]" ))
+        itemlist.append( Item(channel=__channel__ , action="clear_saved_searches"  , title="[COLOR red]Elimina cronologia ricerche[/COLOR]" ))
 
     return itemlist
 
@@ -97,7 +97,7 @@ def do_search(item):
     try:
         import xbmcgui
         progreso = xbmcgui.DialogProgressBG()
-        progreso.create("Buscando "+ tecleado.title())
+        progreso.create("Sto cercando "+ tecleado.title())
     except:
         show_dialog = False
 
@@ -113,9 +113,9 @@ def do_search(item):
         if basename_without_extension not in excluir:
 
             if show_dialog:
-                progreso.update(percentage, ' Buscando "' + tecleado+ '"', basename_without_extension)
+                progreso.update(percentage, ' Sto cercando "' + tecleado+ '"', basename_without_extension)
 
-            logger.info("pelisalacarta.channels.buscador Intentado busqueda en " + basename_without_extension + " de "+ tecleado)
+            logger.info("pelisalacarta.channels.buscador Provando a cercare in " + basename_without_extension + " per "+ tecleado)
             try:
 
                 # http://docs.python.org/library/imp.html?highlight=imp#module-imp
@@ -123,7 +123,7 @@ def do_search(item):
                 logger.info("pelisalacarta.channels.buscador cargado " + basename_without_extension + " de "+ infile)
                 channel_result_itemlist = obj.search( Item() , tecleado)
                 for item in channel_result_itemlist:
-                    item.title = item.title + "[" + basename_without_extension + "]"
+                    item.title = item.title + " [COLOR grey][" + basename_without_extension + "][/COLOR]"
                     item.viewmode = "list"
 
                 itemlist.extend( channel_result_itemlist )
@@ -132,7 +132,7 @@ def do_search(item):
                 logger.error( traceback.format_exc() )
 
         else:
-            logger.info("pelisalacarta.channels.buscador do_search_results, Excluido server " + basename_without_extension)
+            logger.info("pelisalacarta.channels.buscador do_search_results, Escluso il server " + basename_without_extension)
 
     itemlist = sorted(itemlist, key=lambda Item: Item.title) 
 

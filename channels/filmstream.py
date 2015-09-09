@@ -155,6 +155,53 @@ def peliculas(item):
     return itemlist
 
 
+# def episodios(item):
+#     logger.info("pelisalacarta.filmstream episodios")
+#
+#     itemlist = []
+#
+#     ## Descarga la página
+#     data = scrapertools.cache_page(item.url)
+#     data = scrapertools.decodeHtmlentities(data)
+#
+#     lang_titles = []
+#     starts = []
+#     patron = r'<p style="text-align: center;"><strong>((?:STAGIONE|MINISERIE|SERIE)[^<]+)'
+#     matches = re.compile(patron, re.IGNORECASE).finditer(data)
+#     for match in matches:
+#         season_title = match.group(1)
+#         if season_title != '':
+#             lang_titles.append('SUB ITA' if 'SUB' in season_title.upper() else 'ITA')
+#             starts.append(match.end(0))
+#
+#     i = 1
+#     len_lang_titles = len(lang_titles)
+#     lang_title = lang_titles[0]
+#     patron = r'<p style="text-align: center;">(.*?)(<a[^h]*href="[^"]+"[^>]*>([^<]+)</a>.+)'
+#     matches = re.compile(patron).finditer(data)
+#     for match in matches:
+#         ## Extrae las entradas
+#         if i < len_lang_titles and starts[i] < match.end(0):
+#             lang_title = lang_titles[i]
+#             i += 1
+#         title1, data, title2 = match.group(1), match.group(2), match.group(3)
+#         title1 = re.sub(r'<[^>]*>', '', title1)
+#         scrapedtitle = title2 if title1 == '' else title1
+#         scrapedtitle = scrapedtitle.replace('–', '').strip()
+#
+#         itemlist.append(
+#             Item(channel=__channel__,
+#                  action="findvid_serie",
+#                  title="[COLOR azure]" + scrapedtitle + " (" + lang_title + ")" + "[/COLOR]",
+#                  url=item.url,
+#                  thumbnail=item.thumbnail,
+#                  extra=data,
+#                  fulltitle=item.title,
+#                  show=item.title))
+#
+#     return itemlist
+
+
 def episodios(item):
     logger.info("pelisalacarta.filmstream episodios")
 
@@ -164,23 +211,144 @@ def episodios(item):
     data = scrapertools.cache_page(item.url)
     data = scrapertools.decodeHtmlentities(data)
 
-    patron = '<p style="text-align: center;">(.*?)(<a href="[^"]+" target="_blank">([^<]+)</a>.+?)</p>'
+    lang_titles = []
+    starts = []
+    patron = r'<p(?: style="text-align: center;")?>.*?<strong>((?:STAGIONE|MINISERIE|WEBSERIE|SERIE)[^<]+)'
+    matches = re.compile(patron, re.IGNORECASE).finditer(data)
+    for match in matches:
+        season_title = match.group(1)
+        if season_title != '':
+            lang_titles.append('SUB ITA' if 'SUB' in season_title.upper() else 'ITA')
+            starts.append(match.end(0))
+
+    i = 1
+    len_lang_titles = len(lang_titles)
+
+    while i <= len_lang_titles:
+        inizio = starts[i - 1]
+        fine = starts[i] if i < len_lang_titles else -1
+
+        html = data[inizio:fine]
+        lang_title = lang_titles[i - 1]
+
+        ep_list1(html, item, itemlist, lang_title)
+
+        ep_list2(html, item, itemlist, lang_title)
+
+        ep_list3(html, item, itemlist, lang_title)
+
+        ep_list4(html, item, itemlist, lang_title)
+
+        i += 1
+
+    return itemlist
+
+
+def ep_list1(data, item, itemlist, lang_title):
+    patron = r'<p style="text-align: center;">(.*?)(<a[^h]*href="[^"]+"[^>]*>([^<]+)</a>.+)'
     matches = re.compile(patron).findall(data)
-    for titulo1, data, titulo2 in matches:
+    for title1, html, title2 in matches:
         ## Extrae las entradas
-        titulo1 = re.sub(r'<[^>]*>', '', titulo1)
-        scrapedtitle = titulo2 if titulo1 == "" else titulo1
+        title1 = re.sub(r'<[^>]*>', '', title1)
+        scrapedtitle = title2 if title1 == '' else title1
+        scrapedtitle = scrapedtitle.replace('–', '').strip()
+
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid_serie",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="[COLOR azure]" + scrapedtitle + " (" + lang_title + ")" + "[/COLOR]",
                  url=item.url,
                  thumbnail=item.thumbnail,
-                 extra=data,
+                 extra=html,
                  fulltitle=item.title,
                  show=item.title))
 
-    return itemlist
+
+def ep_list2(data, item, itemlist, lang_title):
+    patron = r'<p style="text-align: center;"><strong>([^<]+)<br />'
+    matches = re.compile(patron).finditer(data)
+    starts = []
+    scrapedtitles = []
+    for match in matches:
+        ## Extrae las entradas
+        title = re.sub(r'<[^>]*>', '', match.group(1))
+        scrapedtitles.append(title.replace('–', '').strip())
+        starts.append(match.end(0))
+
+    i = 1
+    len_starts = len(starts)
+    while i <= len_starts:
+        inizio = starts[i - 1]
+        fine = starts[i] if i < len_starts else -1
+
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="findvid_serie",
+                 title="[COLOR azure]" + scrapedtitles[i - 1] + " (" + lang_title + ")" + "[/COLOR]",
+                 url=item.url,
+                 thumbnail=item.thumbnail,
+                 extra=data[inizio:fine],
+                 fulltitle=item.title,
+                 show=item.title))
+        i += 1
+
+
+def ep_list3(data, item, itemlist, lang_title):
+    patron = r'<p><strong>([^<]+)</strong>'
+    matches = re.compile(patron).finditer(data)
+    starts = []
+    scrapedtitles = []
+    for match in matches:
+        ## Extrae las entradas
+        title = re.sub(r'<[^>]*>', '', match.group(1))
+        scrapedtitles.append(title.replace('–', '').strip())
+        starts.append(match.end(0))
+
+    i = 1
+    len_starts = len(starts)
+    while i <= len_starts:
+        inizio = starts[i - 1]
+        fine = starts[i] if i < len_starts else -1
+
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="findvid_serie",
+                 title="[COLOR azure]" + scrapedtitles[i - 1] + " (" + lang_title + ")" + "[/COLOR]",
+                 url=item.url,
+                 thumbnail=item.thumbnail,
+                 extra=data[inizio:fine],
+                 fulltitle=item.title,
+                 show=item.title))
+        i += 1
+
+
+def ep_list4(data, item, itemlist, lang_title):
+    patron = r'<p>(<strong>[^<]*<strong>[^<]*</strong>[^<]*)(?:</strong>)?<br />'
+    matches = re.compile(patron).finditer(data)
+    starts = []
+    scrapedtitles = []
+    for match in matches:
+        ## Extrae las entradas
+        title = re.sub(r'<[^>]*>', '', match.group(1))
+        scrapedtitles.append(title.replace('–', '').strip())
+        starts.append(match.end(0))
+
+    i = 1
+    len_starts = len(starts)
+    while i <= len_starts:
+        inizio = starts[i - 1]
+        fine = starts[i] if i < len_starts else -1
+
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="findvid_serie",
+                 title="[COLOR azure]" + scrapedtitles[i - 1] + " (" + lang_title + ")" + "[/COLOR]",
+                 url=item.url,
+                 thumbnail=item.thumbnail,
+                 extra=data[inizio:fine],
+                 fulltitle=item.title,
+                 show=item.title))
+        i += 1
 
 
 def findvid_serie(item):
@@ -199,3 +367,4 @@ def findvid_serie(item):
         videoitem.channel = __channel__
 
     return itemlist
+

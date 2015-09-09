@@ -41,23 +41,27 @@ def mainlist(item):
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Novita'[/COLOR]",
                      action="peliculas",
-                     url=host),
+                     url=host,
+                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Categorie[/COLOR]",
                      action="categorias",
-                     url=host),
+                     url=host,
+                     thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV[/COLOR]",
                      extra="serie",
                      action="peliculas",
-                     url="%s/serie-tv/" % host),
+                     url="%s/serie-tv/" % host,
+                     thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Animazione[/COLOR]",
                      action="peliculas",
-                     url="%s/animazione/" % host),
+                     url="%s/animazione/" % host,
+                     thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca...[/COLOR]",
-                     action="search")]
+                     action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
     return itemlist
 
@@ -203,6 +207,7 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Avanti >>[/COLOR]",
                  url=scrapedurl,
+                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
 
     return itemlist
@@ -217,26 +222,21 @@ def episodios(item):
     data = scrapertools.cache_page(item.url)
     data = scrapertools.decodeHtmlentities(data)
 
-    patron = r'<!--colorstart:#(\d+)--><span style="color:#\1">(.+ StreamNowMovies HD </a>)'
+    patron = '<!--/colorend--><br />(.+ StreamNowMovies HD </a>)'
     matches = re.compile(patron, re.DOTALL).findall(data)
-
-    for _, match in matches:
+    for match in matches:
         for data in match.split('<br />'):
             ## Extrae las entradas
-            season_title = scrapertools.find_single_match(data, '<b>([^<]+)</b>')
-            if season_title != '':
-                lang_title = 'SUB ITA' if 'SUB' in season_title.upper() else 'ITA'
-            scrapedtitle = scrapertools.find_single_match(data, '\d+x\d+')
-            if scrapedtitle != '':
-                itemlist.append(
-                    Item(channel=__channel__,
-                         action="findvid_serie",
-                         title="[COLOR azure]" + scrapedtitle + " (" + lang_title + ")" + "[/COLOR]",
-                         url=item.url,
-                         thumbnail=item.thumbnail,
-                         extra=data,
-                         fulltitle=item.title,
-                         show=item.title))
+            scrapedtitle = data.split('<a ')[0]
+            itemlist.append(
+                Item(channel=__channel__,
+                     action="findvid_serie",
+                     title=scrapedtitle,
+                     url=item.url,
+                     thumbnail=item.thumbnail,
+                     extra=data,
+                     fulltitle=item.title,
+                     show=item.title))
 
     return itemlist
 

@@ -3,7 +3,7 @@
     <id>serietvsubita</id>
     <name>Serie TV Sub ITA</name>
     <language>it</language>
-    <update_url></update_url>
+    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/channels/serietvsubita.py</update_url>
     <active>true</active>
     <include_in_global_search>true</include_in_global_search>
     <version>1</version>

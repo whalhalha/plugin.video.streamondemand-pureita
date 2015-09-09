@@ -3,11 +3,11 @@
     <id>buscador</id>
     <name>Buscador global</name>
     <language>es</language>
-    <update_url></update_url>
+    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/channels/buscador.py</update_url>
     <active>true</active>
     <include_in_global_search>false</include_in_global_search>
-    <version>1</version>
+    <version>4</version>
     <adult>false</version>
-    <date>28/08/2015</date>
-    <changes>Fixa i canali guasti o disabilitati. Include il nome del canare nella ricerca globale (grazie a Raul)</changes>
+    <date>09/09/2015</date>
+    <changes>Fixa i canali guasti o disabilitati. Include il nome del canale nella ricerca globale (grazie a Raul)</changes>
 </channel>

@@ -39,10 +39,10 @@ def isGeneric():
 def mainlist(item):
     logger.info("pelisalacarta.tantifilm mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="[COLOR azure]Ultimi film[/COLOR]",
+                     title="[COLOR azure]Ultime Uscite[/COLOR]",
                      action="latest",
                      url=host,
-                     thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
+                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Al Cinema[/COLOR]",
                      action="peliculas",
@@ -52,7 +52,7 @@ def mainlist(item):
                      title="[COLOR azure]HD - Alta Definizione[/COLOR]",
                      action="peliculas",
                      url="%s/watch-genre/hd-alta-qualita/" % host,
-                     thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
+                     thumbnail="http://jcrent.com/apple%20tv%20final/HD.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film Per Categoria[/COLOR]",
                      action="categorias",

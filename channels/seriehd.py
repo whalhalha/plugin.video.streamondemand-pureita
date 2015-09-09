@@ -35,9 +35,9 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR azure]Serie TV[/COLOR]", url=host+"/serie-tv-streaming/" ) )
-    itemlist.append( Item( channel=__channel__, action="sottomenu", title="[COLOR orange]Sottomenu...[/COLOR]", url=host ) )
-    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR green]Cerca...[/COLOR]" ) )
+    itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR azure]Serie TV[/COLOR]", url=host+"/serie-tv-streaming/", thumbnail="http://i.imgur.com/rO0ggX2.png" ) )
+    itemlist.append( Item( channel=__channel__, action="sottomenu", title="[COLOR orange]Sottomenu...[/COLOR]", url=host, thumbnail="http://i37.photobucket.com/albums/e88/xzener/NewIcons.png" ) )
+    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR green]Cerca...[/COLOR]", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
 
 
     return itemlist

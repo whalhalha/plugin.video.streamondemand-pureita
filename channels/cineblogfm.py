@@ -35,9 +35,9 @@ def mainlist(item):
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Genere[/COLOR]", action="categorias", url=sito, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Paese[/COLOR]", action="catpays", url=sito , thumbnail="http://missindependent-movie.com/wp-content/uploads/2011/07/movie-clapper-board-hi.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Anno[/COLOR]", action="catyear", url=sito, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search",thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Serie TV[/COLOR]", extra="serie", action="peliculas", url=sito+"/telefilm-serie-tv-streaming/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca Serie TV...[/COLOR]", action="search", extra="serie"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca Serie TV...[/COLOR]", action="search", extra="serie",thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
     
     return itemlist
 

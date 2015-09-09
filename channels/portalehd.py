@@ -37,9 +37,10 @@ def isGeneric():
 def mainlist(item):
     logger.info("pelisalacarta.portalehd mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Novita'[/COLOR]", action="peliculas", url="http://www.portalehd.net/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film HD[/COLOR]", action="peliculas", url="http://www.portalehd.net/category/film-hd/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Novita'[/COLOR]", action="peliculas", url="http://www.portalehd.net/", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film HD[/COLOR]", action="peliculas", url="http://www.portalehd.net/category/film-hd/", thumbnail="http://i.imgur.com/3ED6lOP.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Categorie[/COLOR]", action="categorias", url="http://www.portalehd.net/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film 3D HD[/COLOR]", action="peliculas", url="http://www.portalehd.net/category/3d/", thumbnail="http://i.imgur.com/wXMmQie.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
 
     
@@ -118,7 +119,6 @@ def peliculas(item):
 
     if len(matches)>0:
         scrapedurl = urlparse.urljoin(item.url,matches[0])
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Avanti >>[/COLOR]" , url=scrapedurl , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo >>[/COLOR]" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
 
     return itemlist
-

@@ -27,7 +27,7 @@ def mainlist(item,preferred_thumbnail="squares"):
     logger.info("pelisalacarta.channels.novedades mainlist")
 
     itemlist = []
-    itemlist.append( Item(channel=__channel__, action="peliculas"            , title="Film", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_peliculas.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="peliculas"            , title="Film 3D - (Scegliere 2° server)", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_peliculas.png",viewmode="movie"))
     itemlist.append( Item(channel=__channel__, action="peliculas_infantiles" , title="Per Bambini", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_infantiles.png",viewmode="movie"))
     itemlist.append( Item(channel=__channel__, action="series"               , title="Episodi di Serie TV", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_series.png",viewmode="movie"))
     itemlist.append( Item(channel=__channel__, action="anime"                , title="Episodi di Anime", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_anime.png",viewmode="movie"))
@@ -40,13 +40,9 @@ def peliculas(item):
 
     itemlist = []
 
-    import cineblog01
-    item.url = "www.cb01.eu"
-    itemlist.extend( cineblog01.peliculasrobalo(item) )
-
-    import itafilmtv
-    item.url = "http://www.itafilm.tv/"
-    itemlist.extend( itafilmtv.fichas(item) )
+    import portalehd
+    item.url = "http://www.portalehd.net/category/3d/"
+    itemlist.extend( portalehd.peliculas(item) )
 
     sorted_itemlist = []
 
@@ -86,9 +82,9 @@ def series(item):
 
     itemlist = []
 
-    import serietvsubita
-    item.url = "http://serietvsubita.net/"
-    itemlist.extend( serietvsubita.episodios(item) )
+    #import serietvsubita
+    #item.url = "http://serietvsubita.net/"
+    #itemlist.extend( serietvsubita.episodios(item) )
 
     import guardaserie
     item.url = "http://www.guardaserie.net/lista-serie-tv-guardaserie/"
@@ -123,7 +119,7 @@ def anime(item):
 
     for item in itemlist:
 
-        if item.extra!="next_page" and not item.title.startswith(">>"):
+        if item.extra!="next_page" and not item.title.endswith(">>"):
             item.title = item.title + " ["+item.channel+"]"
             sorted_itemlist.append(item)
 

@@ -49,8 +49,8 @@ def peliculas(item):
     scrapertools.printMatches(matches)
 
     for scrapedurl,scrapedthumbnail,scrapedtitle in matches:
-        scrapedtitle="[COLOR azure]" + scrapedtitle + "[/COLOR]"
         logger.info("scrapedurl="+scrapedurl)
+        title = scrapertools.decodeHtmlentities( scrapedtitle )
         if scrapedtitle.startswith(""):
             scrapedtitle=scrapedtitle[0:]
 
@@ -63,7 +63,7 @@ def peliculas(item):
         except:
             scrapedplot= "Trama non disponibile"
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="findvid_serie" if item.extra == "serie" else "findvideos", title="[COLOR azure]" + scrapedtitle + "[/COLOR]" , url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="findvid_serie" if item.extra == "serie" else "findvideos", title=title, url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     # Extrae el paginador
     patronvideos  = '<td align="center">[^<]+</td>[^<]+<td align="center">\s*<a href="([^"]+)">[^<]+</a>'
