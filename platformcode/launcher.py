@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # tvalacarta
 # XBMC Launcher (xbmc / xbmc-dharma / boxee)
@@ -250,7 +250,7 @@ def run():
                             import sys
                             for line in sys.exc_info():
                                 logger.error( "%s" % line )
-                            logger.info("pelisalacarta.platformcode.launcherError al grabar el archivo "+item.title)
+                            logger.info("pelisalacarta.platformcode.launcher Error al grabar el archivo "+item.title)
                             errores = errores + 1
                         
                     pDialog.close()
@@ -258,10 +258,10 @@ def run():
                     # Actualizacion de la biblioteca
                     itemlist=[]
                     if errores > 0:
-                        itemlist.append(Item(title="ERROR, la serie NO se ha añadido a la biblioteca o lo ha hecho incompleta"))
+                        itemlist.append(Item(title="ERRORE, la serie NON si è aggiunta alla biblioteca o la fatto in modo incompleto"))
                         logger.info ("[launcher.py] No se pudo añadir "+str(errores)+" episodios")
                     else:
-                        itemlist.append(Item(title="La serie se ha añadido a la biblioteca"))
+                        itemlist.append(Item(title="La serie è stata aggiunta alla biblioteca"))
                         logger.info ("[launcher.py] Ningún error al añadir "+str(errores)+" episodios")
                     
                     # FIXME:jesus Comentado porque no funciona bien en todas las versiones de XBMC
@@ -645,7 +645,7 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
                         try:
                             import xbmcgui
                             advertencia = xbmcgui.Dialog()
-                            resultado = advertencia.ok("plugin" , "Descarga abortada")
+                            resultado = advertencia.ok("plugin" , "Download interrotto")
                         except:
                             pass
                         return

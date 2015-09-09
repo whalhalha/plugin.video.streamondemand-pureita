@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # pelisalacarta - XBMC Plugin
 # XBMC Tools
@@ -392,13 +392,13 @@ def play_video(channel="",server="",url="",category="",title="", thumbnail="",pl
             
             if devuelve==0:
                 advertencia = xbmcgui.Dialog()
-                resultado = advertencia.ok("plugin" , "Descargado con éxito")
+                resultado = advertencia.ok("plugin" , "Scaricato con successo")
             elif devuelve==-1:
                 advertencia = xbmcgui.Dialog()
-                resultado = advertencia.ok("plugin" , "Descarga abortada")
+                resultado = advertencia.ok("plugin" , "Download interrotto")
             else:
                 advertencia = xbmcgui.Dialog()
-                resultado = advertencia.ok("plugin" , "Error en la descarga")
+                resultado = advertencia.ok("plugin" , "Errore nel download")
         return
 
     elif opciones[seleccion]==config.get_localized_string(30154): #"Quitar de favoritos"
