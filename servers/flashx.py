@@ -11,7 +11,7 @@ import time
 
 from core import scrapertools
 from core import logger
-from jsbeautifier.unpackers import packer
+from lib.jsbeautifier.unpackers import packer
 
 
 def get_video_url(page_url, premium=False, user="", password="", video_password=""):

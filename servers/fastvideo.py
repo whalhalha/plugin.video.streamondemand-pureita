@@ -10,7 +10,7 @@ import urllib,re
 from core import scrapertools
 from core import logger
 
-from jsbeautifier.unpackers  import packer
+from lib.jsbeautifier.unpackers  import packer
 
 def test_video_exists( page_url ):
     logger.info( "[fastvideo.py] test_video_exists(page_url='%s')" % page_url )

@@ -35,7 +35,7 @@ def mainlist(item):
                      title="[COLOR azure]Ultimi film inseriti[/COLOR]",
                      action="peliculas",
                      url=sito,
-                     thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
+                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film Sub-Ita[/COLOR]",
                      action="peliculas",
@@ -155,7 +155,7 @@ def findvid(item):
     data = scrapertools.cache_page(item.url)
     data = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
     if data != "":
-        from jsbeautifier.unpackers import packer
+        from lib.jsbeautifier.unpackers import packer
         data = packer.unpack(data).replace(r'\\/', '/')
         itemlist = servertools.find_video_items(data=data)
 

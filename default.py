@@ -28,12 +28,16 @@ import plugintools
 import navigation
 from core import updater
 from core.item import Item
+from core import config
 
 plugintools.application_log_enabled = (plugintools.get_setting("debug")=="true")
 plugintools.module_log_enabled = (plugintools.get_setting("debug")=="true")
 plugintools.http_debug_log_enabled = (plugintools.get_setting("debug")=="true")
 
 plugintools.log("pelisalacarta 4 ui begin")
+
+librerias = xbmc.translatePath( os.path.join( config.get_runtime_path(), 'lib' ) )
+sys.path.append (librerias)
 
 updater.checkforupdates(plugin_mode=False)
 

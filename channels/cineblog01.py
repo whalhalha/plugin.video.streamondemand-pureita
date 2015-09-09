@@ -60,7 +60,7 @@ def mainlist(item):
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png"),
                 Item(channel=__channel__,
                      action="search",
-                     title="[COLOR azure]Cerca Film[/COLOR]",
+                     title="[COLOR yellow]Cerca Film[/COLOR]",
                      extra="newsearch",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
@@ -70,7 +70,7 @@ def mainlist(item):
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
                      action="search",
-                     title="[COLOR azure]Cerca Serie Tv[/COLOR]",
+                     title="[COLOR yellow]Cerca Serie Tv[/COLOR]",
                      extra="serie",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
@@ -90,7 +90,7 @@ def mainlist(item):
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Genres.png"),
                 Item(channel=__channel__,
                      action="search",
-                     title="[COLOR azure]Cerca Anime[/COLOR]",
+                     title="[COLOR yellow]Cerca Anime[/COLOR]",
                      extra="cartoni",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -126,7 +126,7 @@ def peliculasrobalo(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title=scrapedtitle,
                  url=scrapedurl, thumbnail=scrapedthumbnail, plot=scrapedplot, viewmode="movie_with_plot",
                  fanart=scrapedthumbnail))
 
@@ -503,13 +503,12 @@ def animegenere(item):
     matches = re.compile(patron, re.DOTALL).findall(bloque)
     scrapertools.printMatches(matches)
 
-    for url, titulo in matches:
-        scrapedtitle = titulo
-        scrapedurl = url
+    for scrapedurl,scrapedtitle in matches:
+        scrapedtitle = scrapertools.decodeHtmlentities( scrapedtitle )
         scrapedthumbnail = ""
         scrapedplot = ""
         if DEBUG: logger.info(
-            "title=[" + scrapedtitle + "], url=[" + scrapedurl + "], thumbnail=[" + scrapedthumbnail + "]")
+            "title=[" + scrapedtitle + "], url=[" + scrapedurl + "]")
         itemlist.append(
             Item(channel=__channel__,
                  action="animestream",
@@ -600,6 +599,21 @@ def findvid(item):
     for scrapedurl, scrapedtitle in matches:
         print "##### findvideos Streaming HD ## %s ## %s ##" % (scrapedurl, scrapedtitle)
         title = "[COLOR yellow]Streaming HD:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="play",
+                 title=title,
+                 url=scrapedurl,
+                 fulltitle=item.title,
+                 show=item.title,
+                 folder=False))
+    
+    streaming_3D = scrapertools.find_single_match(data, '<strong>Streaming 3D[^<]+</strong>(.*?)<table height="30">')
+    patron = '<td><a href="([^"]+)" target="_blank">([^<]+)</a></td>'
+    matches = re.compile(patron, re.DOTALL).findall(streaming_hd)
+    for scrapedurl, scrapedtitle in matches:
+        print "##### findvideos Streaming HD ## %s ## %s ##" % (scrapedurl, scrapedtitle)
+        title = "[COLOR pink]Streaming 3D:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
@@ -724,7 +738,7 @@ def play(item):
         data = scrapertools.get_match(data, 'window.location.href = "([^"]+)";')
         print "##### play go.php data ##\n%s\n##" % data
     elif "/link/" in item.url:
-        from jsbeautifier.unpackers import packer
+        from lib.jsbeautifier.unpackers import packer
 
         try:
             data = scrapertools.get_match(data, "(eval.function.p,a,c,k,e,.*?)</script>")

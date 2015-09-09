@@ -9,7 +9,7 @@ import re
 
 from core import scrapertools
 from core import logger
-from jsbeautifier.unpackers import packer
+from lib.jsbeautifier.unpackers import packer
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
     logger.info("pelisalacarta.servers.vidtome url="+page_url)

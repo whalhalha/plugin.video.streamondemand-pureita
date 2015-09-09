@@ -23,7 +23,7 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
 
     data = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
     if data != "":
-        from jsbeautifier.unpackers import packer
+        from lib.jsbeautifier.unpackers import packer
         data = packer.unpack(data)
         video_url = scrapertools.find_single_match(data, 'file"?\s*:\s*"([^"]+)",')
         video_urls.append(["[megahd]", video_url])
