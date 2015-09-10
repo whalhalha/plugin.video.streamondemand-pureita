@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # pelisalacarta
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta
@@ -27,7 +27,7 @@ elif thumbnail_type=="2":
 
 ROOT_DIR = config.get_runtime_path()
 
-REMOTE_VERSION_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-version.xml"
+REMOTE_VERSION_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/version.xml"
 LOCAL_VERSION_FILE = os.path.join( ROOT_DIR , "version.xml" )
 LOCAL_FILE = os.path.join( ROOT_DIR , config.PLUGIN_NAME+"-" )
 
@@ -38,38 +38,38 @@ try:
     logger.info("pelisalacarta.core.updater get_system_platform="+config.get_system_platform())
     if config.get_platform()=="kodi-isengard":
         import xbmc
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-kodi-isengard-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="kodi-helix":
         import xbmc
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-kodi-helix-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmceden":
         import xbmc
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-xbmc-eden-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmcfrodo":
         import xbmc
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-xbmc-frodo-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmcgotham":
         import xbmc
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-xbmc-gotham-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmc":
         import xbmc
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-xbmc-plugin-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/plugins/video")
     elif config.get_platform()=="wiimc":
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-wiimc-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = os.path.join(config.get_runtime_path(),"..")
     elif config.get_platform()=="rss":
-        REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-rss-"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
         DESTINATION_FOLDER = os.path.join(config.get_runtime_path(),"..")
 
 except:
     import xbmc
-    REMOTE_FILE = "http://descargas.tvalacarta.info/"+config.PLUGIN_NAME+"-xbmc-plugin-"
+    REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
     DESTINATION_FOLDER = xbmc.translatePath( os.path.join( ROOT_DIR , ".." ) )
 
 def checkforupdates(plugin_mode=True):
@@ -195,7 +195,7 @@ def checkforupdates(plugin_mode=True):
 def update(params):
     # Descarga el ZIP
     logger.info("pelisalacarta.core.updater update")
-    remotefilename = REMOTE_FILE+params.get("version")+".zip"
+    remotefilename = "https://github.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/archive/master.zip"
     localfilename = LOCAL_FILE+params.get("version")+".zip"
     logger.info("pelisalacarta.core.updater remotefilename=%s" % remotefilename)
     logger.info("pelisalacarta.core.updater localfilename=%s" % localfilename)
