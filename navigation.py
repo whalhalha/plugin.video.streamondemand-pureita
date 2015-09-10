@@ -34,6 +34,7 @@ import channelselector
 import plugintools
 from core.item import Item
 
+			
 def get_next_items( item ):
 
     plugintools.log("navigation.get_next_items item="+item.tostring())
@@ -43,6 +44,23 @@ def get_next_items( item ):
         #  Main menu
         # ----------------------------------------------------------------
         if item.channel=="navigation":
+		            # --- Update channels list ---------------------------------------
+            from core import config
+            if item.action=="mainlist":
+                plugintools.log("navigation.get_next_items Main menu")
+
+                if config.get_setting("updatechannels")=="true":
+                    try:
+                        from core import updater
+                        actualizado = updater.updatechannel("channelselector")
+
+                        if actualizado:
+                            import xbmcgui
+                            advertencia = xbmcgui.Dialog()
+                            advertencia.ok("tvalacarta",config.get_localized_string(30064))
+                    except:
+                        pass
+            # ----------------------------------------------------------------
 
             if item.action=="mainlist":
                 plugintools.log("navigation.get_next_items Main menu")
@@ -68,6 +86,22 @@ def get_next_items( item ):
                 item.action="mainlist"
 
             plugintools.log("navigation.get_next_items Channel code ("+item.channel+"."+item.action+")")
+
+            # --- Update channels files --------------------------------------
+            if item.action=="mainlist":
+                from core import config
+                if config.get_setting("updatechannels")=="true":
+                    try:
+                        from core import updater
+                        actualizado = updater.updatechannel(item.channel)
+
+                        if actualizado:
+                            import xbmcgui
+                            advertencia = xbmcgui.Dialog()
+                            advertencia.ok("plugin",item.channel,config.get_localized_string(30063))
+                    except:
+                        pass
+            # ----------------------------------------------------------------
 
             try:
                 exec "import channels."+item.channel+" as channel"

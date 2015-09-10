@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # pelisalacarta
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta
@@ -225,15 +225,13 @@ def update(params):
 def get_channel_remote_url(channel_name):
     _remote_channel_url_ = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
     if channel_name <> "channelselector":
-
-
         _remote_channel_url_+= "channels/"
-
     remote_channel_url = _remote_channel_url_+channel_name+".py"
     remote_version_url = _remote_channel_url_+channel_name+".xml"
+
     logger.info("pelisalacarta.core.updater remote_channel_url="+remote_channel_url)
     logger.info("pelisalacarta.core.updater remote_version_url="+remote_version_url)
-    
+   
     return remote_channel_url , remote_version_url
 
 def get_channel_local_path(channel_name):
