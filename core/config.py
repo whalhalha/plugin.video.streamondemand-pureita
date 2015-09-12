@@ -16,7 +16,7 @@ import xbmcaddon
 import xbmc
 
 PLATFORM_NAME = "kodi-isengard"
-print "pelisalacarta.core.config PLATFORM_NAME="+PLATFORM_NAME
+print "streamondemand-pureita.core.config PLATFORM_NAME="+PLATFORM_NAME
 
 PLUGIN_NAME = "streamondemand-pureita"
 __settings__ = xbmcaddon.Addon(id="plugin.video."+PLUGIN_NAME)
