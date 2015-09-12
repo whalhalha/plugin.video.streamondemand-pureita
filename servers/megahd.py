@@ -6,12 +6,10 @@
 # by DrZ3r0
 # ------------------------------------------------------------
 
-import os
-import urlparse, urllib2, urllib, re
+import re
 
 from core import scrapertools
 from core import logger
-from core import config
 
 
 # Returns an array of possible video url's from the page_url
@@ -21,12 +19,17 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
 
     data = scrapertools.cache_page(page_url)
 
-    data = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
-    if data != "":
-        from lib.jsbeautifier.unpackers import packer
-        data = packer.unpack(data)
-        video_url = scrapertools.find_single_match(data, 'file"?\s*:\s*"([^"]+)",')
-        video_urls.append(["[megahd]", video_url])
+    data_pack = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
+    if data_pack != "":
+        from core import unpackerjs3
+        data_unpack = unpackerjs3.unpackjs(data_pack)
+        if data_unpack == "":
+            from lib.jsbeautifier.unpackers import packer
+            data_unpack = packer.unpack(data_pack)
+        data = data_unpack
+
+    video_url = scrapertools.find_single_match(data, 'file"?\s*:\s*"([^"]+)",')
+    video_urls.append(["[megahd]", video_url])
 
     for video_url in video_urls:
         logger.info("[megahd.py] %s - %s" % (video_url[0], video_url[1]))

@@ -3,13 +3,13 @@
     <id>itastreaming</id>
     <name>ItaStreaming</name>
     <language>it</language>
-    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/channels/itastreaming.py</update_url>
+    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/channels/itastreaming.py</update_url>
     <active>true</active>
     <include_in_global_search>true</include_in_global_search>
     <version>1</version>
     <adult>false</version>
     <date>28/08/2015</date>
-    <changes>Prima versione di Pelisalacarta 4</changes>
+    <changes>Prima versione di Stream On Demand PureITA 5</changes>
     <categories>
         <category>movie</category>
     </categories>

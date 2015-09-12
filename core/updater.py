@@ -25,11 +25,22 @@ elif thumbnail_type=="1":
 elif thumbnail_type=="2":
     IMAGES_PATH = 'http://media.tvalacarta.info/pelisalacarta/squares/'
 
+## Installation path.
 ROOT_DIR = config.get_runtime_path()
 
-REMOTE_VERSION_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/version.xml"
+## Remote path to download plugin.zip and version file.
+REMOTE_PATH = "https://github.com/Fenice82/plugin.video.streamondemand-pureita/archive/master.zip"
+
+
+## Full path of the remote file version.
+REMOTE_VERSION_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/version.xml"
+
+## Full path of the local file version.
 LOCAL_VERSION_FILE = os.path.join( ROOT_DIR , "version.xml" )
-LOCAL_FILE = os.path.join( ROOT_DIR , config.PLUGIN_NAME+"-" )
+
+## Full path to the local .zip file. It includes the beginning of the file name.
+## Later, the version that you correspoda, name of the platform and the extension .zip is added.
+LOCAL_FILE = os.path.join( ROOT_DIR , "plugin.video."+config.PLUGIN_NAME+"-master" )
 
 try:
     # Añadida a la opcion : si plataforma xbmcdharma es "True", no debe ser con la plataforma de la xbox
@@ -38,39 +49,39 @@ try:
     logger.info("pelisalacarta.core.updater get_system_platform="+config.get_system_platform())
     if config.get_platform()=="kodi-isengard":
         import xbmc
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="kodi-helix":
         import xbmc
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmceden":
         import xbmc
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmcfrodo":
         import xbmc
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmcgotham":
         import xbmc
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
     elif config.get_platform()=="xbmc":
         import xbmc
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = xbmc.translatePath( "special://home/plugins/video")
     elif config.get_platform()=="wiimc":
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = os.path.join(config.get_runtime_path(),"..")
     elif config.get_platform()=="rss":
-        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+        REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
         DESTINATION_FOLDER = os.path.join(config.get_runtime_path(),"..")
 
 except:
     import xbmc
-    REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
-    DESTINATION_FOLDER = xbmc.translatePath( os.path.join( ROOT_DIR , ".." ) )
+    REMOTE_FILE = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
+    DESTINATION_FOLDER = xbmc.translatePath( "special://home/addons")
 
 def checkforupdates(plugin_mode=True):
     logger.info("pelisalacarta.core.updater checkforupdates")
@@ -80,7 +91,7 @@ def checkforupdates(plugin_mode=True):
     logger.info("pelisalacarta.core.updater Version remota: "+REMOTE_VERSION_FILE)
     data = scrapertools.cachePage( REMOTE_VERSION_FILE )
 
-    '''    
+    '''   
     <?xml version="1.0" encoding="utf-8" standalone="yes"?>
     <version>
             <name>pelisalacarta</name>
@@ -94,7 +105,7 @@ def checkforupdates(plugin_mode=True):
     version_publicada = scrapertools.find_single_match(data,"<version>([^<]+)</version>").strip()
     tag_publicada = scrapertools.find_single_match(data,"<tag>([^<]+)</tag>").strip()
     logger.info("pelisalacarta.core.updater version remota="+tag_publicada+" "+version_publicada)
-    
+   
     # Lee el fichero con la versión instalada
     localFileName = LOCAL_VERSION_FILE
     logger.info("pelisalacarta.core.updater fichero local version: "+localFileName)
@@ -158,23 +169,23 @@ def checkforupdates(plugin_mode=True):
         hayqueactualizar = (numero_version_publicada > numero_version_local)
 
     if hayqueactualizar:
-    
+   
         if plugin_mode:
-    
+   
             logger.info("pelisalacarta.core.updater actualizacion disponible")
-            
+           
             # Añade al listado de XBMC
             import xbmcgui
             thumbnail = IMAGES_PATH+"Crystal_Clear_action_info.png"
             logger.info("thumbnail="+thumbnail)
-            listitem = xbmcgui.ListItem( "Descargar version "+tag_publicada, thumbnailImage=thumbnail )
+            listitem = xbmcgui.ListItem( "Scarica la versione "+tag_publicada, thumbnailImage=thumbnail )
             itemurl = '%s?action=update&version=%s' % ( sys.argv[ 0 ] , tag_publicada )
             import xbmcplugin
             xbmcplugin.addDirectoryItem( handle = int(sys.argv[ 1 ]), url = itemurl , listitem=listitem, isFolder=True)
-            
+           
             # Avisa con un popup
             dialog = xbmcgui.Dialog()
-            dialog.ok("Versión "+tag_publicada+" disponible","Ya puedes descargar la nueva versión del plugin\ndesde el listado principal")
+            dialog.ok("Versione "+tag_publicada+" disponibile","E' possibile scaricare la nuova versione del plugin\nattraverso l'opzione nel menù principale.")
 
         else:
 
@@ -195,20 +206,20 @@ def checkforupdates(plugin_mode=True):
 def update(params):
     # Descarga el ZIP
     logger.info("pelisalacarta.core.updater update")
-    remotefilename = "https://github.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/archive/master.zip"
-    localfilename = LOCAL_FILE+params.get("version")+".zip"
+    remotefilename = "https://github.com/Fenice82/plugin.video.streamondemand-pureita/archive/master.zip"
+    localfilename = LOCAL_FILE
     logger.info("pelisalacarta.core.updater remotefilename=%s" % remotefilename)
     logger.info("pelisalacarta.core.updater localfilename=%s" % localfilename)
     logger.info("pelisalacarta.core.updater descarga fichero...")
     inicio = time.clock()
-    
+   
     #urllib.urlretrieve(remotefilename,localfilename)
     from core import downloadtools
     downloadtools.downloadfile(remotefilename, localfilename, continuar=False)
-    
+   
     fin = time.clock()
     logger.info("pelisalacarta.core.updater Descargado en %d segundos " % (fin-inicio+1))
-    
+   
     # Lo descomprime
     logger.info("pelisalacarta.core.updater descomprime fichero...")
     import ziptools
@@ -216,14 +227,14 @@ def update(params):
     destpathname = DESTINATION_FOLDER
     logger.info("pelisalacarta.core.updater destpathname=%s" % destpathname)
     unzipper.extract(localfilename,destpathname)
-    
+   
     # Borra el zip descargado
     logger.info("pelisalacarta.core.updater borra fichero...")
     os.remove(localfilename)
     logger.info("pelisalacarta.core.updater ...fichero borrado")
 
 def get_channel_remote_url(channel_name):
-    _remote_channel_url_ = "https://raw.githubusercontent.com/Fenice82/plugin.video.pelisalacarta_ui.pureita/master/"
+    _remote_channel_url_ = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
     if channel_name <> "channelselector":
         _remote_channel_url_+= "channels/"
     remote_channel_url = _remote_channel_url_+channel_name+".py"
@@ -248,18 +259,18 @@ def get_channel_local_path(channel_name):
     logger.info("pelisalacarta.core.updater local_channel_path="+local_channel_path)
     logger.info("pelisalacarta.core.updater local_version_path="+local_version_path)
     logger.info("pelisalacarta.core.updater local_compiled_path="+local_compiled_path)
-    
+   
     return local_channel_path , local_version_path , local_compiled_path
 
 def updatechannel(channel_name):
     logger.info("pelisalacarta.core.updater updatechannel('"+channel_name+"')")
-    
+   
     # Canal remoto
     remote_channel_url , remote_version_url = get_channel_remote_url(channel_name)
-    
+   
     # Canal local
     local_channel_path , local_version_path , local_compiled_path = get_channel_local_path(channel_name)
-    
+   
     #if not os.path.exists(local_channel_path):
     #    return False;
 
@@ -288,9 +299,9 @@ def updatechannel(channel_name):
         local_version = int(matches[0])
     else:
         local_version = 0
-    
+   
     logger.info("pelisalacarta.core.updater local_version=%d" % local_version)
-    
+   
     # Comprueba si ha cambiado
     updated = remote_version > local_version
 
@@ -304,7 +315,7 @@ def download_channel(channel_name):
     logger.info("pelisalacarta.core.updater download_channel('"+channel_name+"')")
     # Canal remoto
     remote_channel_url , remote_version_url = get_channel_remote_url(channel_name)
-    
+   
     # Canal local
     local_channel_path , local_version_path , local_compiled_path = get_channel_local_path(channel_name)
 

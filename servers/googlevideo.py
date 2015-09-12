@@ -6,19 +6,14 @@
 # ------------------------------------------------------------
 # modify by DrZ3r0
 
-import os
-import urlparse, urllib2, urllib, re
+import re
 
-from core import scrapertools
 from core import logger
-from core import config
 
 
 # Returns an array of possible video url's from the page_url
 def get_video_url(page_url, premium=False, user="", password="", video_password=""):
     logger.info("[googlevideo.py] get_video_url(page_url='%s')" % page_url)
-
-    print page_url
 
     video_urls = [["[googlevideo]", page_url]]
 

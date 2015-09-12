@@ -38,7 +38,7 @@
       <font>font14</font>
       <textcolor>FFCCCCCC</textcolor>
       <align>left</align>
-      <label>pelisalacarta</label>
+      <label>Stream On Demand PureITA</label>
     </control>
 
     <!-- ---------------------------- -->
@@ -60,7 +60,7 @@
       <font>font10_title</font>
       <textcolor>FFCCCCCC</textcolor>
       <align>right</align>
-      <label>pelisalacarta 4.0.3</label>
+      <label>Stream On Demand Pureita 5.0.1</label>
     </control>
 
     <control type="label">
@@ -69,7 +69,7 @@
       <font>font10_title</font>
       <textcolor>FFCCCCCC</textcolor>
       <align>right</align>
-      <label>31/Agosto/2015</label>
+      <label>12/Settembre/2015</label>
     </control>
 
     <!-- ---------------------------- -->

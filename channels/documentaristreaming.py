@@ -78,13 +78,13 @@ def peliculas(item):
     scrapertools.printMatches(matches)
 
     for scrapedthumbnail, scrapedurl, scrapedtitle, scrapedplot in matches:
-        scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
+        scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle).strip()
         scrapedplot = scrapertools.decodeHtmlentities(scrapedplot)
         if (DEBUG): logger.info(
             "title=[" + scrapedtitle + "], url=[" + scrapedurl + "], thumbnail=[" + scrapedthumbnail + "]")
         itemlist.append(
             Item(channel=__channel__,
-                 action="play",
+                 action="findvideos",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  viewmode="movie_with_plot",
@@ -155,30 +155,3 @@ def search(item,texto):
         for line in sys.exc_info():
             logger.error( "%s" % line )
         return []
-
-
-def play(item):
-    logger.info("[documentaristreaming.py] play")
-    itemlist = []
-    video_url = ""
-    server = None
-
-    data = scrapertools.cache_page(item.url)
-    url = scrapertools.find_single_match(data, '<iframe\s+(?:width="[^"]*"\s*height="[^"]*"\s*)?src="([^"]+)"')
-
-    if 'youtu' in url:
-        data = scrapertools.cache_page(url)
-        vid = scrapertools.find_single_match(data, '\'VIDEO_ID\'\s*:\s*"([^"]+)')
-        if vid != "":
-            video_url = "http://www.youtube.com/watch?v=%s" % vid
-            server = 'youtube'
-    elif 'rai.tv' in url:
-        data = scrapertools.cache_page(url)
-        video_url = scrapertools.find_single_match(data, '<meta\s+name="videourl_m3u8"\s*content="([^"]+)"')
-
-    if video_url != "":
-        item.url = video_url
-        item.server = server
-        itemlist.append(item)
-
-    return itemlist

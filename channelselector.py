@@ -243,7 +243,7 @@ def channels_list():
     itemlist.append( Item( title="FoxyCinema"          , channel="foxycinema"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"foxycinema.png" ))
     itemlist.append( Item( title="Guardaserie.net"     , channel="guardaserie"       , language="IT"    , category="B,S"        , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"guardaserie.png"   ))
     itemlist.append( Item( title="GuardareFilm"         , channel="guardarefilm"           , language="IT"    , category="F,S,A"    , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"guardarefilm.png"))
-    itemlist.append( Item( title="Hubberfilm"          , channel="hubberfilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"hubberfilm.png"))
+    #itemlist.append( Item( title="Hubberfilm"          , channel="hubberfilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"hubberfilm.png"))
     #itemlist.append( Item( title="ildocumento.it"      , channel="ildocumento"           , language="IT"    , category="D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"ildocumento.png"   ))
     itemlist.append( Item( title="ItaFilm.tv"      , channel="itafilmtv"           , language="IT"    , category="F,S,A,D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"itafilmtv.png"   ))
     itemlist.append( Item( title="Italia-Film.co"      , channel="italiafilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"italiafilm.png"   ))

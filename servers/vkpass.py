@@ -7,10 +7,10 @@
 # ------------------------------------------------------------
 
 import re
+import urllib
 
 from core import scrapertools
 from core import logger
-
 
 headers = [
     ['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
@@ -32,7 +32,7 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
 
     # URL del vídeo
     for url, quality in re.findall(r'\{file:"([^"]+)",\s*label:"([^"]+)"', data, re.DOTALL):
-        url = url.replace("%3B", ";")
+        url = url.replace("%3B", ";") + '|' + urllib.urlencode(dict(headers))
         video_urls.append([quality + " [vkpass]", url])
 
     return video_urls
@@ -45,7 +45,7 @@ def find_videos(text):
 
     patronvideos = r'//vkpass.com/token/([^/]+)/vkphash/([^"\']+)'
     logger.info("[vkpass.py] find_videos #" + patronvideos + "#")
-    
+
     matches = re.compile(patronvideos, re.DOTALL).findall(text)
 
     for media_id, vkphash in matches:

@@ -18,7 +18,7 @@ import xbmc
 PLATFORM_NAME = "kodi-isengard"
 print "pelisalacarta.core.config PLATFORM_NAME="+PLATFORM_NAME
 
-PLUGIN_NAME = "pelisalacarta-ui"
+PLUGIN_NAME = "streamondemand-pureita"
 __settings__ = xbmcaddon.Addon(id="plugin.video."+PLUGIN_NAME)
 __language__ = __settings__.getLocalizedString
 

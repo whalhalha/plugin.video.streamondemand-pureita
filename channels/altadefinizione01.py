@@ -4,8 +4,9 @@
 # Canal para altadefinizione01
 # http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # ------------------------------------------------------------
-import urlparse, urllib2, urllib, re
-import os, sys
+import urlparse
+import re
+import sys
 
 from core import logger
 from core import config
@@ -155,9 +156,13 @@ def findvid(item):
     data = scrapertools.cache_page(item.url)
     data = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
     if data != "":
-        from lib.jsbeautifier.unpackers import packer
-        data = packer.unpack(data).replace(r'\\/', '/')
-        itemlist = servertools.find_video_items(data=data)
+        from core import unpackerjs3
+        data_unpack = unpackerjs3.unpackjs(data)
+        if data_unpack == "":
+            from lib.jsbeautifier.unpackers import packer
+            data_unpack = packer.unpack(data)
+
+        itemlist = servertools.find_video_items(data=data_unpack.replace(r'\\/', '/'))
 
         for videoitem in itemlist:
             videoitem.title = "".join([item.title, videoitem.title])
