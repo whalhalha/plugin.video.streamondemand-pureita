@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para documentaristreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per documentaristreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # by dentaku65, DrZ3r0
 # ------------------------------------------------------------
 import urlparse, urllib2, urllib, re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("pelisalacarta.documentaristreaming mainlist")
+    logger.info("[documentaristreaming] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Aggiornamenti[/COLOR]",
                      action="peliculas",
@@ -50,7 +50,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("pelisalacarta.documentaristreaming peliculas")
+    logger.info("[documentaristreaming] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -111,7 +111,7 @@ def peliculas(item):
 
 
 def categorias(item):
-    logger.info("pelisalacarta.documentaristreaming categorias")
+    logger.info("[documentaristreaming] categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)

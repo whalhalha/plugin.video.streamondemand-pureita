@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse
 import urllib2
@@ -37,7 +37,7 @@ def mainlist(item):
     return itemlist
 
 def peliculas(item):
-    logger.info("pelisalacarta.piratestreaming peliculas")
+    logger.info("[piratestreaming] peliculas")
     itemlist = []
 
     # Descarga la pagina

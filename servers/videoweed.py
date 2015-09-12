@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para videoweed
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per videoweed
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import re, urlparse, urllib, urllib2

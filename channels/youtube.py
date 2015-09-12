@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para youtube
+# Stream On Demand PureITA
+# Canale per youtube
 # Buscador simple para visonar o descargar desde YouTube
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import re, sys
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para documentary.es
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per documentary.es
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -13,7 +13,7 @@ from core import logger
 from core import config
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("documentary get_video_url(page_url='%s')" % page_url)
+    logger.info("[documentary.py] get_video_url(page_url='%s')" % page_url)
     video_urls = []
 
     data = scrapertools.cache_page(page_url)
@@ -42,7 +42,7 @@ def get_video_url( page_url , premium = False , user="" , password="", video_pas
         video_urls = servermodule.get_video_url(item.url)
 
     for video_url in video_urls:
-        logger.info("documentary %s - %s" % (video_url[0],video_url[1]))
+        logger.info("[documentary.py] %s - %s" % (video_url[0],video_url[1]))
 
     return video_urls
 
@@ -53,7 +53,7 @@ def find_videos(data):
 
     # <iframe src="http://documentary.es/2321-mundos-invisibles-1x02-mas-alla-de-nuestra-vision-720p?embed"
     patronvideos  = 'http://documentary.es/(\d+[a-z0-9\-]+)'
-    logger.info("documentary find_videos #"+patronvideos+"#")
+    logger.info("[documentary.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

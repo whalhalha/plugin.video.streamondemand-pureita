@@ -1,9 +1,9 @@
 
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para novamov
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per novamov
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 # Credits:
 # Unwise and main algorithm taken from Eldorado url resolver

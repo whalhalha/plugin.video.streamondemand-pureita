@@ -1,4 +1,4 @@
-# plugin.video.streamondemand-pureita
+# plugin.video.pelisalacarta_ui.pureita
 Italian version of pelisalacarta-ui v4.0.3,
 and only with Italian channels.
 Fixed the new options with Italian channels,

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para powvideo
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per powvideo
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -14,12 +14,12 @@ from core import config
 from core import jsunpack
 
 def test_video_exists( page_url ):
-    logger.info("pelisalacarta.powvideo test_video_exists(page_url='%s')" % page_url)
+    logger.info("[powvideo.py] test_video_exists(page_url='%s')" % page_url)
     
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.powvideo get_video_url(page_url='%s')" % page_url)
+    logger.info("[powvideo.py] get_video_url(page_url='%s')" % page_url)
 
     # Lo pide una vez
     if not "embed" in page_url:
@@ -85,7 +85,7 @@ def find_videos(data):
 
     # http://powvideo.net/embed-sbb9ptsfqca2
     patronvideos  = 'powvideo.net/embed-([a-z0-9]+)'
-    logger.info("pelisalacarta.powvideo find_videos #"+patronvideos+"#")
+    logger.info("[powvideo.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -100,7 +100,7 @@ def find_videos(data):
 
     # http://powvideo.net/auoxxtvyoy
     patronvideos  = 'powvideo.net/([a-z0-9]+)'
-    logger.info("pelisalacarta.powvideo find_videos #"+patronvideos+"#")
+    logger.info("[powvideo.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

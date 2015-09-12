@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para Movshare
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per Movshare
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 # Credits:
 # https://github.com/Eldorados/script.module.urlresolver/blob/master/lib/urlresolver/plugins/movshare.py

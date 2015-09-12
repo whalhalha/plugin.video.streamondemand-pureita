@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para videos externos de divxstage
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per videos externos de divxstage
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 # Credits:
 # Unwise and main algorithm taken from Eldorado url resolver

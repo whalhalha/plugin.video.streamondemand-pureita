@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para playedto
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per playedto
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re

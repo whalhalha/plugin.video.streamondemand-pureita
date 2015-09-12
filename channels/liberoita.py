@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -26,7 +26,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.liberoita mainlist")
+    logger.info("[liberoita] mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Novita'[/COLOR]", action="peliculas", url="http://liberoita.org/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Categorie[/COLOR]", action="categorias", url="http://liberoita.org/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -36,7 +36,7 @@ def mainlist(item):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.liberoita categorias")
+    logger.info("[liberoita] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)
@@ -73,7 +73,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("pelisalacarta.liberoita peliculas")
+    logger.info("[liberoita] peliculas")
     itemlist = []
 
     # Descarga la pagina

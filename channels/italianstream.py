@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -25,7 +25,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.italianstream mainlist")
+    logger.info("[italianstream] mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Al Cinema[/COLOR]", action="peliculas", url="http://italian-stream.tv/category/news/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]HD Quality[/COLOR]", action="peliculas", url="http://italian-stream.tv/category/dvd-rip/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/Box%20Sets%20HD.png"))
@@ -36,7 +36,7 @@ def mainlist(item):
     return itemlist
 
 def peliculas(item):
-    logger.info("pelisalacarta.italianstream peliculas")
+    logger.info("[italianstream] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -71,7 +71,7 @@ def peliculas(item):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.italianstream categorias")
+    logger.info("[italianstream] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)

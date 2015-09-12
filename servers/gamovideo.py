@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para gamovideo
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per gamovideo
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -14,11 +14,11 @@ from core import config
 from core import jsunpack
 
 def test_video_exists( page_url ):
-    logger.info("pelisalacarta.gamovideo test_video_exists(page_url='%s')" % page_url)
+    logger.info("[gamovideo.py] test_video_exists(page_url='%s')" % page_url)
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.gamovideo get_video_url(page_url='%s')" % page_url)
+    logger.info("[gamovideo.py] get_video_url(page_url='%s')" % page_url)
     if not "embed" in page_url:
       page_url = page_url.replace("http://gamovideo.com/","http://gamovideo.com/embed-") + "-640x360.html"
 
@@ -48,7 +48,7 @@ def find_videos(data):
     # http://gamovideo.com/auoxxtvyoy
     # http://gamovideo.com/h1gvpjarjv88
     patronvideos  = 'gamovideo.com/([a-z0-9]+)'
-    logger.info("pelisalacarta.gamovideo find_videos #"+patronvideos+"#")
+    logger.info("[gamovideo.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -63,7 +63,7 @@ def find_videos(data):
             
     # http://gamovideo.com/embed-sbb9ptsfqca2-588x360.html
     patronvideos  = 'gamovideo.com/embed-([a-z0-9]+)'
-    logger.info("pelisalacarta.gamovideo find_videos #"+patronvideos+"#")
+    logger.info("[gamovideo.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

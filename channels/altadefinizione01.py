@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para altadefinizione01
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per altadefinizione01
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("pelisalacarta.altadefinizione01 mainlist")
+    logger.info("[altadefinizione01] mainlist")
 
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Ultimi film inseriti[/COLOR]",
@@ -56,7 +56,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("pelisalacarta.altadefinizione01 peliculas")
+    logger.info("[altadefinizione01] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -105,7 +105,7 @@ def peliculas(item):
 
 
 def categorias(item):
-    logger.info("pelisalacarta.altadefinizione01 categorias")
+    logger.info("[altadefinizione01] categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)

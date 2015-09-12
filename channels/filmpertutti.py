@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse
 import re
@@ -26,7 +26,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.filmpertutti mainlist")
+    logger.info("[filmpertutti] mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi film inseriti[/COLOR]", action="peliculas", url="http://www.filmpertutti.co/category/film/news_film/",thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Categorie film[/COLOR]", action="categorias", url="http://www.filmpertutti.co/category/film/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -36,7 +36,7 @@ def mainlist(item):
     return itemlist
 
 def peliculas(item):
-    logger.info("pelisalacarta.filmpertutti peliculas")
+    logger.info("[filmpertutti] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -73,7 +73,7 @@ def peliculas(item):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.filmpertutti categorias")
+    logger.info("[filmpertutti] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)
@@ -111,7 +111,7 @@ def search(item,texto):
 
 
 def findvid_serie(item):
-    logger.info("pelisalacarta.filmpertutti findvideos")
+    logger.info("[filmpertutti] findvideos")
 
     itemlist = []
 

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para itastreaming
+# Stream On Demand PureITA
+# Canale per itastreaming
 # by DrZ3r0
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 import urllib2
 import urlparse
@@ -40,7 +40,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("pelisalacarta.itastreaming mainlist")
+    logger.info("[itastreaming] mainlist")
 
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Ultimi film inseriti[/COLOR]",
@@ -66,7 +66,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("pelisalacarta.itastreaming peliculas")
+    logger.info("[itastreaming] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -133,7 +133,7 @@ def peliculas(item):
 
 
 def peliculas_search(item):
-    logger.info("pelisalacarta.itastreaming peliculas")
+    logger.info("[itastreaming] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -181,7 +181,7 @@ def peliculas_search(item):
 
 
 def categorias(item):
-    logger.info("pelisalacarta.itastreaming categorias")
+    logger.info("[itastreaming] categorias")
     itemlist = []
 
     data = anti_cloudflare(item.url)
@@ -212,7 +212,7 @@ def categorias(item):
 
 
 def listaaz(item):
-    logger.info("pelisalacarta.itastreaming listaaz")
+    logger.info("[itastreaming] listaaz")
     itemlist = []
 
     data = anti_cloudflare(item.url)

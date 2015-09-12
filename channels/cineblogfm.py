@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse
 import urllib2
@@ -29,7 +29,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.cineblogfm mainlist")
+    logger.info("[cineblogfm] mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Nuovi Film[/COLOR]", action="peliculas", url=sito+"/new-film-streaming/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Genere[/COLOR]", action="categorias", url=sito, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -42,7 +42,7 @@ def mainlist(item):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.cineblogfm categorias")
+    logger.info("[cineblogfm] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)
@@ -67,7 +67,7 @@ def categorias(item):
     return itemlist
 
 def catpays(item):
-    logger.info("pelisalacarta.cineblogfm categorias")
+    logger.info("[cineblogfm] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)
@@ -92,7 +92,7 @@ def catpays(item):
     return itemlist
 
 def catyear(item):
-    logger.info("pelisalacarta.cineblogfm categorias")
+    logger.info("[cineblogfm] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)
@@ -135,7 +135,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("pelisalacarta.cineblogfm peliculas")
+    logger.info("[cineblogfm] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -165,7 +165,7 @@ def peliculas(item):
     return itemlist
 
 def serie_tv(item):
-    logger.info("pelisalacarta.cineblogfm peliculas")
+    logger.info("[cineblogfm] peliculas")
     itemlist = []
 
     # Descarga la pagina

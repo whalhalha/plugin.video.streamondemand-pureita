@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para animesubita
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per animesubita
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -31,7 +31,7 @@ def isGeneric():
     return True
 
 def mainlist( item ):
-    logger.info( "pelisalacarta.animesubita mainlist" )
+    logger.info( "[animesubita] mainlist" )
 
     itemlist = []
 
@@ -43,7 +43,7 @@ def mainlist( item ):
     return itemlist
 
 def novedades( item ):
-    logger.info( "pelisalacarta.animesubita peliculas" )
+    logger.info( "[animesubita] peliculas" )
 
     itemlist = []
 
@@ -62,7 +62,7 @@ def novedades( item ):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.animesubita categorias")
+    logger.info("[animesubita] categorias")
 
     itemlist = []
 
@@ -80,7 +80,7 @@ def categorias(item):
     return itemlist
    
 def selection( item ):
-    logger.info( "pelisalacarta.animesubita peliculas" )
+    logger.info( "[animesubita] peliculas" )
 
     itemlist = []
 
@@ -97,7 +97,7 @@ def selection( item ):
     return itemlist   
 
 def episodios( item ):
-    logger.info( "pelisalacarta.animesubita peliculas" )
+    logger.info( "[animesubita] peliculas" )
 
     itemlist = []
 
@@ -131,7 +131,7 @@ def search( item, texto ):
 
 
 def findvideos(item):
-    logger.info("pelisalacarta.channels.animesubita findvideos")
+    logger.info("[animesubita] findvideos")
 
     headers.append(['Referer', item.url])
 

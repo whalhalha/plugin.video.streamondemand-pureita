@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para cineblog01
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per cineblog01
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 import urlparse
 import sys

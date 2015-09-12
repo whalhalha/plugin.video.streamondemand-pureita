@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -25,7 +25,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.filmpertutti mainlist")
+    logger.info("[filmpertutti] mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Tutte Le Serie Tv[/COLOR]", action="peliculas", url="http://www.italiaserie.co/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Serie TV - Top 10[/COLOR]", action="peliculas2", url="http://www.italiaserie.co/top-10/", thumbnail="http://i.imgur.com/cnnUCXh.png"))
@@ -34,7 +34,7 @@ def mainlist(item):
     return itemlist
 
 def peliculas(item):
-    logger.info("pelisalacarta.italiaserie peliculas")
+    logger.info("[italiaserie] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -66,7 +66,7 @@ def peliculas(item):
     return itemlist
 
 def peliculas2(item):
-    logger.info("pelisalacarta.italiaserie peliculas")
+    logger.info("[italiaserie] peliculas")
     itemlist = []
 
     # Descarga la pagina

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para portalehd
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per portalehd
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -35,7 +35,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.portalehd mainlist")
+    logger.info("[portalehd] mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Novita'[/COLOR]", action="peliculas", url="http://www.portalehd.net/", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film HD[/COLOR]", action="peliculas", url="http://www.portalehd.net/category/film-hd/", thumbnail="http://i.imgur.com/3ED6lOP.png"))
@@ -47,7 +47,7 @@ def mainlist(item):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.portalehd categorias")
+    logger.info("[portalehd] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url, headers=headers)
@@ -84,7 +84,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("pelisalacarta.portalehd peliculas")
+    logger.info("[portalehd] peliculas")
     itemlist = []
 
     # Descarga la pagina

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para novedades
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per novedades
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 
@@ -24,7 +24,7 @@ def isGeneric():
     return True
 
 def mainlist(item,preferred_thumbnail="squares"):
-    logger.info("pelisalacarta.channels.novedades mainlist")
+    logger.info("[novedades] mainlist")
 
     itemlist = []
     itemlist.append( Item(channel=__channel__, action="peliculas"            , title="Film 3D - (Scegliere 2° server)", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_peliculas.png",viewmode="movie"))
@@ -36,7 +36,7 @@ def mainlist(item,preferred_thumbnail="squares"):
     return itemlist
 
 def peliculas(item):
-    logger.info("pelisalacarta.channels.novedades peliculas")
+    logger.info("[novedades] peliculas")
 
     itemlist = []
 
@@ -57,7 +57,7 @@ def peliculas(item):
     return sorted_itemlist
 
 def peliculas_infantiles(item):
-    logger.info("pelisalacarta.channels.novedades peliculas_infantiles")
+    logger.info("[channels.novedades] peliculas_infantiles")
 
     itemlist = []
 
@@ -78,7 +78,7 @@ def peliculas_infantiles(item):
     return sorted_itemlist
 
 def series(item):
-    logger.info("pelisalacarta.channels.novedades series")
+    logger.info("[novedades] series")
 
     itemlist = []
 
@@ -103,7 +103,7 @@ def series(item):
     return sorted_itemlist
 
 def anime(item):
-    logger.info("pelisalacarta.channels.novedades anime")
+    logger.info("[novedades] anime")
 
     itemlist = []
 
@@ -128,7 +128,7 @@ def anime(item):
     return sorted_itemlist
 
 def documentales(item):
-    logger.info("pelisalacarta.channels.novedades documentales")
+    logger.info("[novedades] documentales")
 
     itemlist = []
 

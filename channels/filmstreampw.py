@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse
 import re
@@ -36,7 +36,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("pelisalacarta.filmstreampw mainlist")
+    logger.info("[filmstreampw] mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi Film Inseriti[/COLOR]", action="peliculas", url=site + "film/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Genere[/COLOR]", action="categorias", url=site, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -48,7 +48,7 @@ def mainlist(item):
 
 
 def categorias(item):
-    logger.info("pelisalacarta.filmstreampw categorias")
+    logger.info("[filmstreampw] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url, headers=headers)
@@ -74,7 +74,7 @@ def categorias(item):
 
 
 def byyear(item):
-    logger.info("pelisalacarta.filmstreampw byyear")
+    logger.info("[filmstreampw] byyear")
     itemlist = []
     
     data = scrapertools.cache_page(item.url, headers=headers)
@@ -113,7 +113,7 @@ def search(item,texto):
 
 
 def peliculasx(item):
-    logger.info("pelisalacarta.filmstreampw peliculas")
+    logger.info("[filmstreampw] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -138,7 +138,7 @@ def peliculasx(item):
 
 
 def peliculas(item):
-    logger.info("pelisalacarta.filmstreampw peliculas")
+    logger.info("[filmstreampw] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -171,7 +171,7 @@ def peliculas(item):
 
 
 def episodios(item):
-    logger.info("pelisalacarta.channels.filmstreampw episodios")
+    logger.info("[filmstreampw] episodios")
 
     itemlist = []
 
@@ -195,7 +195,7 @@ def episodios(item):
 
 
 def findvid_serie(item):
-    logger.info("pelisalacarta.filmstreampw findvideos")
+    logger.info("[filmstreampw] findvideos")
 
     post_url, post_data, referer = item.url.split('?')
 

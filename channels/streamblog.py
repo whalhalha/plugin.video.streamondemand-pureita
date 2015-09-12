@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -37,7 +37,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("pelisalacarta.streamblog mainlist")
+    logger.info("[streamblog] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Novita'[/COLOR]",
                      action="peliculas",
@@ -67,7 +67,7 @@ def mainlist(item):
 
 
 def categorias(item):
-    logger.info("pelisalacarta.streamblog categorias")
+    logger.info("[streamblog] categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)
@@ -113,7 +113,7 @@ def search(item, texto):
 
 
 def results(item):
-    logger.info("pelisalacarta.streamblog results")
+    logger.info("[streamblog] results")
     itemlist = []
 
     # Descarga la pagina
@@ -164,7 +164,7 @@ def results(item):
 
 
 def peliculas(item):
-    logger.info("pelisalacarta.streamblog peliculas")
+    logger.info("[streamblog] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -214,7 +214,7 @@ def peliculas(item):
 
 
 def episodios(item):
-    logger.info("pelisalacarta.streamblog episodios")
+    logger.info("[streamblog] episodios")
 
     itemlist = []
 
@@ -242,7 +242,7 @@ def episodios(item):
 
 
 def findvid_serie(item):
-    logger.info("pelisalacarta.streamblog findvideos")
+    logger.info("[streamblog] findvideos")
 
     ## Descarga la página
     data = item.extra

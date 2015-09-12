@@ -1,9 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 # ------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para backin.net
+# Stream On Demand PureITA
+# Server per backin.net
 # by be4t5
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 # modify by Robalo, DrZ3r0
 

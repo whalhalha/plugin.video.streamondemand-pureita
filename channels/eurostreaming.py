@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# Stream On Demand PureITA
 # Canale per eurostreaming.tv
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("pelisalacarta.eurostreaming mainlist")
+    logger.info("[eurostreaming] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film - Archivio[/COLOR]",
                      action="peliculas",
@@ -55,7 +55,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("pelisalacarta.eurostreaming peliculas")
+    logger.info("[eurostreaming] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -102,7 +102,7 @@ def peliculas(item):
 
 
 def serietv(item):
-    logger.info("pelisalacarta.eurostreaming peliculas")
+    logger.info("[eurostreaming] peliculas")
     itemlist = []
 
     # Descarga la pagina

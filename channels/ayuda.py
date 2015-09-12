@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #----------------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# Stream On Demand PureITA
 # ayuda - Videos de ayuda y tutoriales para pelisalacarta
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # contribuci?n de jurrabi
 #----------------------------------------------------------------------
 import re
@@ -17,7 +17,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.channels.ayuda mainlist")
+    logger.info("[ayuda] mainlist")
     itemlist = []
 
     platform_name = config.get_platform()
@@ -38,7 +38,7 @@ def mainlist(item):
     return itemlist
 
 def tutoriales(item):
-    logger.info("pelisalacarta.channels.ayuda tutoriales")
+    logger.info("[ayuda] tutoriales")
     itemlist = []
 
     return playlists(item,"tvalacarta")

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para casacinema
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per casacinema
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -25,7 +25,7 @@ def isGeneric():
     return True
 
 def mainlist( item ):
-    logger.info( "pelisalacarta.casacinema mainlist" )
+    logger.info( "[casacinema] mainlist" )
 
     itemlist = []
 
@@ -51,7 +51,7 @@ def search( item, texto ):
         return []
 
 def peliculas( item ):
-    logger.info( "pelisalacarta.casacinema peliculas" )
+    logger.info( "[casacinema] peliculas" )
 
     itemlist = []
 
@@ -83,7 +83,7 @@ def peliculas( item ):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.casacinema categorias")
+    logger.info("[casacinema] categorias")
 
     itemlist = []
 

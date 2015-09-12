@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para letwatch
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per letwatch
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -14,11 +14,11 @@ from core import config
 from core import jsunpack
 
 def test_video_exists( page_url ):
-    logger.info("pelisalacarta.servers.letwatch test_video_exists(page_url='%s')" % page_url)
+    logger.info("[letwatch.py] test_video_exists(page_url='%s')" % page_url)
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.servers.letwatch url="+page_url)
+    logger.info("[letwatch.py] url="+page_url)
     if not "embed" in page_url:
       page_url = page_url.replace("http://letwatch.to/","http://letwatch.to/embed-") + ".html"
     
@@ -48,7 +48,7 @@ def find_videos(data):
 
     #letwatch.us/embed-e47krmd6vqo1
     patronvideos  = 'letwatch.(?:us|to)/embed-([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.letwatch find_videos #"+patronvideos+"#")
+    logger.info("[letwatch.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -63,7 +63,7 @@ def find_videos(data):
     
     #letwatch.us/e47krmd6vqo1
     patronvideos  = 'letwatch.(?:us|to)/([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.letwatch find_videos #"+patronvideos+"#")
+    logger.info("[letwatch.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

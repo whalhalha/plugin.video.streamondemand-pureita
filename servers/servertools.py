@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# Stream On Demand PureITA
 # Utilidades para detectar vídeos de los diferentes conectores
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 #LvX Edited Patched
 import re,sys

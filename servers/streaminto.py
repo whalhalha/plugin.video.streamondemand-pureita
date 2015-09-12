@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para streaminto
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per streaminto
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -13,7 +13,7 @@ from core import logger
 from core import config
 
 def test_video_exists( page_url ):
-    logger.info("[streamcloud.py] test_video_exists(page_url='%s')" % page_url)
+    logger.info("[streaminto.py] test_video_exists(page_url='%s')" % page_url)
 
     data = scrapertools.cache_page( url = page_url )
     if "File was deleted" in data:
@@ -22,7 +22,7 @@ def test_video_exists( page_url ):
         return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.servers.streaminto url="+page_url)
+    logger.info("[streaminto.py] url="+page_url)
 
     logger.info("### page_url-streaminto-find_videos : "+page_url)
     # Normaliza la URL
@@ -53,27 +53,27 @@ def get_video_url( page_url , premium = False , user="" , password="", video_pas
     #media_url = []
     try:
         host = scrapertools.get_match(data, patron_jpg)
-        logger.info("pelisalacarta.servers.streaminto host="+host)
+        logger.info("[streaminto.py] host="+host)
         flv_url = scrapertools.get_match(data, patron_flv)
-        logger.info("pelisalacarta.servers.streaminto flv_url="+flv_url)
+        logger.info("[streaminto.py] flv_url="+flv_url)
         flv = host+flv_url.split("=")[1]+"/v.flv"
-        logger.info("pelisalacarta.servers.streaminto flv="+flv)
+        logger.info("[streaminto.py] flv="+flv)
         #rtmp = scrapertools.get_match(data, patron_rtmp)
     except:
-        logger.info("pelisalacarta.servers.streaminto opcion 2")
+        logger.info("[streaminto.py] opcion 2")
         op = scrapertools.get_match(data,'<input type="hidden" name="op" value="([^"]+)"')
-        logger.info("pelisalacarta.servers.streaminto op="+op)
+        logger.info("[streaminto.py] op="+op)
         usr_login = ""
         id = scrapertools.get_match(data,'<input type="hidden" name="id" value="([^"]+)"')
-        logger.info("pelisalacarta.servers.streaminto id="+id)
+        logger.info("[streaminto.py] id="+id)
         fname = scrapertools.get_match(data,'<input type="hidden" name="fname" value="([^"]+)"')
-        logger.info("pelisalacarta.servers.streaminto fname="+fname)
+        logger.info("[streaminto.py] fname="+fname)
         referer = scrapertools.get_match(data,'<input type="hidden" name="referer" value="([^"]*)"')
-        logger.info("pelisalacarta.servers.streaminto referer="+referer)
+        logger.info("[streaminto.py] referer="+referer)
         hashstring = scrapertools.get_match(data,'<input type="hidden" name="hash" value="([^"]*)"')
-        logger.info("pelisalacarta.servers.streaminto hashstring="+hashstring)
+        logger.info("[streaminto.py] hashstring="+hashstring)
         imhuman = scrapertools.get_match(data,'<input type="submit" name="imhuman".*?value="([^"]+)"').replace(" ","+")
-        logger.info("pelisalacarta.servers.streaminto imhuman="+imhuman)
+        logger.info("[streaminto.py] imhuman="+imhuman)
         
         import time
         time.sleep(10)
@@ -96,7 +96,7 @@ def get_video_url( page_url , premium = False , user="" , password="", video_pas
     #video_urls.append( [ scrapertools.get_filename_from_url(rtmp)[-4:]+" [streaminto]",rtmp])
 
     for video_url in video_urls:
-        logger.info("pelisalacarta.servers.streaminto %s - %s" % (video_url[0],video_url[1]))
+        logger.info("[streaminto.py] %s - %s" % (video_url[0],video_url[1]))
 
     return video_urls
 
@@ -120,7 +120,7 @@ def find_videos(data):
 
     #http://streamin.to/z3nnqbspjyne
     patronvideos  = 'streamin.to/([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.streaminto find_videos #"+patronvideos+"#")
+    logger.info("[streaminto.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -135,7 +135,7 @@ def find_videos(data):
 
     #http://streamin.to/embed-z3nnqbspjyne.html
     patronvideos  = 'streamin.to/embed-([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.streaminto find_videos #"+patronvideos+"#")
+    logger.info("[streaminto.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

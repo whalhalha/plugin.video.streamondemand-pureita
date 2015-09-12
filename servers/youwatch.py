@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# Stream On Demand PureITA
 # Server per youwatch
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -14,11 +14,11 @@ from core import config
 from core import unpackerjs3
 
 def test_video_exists( page_url ):
-    logger.info("youwatch test_video_exists(page_url='%s')" % page_url)
+    logger.info("[youwatch.py] test_video_exists(page_url='%s')" % page_url)
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("youwatch get_video_url(page_url='%s')" % page_url)
+    logger.info("[youwatch.py] get_video_url(page_url='%s')" % page_url)
     if not "embed" in page_url:
       #page_url = page_url.replace("http://youwatch.org/","http://youwatch.org/embed-") + ".html"
       ## - fix ------------------------------------------------------
@@ -62,7 +62,7 @@ def find_videos(data):
 
 
     patronvideos  = 'http://youwatch.org/([a-z0-9]+)'
-    logger.info("youwatch find_videos #"+patronvideos+"#")
+    logger.info("[youwatch.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -77,7 +77,7 @@ def find_videos(data):
            
 
     patronvideos  = 'http://youwatch.org/embed-([a-z0-9]+)'
-    logger.info("youwatch find_videos #"+patronvideos+"#")
+    logger.info("[youwatch.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

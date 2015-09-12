@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para piratestreaming
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per piratestreaming
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -34,7 +34,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("pelisalacarta.guardarefilm mainlist")
+    logger.info("[guardarefilm] mainlist")
     itemlist = []
     #itemlist.append( Item(channel=__channel__, title="[COLOR azure]Home[/COLOR]", action="peliculashome", url="http://guardarefilm.tv", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Novita' Al Cinema[/COLOR]", action="peliculas", url="http://guardarefilm.tv/streaming-film/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
@@ -47,7 +47,7 @@ def mainlist(item):
     return itemlist
 
 def categorias(item):
-    logger.info("pelisalacarta.guardarefilm categorias")
+    logger.info("[guardarefilm] categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)
@@ -84,7 +84,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("pelisalacarta.guardarefilm peliculas")
+    logger.info("[guardarefilm] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -119,7 +119,7 @@ def peliculas(item):
     return itemlist
 
 def peliculashome(item):
-    logger.info("pelisalacarta.guardarefilm peliculas")
+    logger.info("[guardarefilm] peliculas")
     itemlist = []
 
     # Descarga la pagina

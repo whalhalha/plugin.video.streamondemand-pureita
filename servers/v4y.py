@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para v4y
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per v4y
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -13,12 +13,12 @@ from core import logger
 from core import config
 
 def test_video_exists( page_url ):
-    logger.info("v4y test_video_exists(page_url='%s')" % page_url)
+    logger.info("[v4y.py] test_video_exists(page_url='%s')" % page_url)
     
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("v4y get_video_url(page_url='%s')" % page_url)
+    logger.info("[v4y.py] get_video_url(page_url='%s')" % page_url)
 
     data = scrapertools.cache_page(page_url)
     #logger.info("data="+data)
@@ -38,7 +38,7 @@ def find_videos(data):
     devuelve = []
 
     patronvideos  = 'http://v4y.me/([a-z0-9]+)'
-    logger.info("v4y find_videos #"+patronvideos+"#")
+    logger.info("[v4y.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

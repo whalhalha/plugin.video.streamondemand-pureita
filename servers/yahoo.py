@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para Yahoo
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per Yahoo
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re

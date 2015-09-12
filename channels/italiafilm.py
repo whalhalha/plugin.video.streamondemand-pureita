@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Canal para italiafilm
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Canale per italiafilm
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os

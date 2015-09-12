@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# Conector para thevideo.me
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# Stream On Demand PureITA
+# Server per thevideo.me
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -14,11 +14,11 @@ from core import config
 from core import jsunpack
 
 def test_video_exists( page_url ):
-    logger.info("pelisalacarta.servers.thevideome test_video_exists(page_url='%s')" % page_url)
+    logger.info("[thevideome.py] test_video_exists(page_url='%s')" % page_url)
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("pelisalacarta.servers.thevideome url="+page_url)
+    logger.info("[thevideome.py] url="+page_url)
     if not "embed" in page_url:
       page_url = page_url.replace("http://vodlocker.com/","http://vodlocker.com/embed-") + ".html"
     
@@ -38,7 +38,7 @@ def find_videos(data):
     devuelve = []
 
     patronvideos  = 'thevideo.me/embed-([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.thevideome find_videos #"+patronvideos+"#")
+    logger.info("[thevideome.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -52,7 +52,7 @@ def find_videos(data):
             logger.info("  url duplicada="+url)
             
     patronvideos  = 'thevideo.me/([a-z0-9A-Z]+)'
-    logger.info("pelisalacarta.servers.thevideome find_videos #"+patronvideos+"#")
+    logger.info("[thevideome.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
