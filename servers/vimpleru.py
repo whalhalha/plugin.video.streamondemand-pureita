@@ -86,7 +86,7 @@ def find_videos(data):
 
     # http://player.vimple.ru/iframe/3721fe74563a45c7a3fe1e6941e5cdc6
     patronvideos  = 'vimple.ru/iframe/([a-f0-9]+)'
-    logger.info("pelisalacarta.vimple.ru find_videos #"+patronvideos+"#")
+    logger.info("[vimpleru] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
