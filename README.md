@@ -1,17 +1,15 @@
-# plugin.video.streamondemand-pureita
-Italian version of pelisalacarta-ui v4.0.3,
-and only with Italian channels.
-Fixed the new options with Italian channels,
-translated the tweaked "buscador general" in Italian.
-The downloadable .zip can be installed directly into Kodi.
-It is suggested to remove any other pelisalacarta version first, restart Kodi and then install this.
+# Stream On Demand PureITA
 
-THIS VERSION HAS AUTO-UPDATES TO THIS REPO.
-JUST ENABLE UPDATES OPTIONS IN ADD-ON CONFIGURATION!
+![alt tag] https://raw.githubusercontent.com/Fenice82/streamondemand-pureita/master/icon.png
 
-Removed channels not in italian (sorry but that also makes the plugin lighter)
-Removed adult options and contents, these can be added easily by yourself!
+Fork of Pelisalacarta-ui, fully translated and customized with only italian channels.
 
-Many thanks to jesus (pelisalacarta founder), dentaku65, zanzibar1982, robalo and DrZ3ro for all the good work.
+Made for touch devices and thinked to have the same User Interface on all your KODI\Openelec installations and skins.
 
-Also refer to forum: http://www.mimediacenter.info/foro/viewtopic.php?f=22&t=6821
+Easily installable via Add-on manager on Kodi\Openelec, this version have self-updates enabled by default.
+
+All the erotic channels were removed, KODI\Openelec repositories are full of add-on made to view this kind of contents.
+
+Special thanks to forum users: Jesus (for pelisalacarta) robalo (for being a master and a skilled a developer) dentaku65 (for being a vulcano of ideas and a hard worker, and supporting moving the project here) DrZ3r0 (for being an Italian skilled developer, author of many important servers' files) Raùl (for his native general search) Chryses (for ideas about auto-updates) Zanzibar1982 (for editing channels and for adapting Pelisalacarta Classic to Streamondemand, https://github.com/Zanzibar82/plugin.video.streamondemand)
+
+Also refer to forum: http://www.mimediacenter.info/foro/viewforum.php?f=36
