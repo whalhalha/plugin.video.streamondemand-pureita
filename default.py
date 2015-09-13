@@ -35,7 +35,7 @@ plugintools.application_log_enabled = (plugintools.get_setting("debug")=="true")
 plugintools.module_log_enabled = (plugintools.get_setting("debug")=="true")
 plugintools.http_debug_log_enabled = (plugintools.get_setting("debug")=="true")
 
-plugintools.log("pelisalacarta 4 ui begin")
+plugintools.log("stream on demand pureita 1 begin")
 
 librerias = xbmc.translatePath( os.path.join( config.get_runtime_path(), 'lib' ) )
 sys.path.append (librerias)

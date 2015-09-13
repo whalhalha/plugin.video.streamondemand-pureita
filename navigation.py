@@ -115,7 +115,7 @@ def get_next_items( item ):
 
                 # Si el canal tiene una acción "play" tiene prioridad
                 if hasattr(channel, 'play'):
-                    plugintools.log("pelisalacarta.platformcode.launcher Channel has its own 'play' method")
+                    plugintools.log("streamondemand-pureita.platformcode.launcher Channel has its own 'play' method")
                     itemlist = channel.play(item)
                     if len(itemlist)>0:
                         item = itemlist[0]
@@ -131,7 +131,7 @@ def get_next_items( item ):
                         ventana_error = xbmcgui.Dialog()
                         ok = ventana_error.ok ("plugin", "No hay nada para reproducir")
                 else:
-                    plugintools.log("pelisalacarta.platformcode.launcher No channel 'play' method, executing core method")
+                    plugintools.log("streamondemand-pureita.platformcode.launcher No channel 'play' method, executing core method")
 
                     # FIXME: Este error ha que tratarlo de otra manera, por al dar a volver sin ver el vídeo falla
                     # Mejor hacer el play desde la ventana
@@ -148,7 +148,7 @@ def get_next_items( item ):
 
                 # Si el canal tiene una acción "findvideos" tiene prioridad
                 if hasattr(channel, 'findvideos'):
-                    plugintools.log("pelisalacarta.platformcode.launcher Channel has its own 'findvideos' method")
+                    plugintools.log("streamondemand-pureita.platformcode.launcher Channel has its own 'findvideos' method")
                     itemlist = channel.findvideos(item)
                 else:
                     itemlist = []

@@ -1,34 +1,34 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta 4
+# streamondemand-pureita 4
 # Copyright 2015 tvalacarta@gmail.com
 #
 # Distributed under the terms of GNU General Public License v3 (GPLv3)
 # http://www.gnu.org/licenses/gpl-3.0.html
 #------------------------------------------------------------
-# This file is part of pelisalacarta 4.
+# This file is part of streamondemand-pureita 4.
 #
-# pelisalacarta 4 is free software: you can redistribute it and/or modify
+# streamondemand-pureita 4 is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# pelisalacarta 4 is distributed in the hope that it will be useful,
+# streamondemand-pureita 4 is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with pelisalacarta 4.  If not, see <http://www.gnu.org/licenses/>.
+# along with streamondemand-pureita 4.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------
 # Service for updating new episodes on library series
 #------------------------------------------------------------
 
-# -- Update servertools and servers from repository pelisalacarta-ui PureITA ------
+# -- Update servertools and servers from repository streamondemand-pureita-ui PureITA ------
 try:
     from core import update_servers
 except:
-    logger.info("pelisalacarta.library_service Error en update_servers")
+    logger.info("streamondemand-pureita.library_service Error en update_servers")
 # ----------------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -42,7 +42,7 @@ from core import logger
 from core.item import Item
 from servers import servertools
 
-logger.info("pelisalacarta.library_service Actualizando series...")
+logger.info("streamondemand-pureita.library_service Actualizando series...")
 from platformcode import library
 from platformcode import launcher
 import xbmcgui
@@ -64,19 +64,19 @@ try:
         config_canal = open( nombre_fichero_config_canal , "r" )
         
         for serie in config_canal.readlines():
-            logger.info("pelisalacarta.library_service serie="+serie)
+            logger.info("streamondemand-pureita.library_service serie="+serie)
             serie = serie.split(",")
         
             ruta = os.path.join( config.get_library_path() , "SERIES" , serie[0] )
-            logger.info("pelisalacarta.library_service ruta =#"+ruta+"#")
+            logger.info("streamondemand-pureita.library_service ruta =#"+ruta+"#")
             if os.path.exists( ruta ):
-                logger.info("pelisalacarta.library_service Actualizando "+serie[0])
+                logger.info("streamondemand-pureita.library_service Actualizando "+serie[0])
                 item = Item(url=serie[1], show=serie[0])
                 try:
                     itemlist = []
 
                     pathchannels = os.path.join(config.get_runtime_path() , 'channels' ,serie[2].strip() + '.py')
-                    logger.info("pelisalacarta.library_service Cargando canal  " + pathchannels + " " + serie[2].strip())
+                    logger.info("streamondemand-pureita.library_service Cargando canal  " + pathchannels + " " + serie[2].strip())
                     obj = imp.load_source(serie[2].strip(), pathchannels )
                     itemlist = obj.episodios(item)
 
@@ -85,7 +85,7 @@ try:
                     logger.error(traceback.format_exc())
                     itemlist = []
             else:
-                logger.info("pelisalacarta.library_service No actualiza "+serie[0]+" (no existe el directorio)")
+                logger.info("streamondemand-pureita.library_service No actualiza "+serie[0]+" (no existe el directorio)")
                 itemlist=[]
 
             for item in itemlist:
@@ -94,12 +94,12 @@ try:
                     item.show=serie[0].strip()
                     library.savelibrary( titulo=item.title , url=item.url , thumbnail=item.thumbnail , server=item.server , plot=item.plot , canal=item.channel , category="Series" , Serie=item.show , verbose=False, accion="play_from_library", pedirnombre=False, subtitle=item.subtitle )
                 except:
-                    logger.info("pelisalacarta.library_service Capitulo no valido")
+                    logger.info("streamondemand-pureita.library_service Capitulo no valido")
 
         import xbmc
         xbmc.executebuiltin('UpdateLibrary(video)')
     else:
-        logger.info("No actualiza la biblioteca, está desactivado en la configuración de pelisalacarta")
+        logger.info("No actualiza la biblioteca, está desactivado en la configuración de streamondemand-pureita")
 
 except:
-    logger.info("pelisalacarta.library_service No hay series para actualizar")
+    logger.info("streamondemand-pureita.library_service No hay series para actualizar")
