@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per casacinema
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para casacinema
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -25,7 +25,7 @@ def isGeneric():
     return True
 
 def mainlist( item ):
-    logger.info( "[casacinema] mainlist" )
+    logger.info( "streamondemand.casacinema mainlist" )
 
     itemlist = []
 
@@ -51,7 +51,7 @@ def search( item, texto ):
         return []
 
 def peliculas( item ):
-    logger.info( "[casacinema] peliculas" )
+    logger.info( "streamondemand.casacinema peliculas" )
 
     itemlist = []
 
@@ -83,7 +83,7 @@ def peliculas( item ):
     return itemlist
 
 def categorias(item):
-    logger.info("[casacinema] categorias")
+    logger.info("streamondemand.casacinema categorias")
 
     itemlist = []
 

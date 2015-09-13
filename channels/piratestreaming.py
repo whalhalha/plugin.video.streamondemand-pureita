@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para piratestreaming
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse
 import urllib2
@@ -37,7 +37,7 @@ def mainlist(item):
     return itemlist
 
 def peliculas(item):
-    logger.info("[piratestreaming] peliculas")
+    logger.info("streamondemand.piratestreaming peliculas")
     itemlist = []
 
     # Descarga la pagina

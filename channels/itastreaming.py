@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per itastreaming
+# streamondemand.- XBMC Plugin
+# Canal para itastreaming
 # by DrZ3r0
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urllib2
 import urlparse
@@ -40,7 +40,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[itastreaming] mainlist")
+    logger.info("streamondemand.itastreaming mainlist")
 
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Ultimi film inseriti[/COLOR]",
@@ -66,7 +66,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("[itastreaming] peliculas")
+    logger.info("streamondemand.itastreaming peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -133,7 +133,7 @@ def peliculas(item):
 
 
 def peliculas_search(item):
-    logger.info("[itastreaming] peliculas")
+    logger.info("streamondemand.itastreaming peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -181,7 +181,7 @@ def peliculas_search(item):
 
 
 def categorias(item):
-    logger.info("[itastreaming] categorias")
+    logger.info("streamondemand.itastreaming categorias")
     itemlist = []
 
     data = anti_cloudflare(item.url)
@@ -212,7 +212,7 @@ def categorias(item):
 
 
 def listaaz(item):
-    logger.info("[itastreaming] listaaz")
+    logger.info("streamondemand.itastreaming listaaz")
     itemlist = []
 
     data = anti_cloudflare(item.url)

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per adnstream
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para adnstream
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import re, sys

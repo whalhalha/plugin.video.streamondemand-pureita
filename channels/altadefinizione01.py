@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per altadefinizione01
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para altadefinizione01
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[altadefinizione01] mainlist")
+    logger.info("streamondemand.altadefinizione01 mainlist")
 
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Ultimi film inseriti[/COLOR]",
@@ -56,7 +56,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("[altadefinizione01] peliculas")
+    logger.info("streamondemand.altadefinizione01 peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -105,7 +105,7 @@ def peliculas(item):
 
 
 def categorias(item):
-    logger.info("[altadefinizione01] categorias")
+    logger.info("streamondemand.altadefinizione01 categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
+# streamondemand.- XBMC Plugin
 # Canale per eurostreaming.tv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[eurostreaming] mainlist")
+    logger.info("streamondemand.eurostreaming mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film - Archivio[/COLOR]",
                      action="peliculas",
@@ -55,7 +55,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("[eurostreaming] peliculas")
+    logger.info("streamondemand.eurostreaming peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -102,7 +102,7 @@ def peliculas(item):
 
 
 def serietv(item):
-    logger.info("[eurostreaming] peliculas")
+    logger.info("streamondemand.eurostreaming peliculas")
     itemlist = []
 
     # Descarga la pagina

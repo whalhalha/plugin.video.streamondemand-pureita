@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per filmsenzalimiti
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para filmsenzalimiti
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import re
 import sys

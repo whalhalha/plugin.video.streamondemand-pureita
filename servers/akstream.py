@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
+# pelisalacarta - XBMC Plugin
 # Conector for akstream.net
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # by be4t5
 #------------------------------------------------------------
 

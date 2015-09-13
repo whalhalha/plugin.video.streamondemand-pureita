@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para piratestreaming
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -37,7 +37,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[tantifilm] mainlist")
+    logger.info("streamondemand.tantifilm mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Ultime Uscite[/COLOR]",
                      action="latest",
@@ -111,7 +111,7 @@ def search(item, texto):
 
 
 def search_peliculas(item):
-    logger.info("[tantifilm] search_peliculas")
+    logger.info("streamondemand.tantifilm search_peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -146,7 +146,7 @@ def search_peliculas(item):
 
 
 def peliculas(item):
-    logger.info("[tantifilm] peliculas")
+    logger.info("streamondemand.tantifilm peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -196,7 +196,7 @@ def peliculas(item):
 
 
 def latest(item):
-    logger.info("[tantifilm] peliculas")
+    logger.info("streamondemand.tantifilm peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -248,7 +248,7 @@ def latest(item):
 
 
 def episodios(item):
-    logger.info("[tantifilm] episodios")
+    logger.info("streamondemand.tantifilm episodios")
 
     itemlist = []
 
@@ -294,7 +294,7 @@ def episodios(item):
 
 
 def findvideos(item):
-    logger.info("[tantifilm] findvideos")
+    logger.info("streamondemand.tantifilm findvideos")
 
     ## Descarga la página
     data = item.extra if item.extra != '' else scrapertools.cache_page(item.url, headers=headers)

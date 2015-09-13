@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #----------------------------------------------------------------------
-# Stream On Demand PureITA
+# streamondemand.- XBMC Plugin
 # ayuda - Videos de ayuda y tutoriales para pelisalacarta
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # contribuci?n de jurrabi
 #----------------------------------------------------------------------
 import re
@@ -17,7 +17,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("[ayuda] mainlist")
+    logger.info("streamondemand.channels.ayuda mainlist")
     itemlist = []
 
     platform_name = config.get_platform()
@@ -38,7 +38,7 @@ def mainlist(item):
     return itemlist
 
 def tutoriales(item):
-    logger.info("[ayuda] tutoriales")
+    logger.info("streamondemand.channels.ayuda tutoriales")
     itemlist = []
 
     return playlists(item,"tvalacarta")

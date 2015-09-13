@@ -1,8 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per nowvideo
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para nowvideo
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # ------------------------------------------------------------
 # Credits:
 # Unwise and main algorithm taken from Eldorado url resolver

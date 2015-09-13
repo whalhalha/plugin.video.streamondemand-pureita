@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per documentaristreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para documentaristreaming
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # by dentaku65, DrZ3r0
 # ------------------------------------------------------------
 import urlparse, urllib2, urllib, re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[documentaristreaming] mainlist")
+    logger.info("streamondemand.documentaristreaming mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Aggiornamenti[/COLOR]",
                      action="peliculas",
@@ -42,7 +42,7 @@ def mainlist(item):
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     title="[COLOR yellow]Cerca...[/COLOR]",
+                     #title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -50,7 +50,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("[documentaristreaming] peliculas")
+    logger.info("streamondemand.documentaristreaming peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -111,7 +111,7 @@ def peliculas(item):
 
 
 def categorias(item):
-    logger.info("[documentaristreaming] categorias")
+    logger.info("streamondemand.documentaristreaming categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)

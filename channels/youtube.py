@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per youtube
+# streamondemand.- XBMC Plugin
+# Canal para youtube
 # Buscador simple para visonar o descargar desde YouTube
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import re, sys
 

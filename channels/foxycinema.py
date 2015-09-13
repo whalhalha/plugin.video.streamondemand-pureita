@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per foxycinema
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para foxycinema
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -27,7 +27,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("[foxycinema] mainlist")
+    logger.info("streamondemand.foxycinema mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi Film Inseriti[/COLOR]", action="peliculas", url="http://www.foxycinema.org/film.html", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
     #itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Categoria[/COLOR]", action="categorias", url="http://www.fastvideo.tv/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -69,7 +69,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("[foxycinema] peliculas")
+    logger.info("streamondemand.foxycinema peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -106,7 +106,7 @@ def peliculas(item):
     return itemlist
 
 def peliculasearch(item):
-    logger.info("[foxycinema] peliculas")
+    logger.info("streamondemand.foxycinema peliculas")
     itemlist = []
 
     # Descarga la pagina

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per streamable
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para streamable
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -14,12 +14,12 @@ from core import config
 from core import jsunpack
 
 def test_video_exists( page_url ):
-    logger.info("[streamable.py] test_video_exists(page_url='%s')" % page_url)
+    logger.info("streamable test_video_exists(page_url='%s')" % page_url)
     
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("[streamable.py] get_video_url(page_url='%s')" % page_url)
+    logger.info("streamable get_video_url(page_url='%s')" % page_url)
 
     data = scrapertools.cache_page(page_url)
 
@@ -50,7 +50,7 @@ def find_videos(data):
 
     # http://powvideo.net/embed-sbb9ptsfqca2
     patronvideos  = 'http://www.streamable.ch/video/([a-z0-9]+)'
-    logger.info("[streamable.py] find_videos #"+patronvideos+"#")
+    logger.info("streamable find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #:-----------------------------------------------------------
-# Stream On Demand PureITA
-# Server per enlaces a torrent y magnet
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para enlaces a torrent y magnet
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 from core import logger
 import urllib

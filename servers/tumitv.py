@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per tumi.tv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para tumi.tv
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 import re
 import urllib
@@ -12,7 +12,7 @@ from core import logger
 
 # Returns an array of possible video url's from the page_url
 def get_video_url( page_url , premium = False , user="" , password="" , video_password="" ):
-    logger.info("[tumitv.py] get_video_url(page_url='%s')" % page_url)
+    logger.info("pelisalacarta.tumitv get_video_url(page_url='%s')" % page_url)
 
     video_urls = []
 
@@ -41,7 +41,7 @@ def get_video_url( page_url , premium = False , user="" , password="" , video_pa
     video_urls.append( video_url )
 
     for video_url in video_urls:
-        logger.info("[tumitv.py] %s - %s" % (video_url[0],video_url[1]))
+        logger.info("pelisalacarta.tumitv %s - %s" % (video_url[0],video_url[1]))
 
     return video_urls
 
@@ -52,7 +52,7 @@ def find_videos(text):
 
     # http://www.tumi.tv/iframe-rzy0xuus6esv-600x400.html
     patronvideos  = 'tumi.tv/iframe-([a-z0-9]+)'
-    logger.info("[tumitv.py] find_videos #"+patronvideos+"#")
+    logger.info("pelisalacarta.tumitv find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(text)
 
     for match in matches:
@@ -68,7 +68,7 @@ def find_videos(text):
 
     # http://www.tumi.tv/rzy0xuus6esv
     patronvideos  = 'tumi.tv/([a-z0-9]+)'
-    logger.info("[tumitv.py] find_videos #"+patronvideos+"#")
+    logger.info("pelisalacarta.tumitv find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(text)
 
     for match in matches:

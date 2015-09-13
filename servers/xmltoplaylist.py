@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
+# pelisalacarta - XBMC Plugin
 # Convierte una lista de vídeos en xml a una playlist PLS
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 import re, os
 import urlparse, urllib, urllib2

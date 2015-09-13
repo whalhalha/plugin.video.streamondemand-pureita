@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
+# pelisalacarta - XBMC Plugin
 # Utilidades para detectar vídeos de los diferentes conectores
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 #LvX Edited Patched
 import re,sys
@@ -27,7 +27,7 @@ FREE_SERVERS.extend(['fileflyer','playedto','tunepk','powvideo','videomega','meg
 FREE_SERVERS.extend(['videozed','documentary','hugefiles','firedrive','videott','tumitv','gamovideo'])
 FREE_SERVERS.extend(['torrent','video4you','mailru','streaminto','backin','akstream','speedvideo','junkyvideo','realvid','cloudzilla','fakingstv'])
 FREE_SERVERS.extend(['meuvideos','cumlouder','openload','abysstream','megahd','exashare','okru','youwatch','publicvideohost','spruto','vkpass','bitmovie'])
-FREE_SERVERS.extend(['googledrive'])
+FREE_SERVERS.extend(['googledrive' , 'streamingfilmit'])
 
 # Lista de TODOS los servidores que funcionan con cuenta premium individual
 PREMIUM_SERVERS = ['uploadedto','nowvideo']
@@ -216,7 +216,7 @@ def resolve_video_urls_for_playing(server,url,video_password="",muestra_dialogo=
             if muestra_dialogo:
                 import xbmcgui
                 progreso = xbmcgui.DialogProgress()
-                progreso.create( "Stream On Demand PureITA" , "Connessione con "+server)
+                progreso.create( "streamondemand" , "Connessione con "+server)
 
             # Sustituye el código por otro "Plex compatible"
             #exec "from servers import "+server+" as server_connector"

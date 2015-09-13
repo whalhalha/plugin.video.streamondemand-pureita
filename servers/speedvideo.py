@@ -1,9 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per speedvideo
+# pelisalacarta - XBMC Plugin
+# Conector para speedvideo
 # by be4t5
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re

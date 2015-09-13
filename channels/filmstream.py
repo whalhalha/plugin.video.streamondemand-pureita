@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para piratestreaming
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[filmstream] mainlist")
+    logger.info("streamondemand.filmstream mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Ultimi Film Inseriti[/COLOR]",
                      action="peliculas",
@@ -56,7 +56,7 @@ def mainlist(item):
 
 
 def categorias(item):
-    logger.info("[filmstream] categorias")
+    logger.info("streamondemand.filmstream categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)
@@ -102,7 +102,7 @@ def search(item, texto):
 
 
 def peliculas(item):
-    logger.info("[filmstream] peliculas")
+    logger.info("streamondemand.filmstream peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -156,7 +156,7 @@ def peliculas(item):
 
 
 # def episodios(item):
-#     logger.info("[filmstream] episodios")
+#     logger.info("streamondemand.filmstream episodios")
 #
 #     itemlist = []
 #
@@ -203,7 +203,7 @@ def peliculas(item):
 
 
 def episodios(item):
-    logger.info("[filmstream] episodios")
+    logger.info("streamondemand.filmstream episodios")
 
     itemlist = []
 
@@ -352,7 +352,7 @@ def ep_list4(data, item, itemlist, lang_title):
 
 
 def findvid_serie(item):
-    logger.info("[filmstream] findvideos")
+    logger.info("streamondemand.filmstream findvideos")
 
     ## Descarga la página
     data = item.extra

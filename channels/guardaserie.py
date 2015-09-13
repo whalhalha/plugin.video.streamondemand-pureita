@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per guardaserie - Thank you robalo!
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para guardaserie - Thank you robalo!
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -31,7 +31,7 @@ def isGeneric():
     return True
 
 def mainlist( item ):
-    logger.info( "[guardaserie] mainlist" )
+    logger.info( "streamondemand.channels.guardaserie mainlist" )
 
     itemlist = []
 
@@ -44,7 +44,7 @@ def mainlist( item ):
     return itemlist
 
 def search( item,texto ):
-    logger.info("[guardaserie] search")
+    logger.info("streamondemand.channels.guardaserie search")
 
     item.url=host + "/?s=" + texto
 
@@ -60,7 +60,7 @@ def search( item,texto ):
         return []
 
 def fichas( item ):
-    logger.info( "[guardaserie] fichas" )
+    logger.info( "streamondemand.channels.guardaserie fichas" )
 
     itemlist = []
 
@@ -79,7 +79,7 @@ def fichas( item ):
     return itemlist
 
 def anime( item ):
-    logger.info( "[guardaserie] fichas" )
+    logger.info( "streamondemand.channels.guardaserie fichas" )
 
     itemlist = []
 
@@ -98,7 +98,7 @@ def anime( item ):
     return itemlist
 
 def cartoni( item ):
-    logger.info( "[guardaserie] fichas" )
+    logger.info( "streamondemand.channels.guardaserie fichas" )
 
     itemlist = []
 
@@ -117,7 +117,7 @@ def cartoni( item ):
     return itemlist
 
 def progs( item ):
-    logger.info( "[guardaserie] fichas" )
+    logger.info( "streamondemand.channels.guardaserie fichas" )
 
     itemlist = []
 
@@ -136,7 +136,7 @@ def progs( item ):
     return itemlist
 
 def cerca( item ):
-    logger.info( "[guardaserie] fichas" )
+    logger.info( "streamondemand.channels.guardaserie fichas" )
 
     itemlist = []
 
@@ -159,7 +159,7 @@ def cerca( item ):
     return itemlist
 
 def episodios(item):
-    logger.info("[guardaserie] episodios")
+    logger.info("streamondemand.channels.guardaserie episodios")
 
     itemlist = []
 
@@ -191,7 +191,7 @@ def episodios(item):
     return itemlist
 
 def findvideos( item ):
-    logger.info("[guardaserie] findvideos")
+    logger.info("streamondemand.channels.guardaserie findvideos")
 
     itemlist = []
 

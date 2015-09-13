@@ -1,8 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per filebox
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para filebox
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -13,7 +13,7 @@ from core import logger
 from core import config
 
 def test_video_exists( page_url ):
-    logger.info("[filebox.py] test_video_exists(page_url='%s')" % page_url)
+    logger.info("[streamcloud.py] test_video_exists(page_url='%s')" % page_url)
 
     data = scrapertools.cache_page( url = page_url )
     if "<b>File Not Found</b>" in data:

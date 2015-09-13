@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para piratestreaming
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -26,7 +26,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("[liberoita] mainlist")
+    logger.info("streamondemand.liberoita mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Novita'[/COLOR]", action="peliculas", url="http://liberoita.org/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Categorie[/COLOR]", action="categorias", url="http://liberoita.org/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -36,7 +36,7 @@ def mainlist(item):
     return itemlist
 
 def categorias(item):
-    logger.info("[liberoita] categorias")
+    logger.info("streamondemand.liberoita categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url)
@@ -73,7 +73,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("[liberoita] peliculas")
+    logger.info("streamondemand.liberoita peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -89,7 +89,7 @@ def peliculas(item):
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         response = urllib2.urlopen(scrapedurl)
         html = response.read()
-        start = html.find("</span></p>")
+        start = html.find("</strong><br />")
         end = html.find("<table border=\"1\" width=\"615\">", start)
         scrapedplot = html[start:end]
         scrapedplot = re.sub(r'<[^>]*>', '', scrapedplot)

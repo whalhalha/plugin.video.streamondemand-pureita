@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per Libreria XBMC
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para Libreria XBMC
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -151,7 +151,7 @@ def getContentFile(idFile):
     """, [idFile])
 
     for row in c:
-        #special://home/userdata/addon_data/plugin.video.streamondemand-pureita/library/SERIES/titulo/
+        #special://home/userdata/addon_data/plugin.video.streamondemand.library/SERIES/titulo/
         path = row[3].split("library/")
         archivo = row[2]
         path = path[1] + archivo

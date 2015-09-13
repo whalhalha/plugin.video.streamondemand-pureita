@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
+# pelisalacarta - XBMC Plugin
 # Conector for videowood.tv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # by DrZ3r0
 # ------------------------------------------------------------
 

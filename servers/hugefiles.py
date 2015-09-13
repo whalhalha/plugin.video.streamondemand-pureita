@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per hugefiles
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para hugefiles
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # Based on the hugefiles resolver from script.modules.urlresolver
 #------------------------------------------------------------
 
@@ -15,7 +15,7 @@ from core import config
 from core import jsunpack
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("[hugefiles.py] get_video_url(page_url='%s')" % page_url)
+    logger.info("hugefiles get_video_url(page_url='%s')" % page_url)
     video_urls = []
     
     data = scrapertools.cache_page( page_url )
@@ -45,7 +45,7 @@ def get_video_url( page_url , premium = False , user="" , password="", video_pas
     video_urls.append( [ scrapertools.get_filename_from_url(mediaurl)[-4:]+" [hugefiles]",mediaurl])
 
     for video_url in video_urls:
-        logger.info("[hugefiles.py] %s - %s" % (video_url[0],video_url[1]))
+        logger.info("hugefiles %s - %s" % (video_url[0],video_url[1]))
     
     return video_urls
 
@@ -56,7 +56,7 @@ def find_videos(data):
 
     #http://www.hugefiles.net/m23qtxy5bnlw
     patronvideos  = 'hugefiles.net/([a-z0-9]+)'
-    logger.info("[hugefiles.py] find_videos #"+patronvideos+"#")
+    logger.info("hugefiles find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per asiansubita
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para asiansubita
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -26,7 +26,7 @@ def isGeneric():
     return True
 
 def mainlist( item ):
-    logger.info( "[asiansubita] mainlist" )
+    logger.info( "streamondemand.asiansubita mainlist" )
 
     itemlist = []
 
@@ -51,7 +51,7 @@ def search( item, texto ):
         return []
 
 def peliculas( item ):
-    logger.info( "[asiansubita] peliculas" )
+    logger.info( "streamondemand.asiansubita peliculas" )
 
     itemlist = []
 
@@ -81,7 +81,7 @@ def peliculas( item ):
     return itemlist
 
 def categorias(item):
-    logger.info("[asiansubita] categorias")
+    logger.info("streamondemand.asiansubita categorias")
 
     itemlist = []
 

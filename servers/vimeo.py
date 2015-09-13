@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per Vimeo
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para Vimeo
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -17,7 +17,7 @@ from core import jsontools
 
 # Returns an array of possible video url's from the page_url
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("[vimeo.py] get_video_url(page_url='%s')" % page_url)
+    logger.info("servers.vimeo get_video_url(page_url='%s')" % page_url)
 
     video_urls = []
 
@@ -68,7 +68,7 @@ def get_video_url( page_url , premium = False , user="" , password="", video_pas
     video_urls.append( [ "SD [vimeo]",media_url ] )    
 
     for video_url in video_urls:
-        logger.info("[vimeo.py] %s - %s" % (video_url[0],video_url[1]))
+        logger.info("servers.vimeo %s - %s" % (video_url[0],video_url[1]))
 
     return video_urls
 
@@ -79,7 +79,7 @@ def find_videos(text):
 
     #"http://player.vimeo.com/video/17555432?title=0&amp;byline=0&amp;portrait=0
     patronvideos  = 'player.vimeo.com/video/([0-9]+)'
-    logger.info("[vimeo.py] find_videos #"+patronvideos+"#")
+    logger.info("servers.vimeo find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(text)
 
     for match in matches:
@@ -95,7 +95,7 @@ def find_videos(text):
 
     #"http://vimeo.com/17555432
     patronvideos  = 'vimeo.com/([0-9]+)'
-    logger.info("[vimeo.py] find_videos #"+patronvideos+"#")
+    logger.info("servers.vimeo find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(text)
 
     for match in matches:

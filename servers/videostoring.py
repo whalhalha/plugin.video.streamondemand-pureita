@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per gamovideo
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para gamovideo
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -14,11 +14,11 @@ from core import config
 from core import unpackerjs
 
 def test_video_exists( page_url ):
-    logger.info("[videostoring.py] test_video_exists(page_url='%s')" % page_url)
+    logger.info("videostoring test_video_exists(page_url='%s')" % page_url)
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("[videostoring.py] get_video_url(page_url='%s')" % page_url)
+    logger.info("videostoring get_video_url(page_url='%s')" % page_url)
     if not "embed" in page_url:
       page_url = page_url.replace("http://www.videostoring.com/","http://www.videostoring.com/embed-") + ".html"
 
@@ -44,7 +44,7 @@ def find_videos(data):
 
 
     patronvideos  = 'http://www.videostoring.com/([a-z0-9]+)'
-    logger.info("[videostoring.py] find_videos #"+patronvideos+"#")
+    logger.info("videostoring find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -59,7 +59,7 @@ def find_videos(data):
             
 
     patronvideos  = 'http://www.videostoring.com/embed-([a-z0-9]+)'
-    logger.info("[videostoring.py] find_videos #"+patronvideos+"#")
+    logger.info("videostoring find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

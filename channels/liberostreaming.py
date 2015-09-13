@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per liberostreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para liberostreaming
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse
 import urllib2
@@ -37,7 +37,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("[liberostreaming] mainlist")
+    logger.info("streamondemand.liberostreaming mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Novita'[/COLOR]", action="peliculas", url="http://liberostreaming.org/", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Categorie[/COLOR]", action="categorias", url="http://liberostreaming.org/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
@@ -49,7 +49,7 @@ def mainlist(item):
     return itemlist
 
 def categorias(item):
-    logger.info("[liberostreaming] categorias")
+    logger.info("streamondemand.liberostreaming categorias")
     itemlist = []
     
     data = scrapertools.cache_page(item.url, headers=headers)
@@ -86,7 +86,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("[liberostreaming] peliculas")
+    logger.info("streamondemand.liberostreaming peliculas")
     itemlist = []
 
     # Descarga la pagina

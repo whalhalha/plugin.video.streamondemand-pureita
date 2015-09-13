@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para piratestreaming
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # by dentaku65, DrZ3r0
 # ------------------------------------------------------------
 import urlparse, urllib2, urllib, re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[ildocumento] mainlist")
+    logger.info("streamondemand.ildocumento mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Home[/COLOR]",
                      action="peliculas",
@@ -55,7 +55,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("[ildocumento] peliculas")
+    logger.info("streamondemand.ildocumento peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -105,7 +105,7 @@ def peliculas(item):
 
 
 def categorias(item):
-    logger.info("[ildocumento] categorias")
+    logger.info("streamondemand.ildocumento categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per vidto.me
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para vidto.me
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import re
@@ -12,27 +12,27 @@ from core import logger
 from lib.jsbeautifier.unpackers import packer
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("[vidtome] url="+page_url)
+    logger.info("pelisalacarta.servers.vidtome url="+page_url)
 
     # Lo pide una vez
     headers = [['User-Agent','Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14']]
     data = scrapertools.cache_page( page_url , headers=headers )
     #logger.info("data="+data)
     
-    logger.info("[vidtome] opcion 2")
+    logger.info("pelisalacarta.servers.vidtome opcion 2")
     op = scrapertools.get_match(data,'<input type="hidden" name="op" value="([^"]+)"')
-    logger.info("[vidtome] op="+op)
+    logger.info("pelisalacarta.servers.vidtome op="+op)
     usr_login = ""
     id = scrapertools.get_match(data,'<input type="hidden" name="id" value="([^"]+)"')
-    logger.info("[vidtome] id="+id)
+    logger.info("pelisalacarta.servers.vidtome id="+id)
     fname = scrapertools.get_match(data,'<input type="hidden" name="fname" value="([^"]+)"')
-    logger.info("[vidtome] fname="+fname)
+    logger.info("pelisalacarta.servers.vidtome fname="+fname)
     referer = scrapertools.get_match(data,'<input type="hidden" name="referer" value="([^"]*)"')
-    logger.info("[vidtome] referer="+referer)
+    logger.info("pelisalacarta.servers.vidtome referer="+referer)
     hashstring = scrapertools.get_match(data,'<input type="hidden" name="hash" value="([^"]*)"')
-    logger.info("[vidtome] hashstring="+hashstring)
+    logger.info("pelisalacarta.servers.vidtome hashstring="+hashstring)
     imhuman = scrapertools.get_match(data,'<input type="submit".*?name="imhuman" value="([^"]+)"').replace(" ","+")
-    logger.info("[vidtome] imhuman="+imhuman)
+    logger.info("pelisalacarta.servers.vidtome imhuman="+imhuman)
         
     import time
     time.sleep(10)
@@ -64,7 +64,7 @@ def get_video_url( page_url , premium = False , user="" , password="", video_pas
         video_urls.append( [ scrapertools.get_filename_from_url(media_url)[-4:]+" (ORIGINAL) [vidto.me]",media_url])
 
     for video_url in video_urls:
-        logger.info("[vidtome] %s - %s" % (video_url[0],video_url[1]))
+        logger.info("pelisalacarta.servers.vidtome %s - %s" % (video_url[0],video_url[1]))
 
     return video_urls
 
@@ -77,7 +77,7 @@ def find_videos(data):
 
     #http://vidto.me/z3nnqbspjyne
     patronvideos  = 'vidto.me/([a-z0-9A-Z]+)'
-    logger.info("[vidtome] find_videos #"+patronvideos+"#")
+    logger.info("pelisalacarta.servers.vidtome find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
@@ -92,7 +92,7 @@ def find_videos(data):
 
     #http://vidto.me/embed-z3nnqbspjyne
     patronvideos  = 'vidto.me/embed-([a-z0-9A-Z]+)'
-    logger.info("[vidtome] find_videos #"+patronvideos+"#")
+    logger.info("pelisalacarta.servers.vidtome find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per novedades
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para novedades
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 
@@ -24,19 +24,19 @@ def isGeneric():
     return True
 
 def mainlist(item,preferred_thumbnail="squares"):
-    logger.info("[novedades] mainlist")
+    logger.info("streamondemand.channels.novedades mainlist")
 
     itemlist = []
-    itemlist.append( Item(channel=__channel__, action="peliculas"            , title="Film 3D - (Scegliere 2° server)", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_peliculas.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="peliculas_infantiles" , title="Per Bambini", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_infantiles.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="series"               , title="Episodi di Serie TV", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_series.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="anime"                , title="Episodi di Anime", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_anime.png",viewmode="movie"))
-    itemlist.append( Item(channel=__channel__, action="documentales"         , title="Documentari", thumbnail="http://media.tvalacarta.info/pelisalacarta/"+preferred_thumbnail+"/thumb_canales_documentales.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="peliculas"            , title="Film 3D - (Scegliere 2° server)", thumbnail="http://media.tvalacarta.info/streamondemand."+preferred_thumbnail+"/thumb_canales_peliculas.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="peliculas_infantiles" , title="Per Bambini", thumbnail="http://media.tvalacarta.info/streamondemand."+preferred_thumbnail+"/thumb_canales_infantiles.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="series"               , title="Episodi di Serie TV", thumbnail="http://media.tvalacarta.info/streamondemand."+preferred_thumbnail+"/thumb_canales_series.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="anime"                , title="Episodi di Anime", thumbnail="http://media.tvalacarta.info/streamondemand."+preferred_thumbnail+"/thumb_canales_anime.png",viewmode="movie"))
+    itemlist.append( Item(channel=__channel__, action="documentales"         , title="Documentari", thumbnail="http://media.tvalacarta.info/streamondemand."+preferred_thumbnail+"/thumb_canales_documentales.png",viewmode="movie"))
 
     return itemlist
 
 def peliculas(item):
-    logger.info("[novedades] peliculas")
+    logger.info("streamondemand.channels.novedades peliculas")
 
     itemlist = []
 
@@ -57,7 +57,7 @@ def peliculas(item):
     return sorted_itemlist
 
 def peliculas_infantiles(item):
-    logger.info("[channels.novedades] peliculas_infantiles")
+    logger.info("streamondemand.channels.novedades peliculas_infantiles")
 
     itemlist = []
 
@@ -78,7 +78,7 @@ def peliculas_infantiles(item):
     return sorted_itemlist
 
 def series(item):
-    logger.info("[novedades] series")
+    logger.info("streamondemand.channels.novedades series")
 
     itemlist = []
 
@@ -103,7 +103,7 @@ def series(item):
     return sorted_itemlist
 
 def anime(item):
-    logger.info("[novedades] anime")
+    logger.info("streamondemand.channels.novedades anime")
 
     itemlist = []
 
@@ -128,7 +128,7 @@ def anime(item):
     return sorted_itemlist
 
 def documentales(item):
-    logger.info("[novedades] documentales")
+    logger.info("streamondemand.channels.novedades documentales")
 
     itemlist = []
 

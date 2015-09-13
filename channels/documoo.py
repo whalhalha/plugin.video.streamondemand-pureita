@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per documoo
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para documoo
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # by dentaku65, DrZ3r0
 # ------------------------------------------------------------
 import urlparse, urllib2, urllib, re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[documoo] mainlist")
+    logger.info("streamondemand.documoo mainlist")
     itemlist = [#Item(channel=__channel__,
                      #title="[COLOR azure]Documentari random[/COLOR]",
                      #action="random",
@@ -50,7 +50,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("[documoo] peliculas")
+    logger.info("streamondemand.documoo peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -104,7 +104,7 @@ def peliculas(item):
 
 
 def random(item):
-    logger.info("[documoo] peliculas")
+    logger.info("streamondemand.documoo peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -142,7 +142,7 @@ def random(item):
 
 
 def categorias(item):
-    logger.info("[documoo] categorias")
+    logger.info("streamondemand.documoo categorias")
     itemlist = []
 
     data = scrapertools.cache_page(item.url)

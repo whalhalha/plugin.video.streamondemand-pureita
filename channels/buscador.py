@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re,os,sys
 
@@ -12,7 +12,7 @@ from core import scrapertools
 
 __channel__ = "buscador"
 
-logger.info("[buscador] init")
+logger.info("streamondemand.channels.buscador init")
 
 DEBUG = True
 
@@ -20,7 +20,7 @@ def isGeneric():
     return True
 
 def mainlist(item,preferred_thumbnail="squares"):
-    logger.info("[buscador] mainlist")
+    logger.info("streamondemand.channels.buscador mainlist")
 
     itemlist = []
     itemlist.append( Item(channel=__channel__ , action="search"  , title="[COLOR yellow]Effettuare una nuova ricerca...[/COLOR]" ))
@@ -38,7 +38,7 @@ def mainlist(item,preferred_thumbnail="squares"):
 # Al llamar a esta función, el sistema pedirá primero el texto a buscar
 # y lo pasará en el parámetro "tecleado"
 def search(item,tecleado):
-    logger.info("[buscador] search")
+    logger.info("streamondemand.channels.buscador search")
 
     if tecleado!="":
         save_search(item.channel,tecleado)
@@ -48,7 +48,7 @@ def search(item,tecleado):
 
 # Esta es la función que realmente realiza la búsqueda
 def do_search(item):
-    logger.info("[buscador] do_search")
+    logger.info("streamondemand.channels.buscador do_search")
 
     tecleado = item.extra
 
@@ -59,13 +59,13 @@ def do_search(item):
     import imp
 
     master_exclude_data_file = os.path.join( config.get_runtime_path() , "resources", "global_search_exclusion.txt")
-    logger.info("[buscador] master_exclude_data_file="+master_exclude_data_file)
+    logger.info("streamondemand.channels.buscador master_exclude_data_file="+master_exclude_data_file)
 
     exclude_data_file = os.path.join( config.get_data_path() , "global_search_exclusion.txt")
-    logger.info("[buscador] exclude_data_file="+exclude_data_file)
+    logger.info("streamondemand.channels.buscador exclude_data_file="+exclude_data_file)
 
     channels_path = os.path.join( config.get_runtime_path() , "channels" , '*.py' )
-    logger.info("[buscador] channels_path="+channels_path)
+    logger.info("streamondemand.channels.buscador channels_path="+channels_path)
 
     excluir=""
 
@@ -82,13 +82,13 @@ def do_search(item):
         fileexclude.close()
     '''
     if os.path.exists(master_exclude_data_file):
-        logger.info("[buscador] Encontrado fichero exclusiones")
+        logger.info("streamondemand.channels.buscador Encontrado fichero exclusiones")
 
         fileexclude = open(master_exclude_data_file,"r")
         excluir= fileexclude.read()
         fileexclude.close()
     else:
-        logger.info("[buscador] No encontrado fichero exclusiones")
+        logger.info("streamondemand.channels.buscador No encontrado fichero exclusiones")
         excluir = "seriesly\nbuscador\ntengourl\n__init__"
 
     if config.is_xbmc():
@@ -115,12 +115,12 @@ def do_search(item):
             if show_dialog:
                 progreso.update(percentage, ' Sto cercando "' + tecleado+ '"', basename_without_extension)
 
-            logger.info("[buscador] Provando a cercare in " + basename_without_extension + " per "+ tecleado)
+            logger.info("streamondemand.channels.buscador Provando a cercare in " + basename_without_extension + " per "+ tecleado)
             try:
 
                 # http://docs.python.org/library/imp.html?highlight=imp#module-imp
                 obj = imp.load_source(basename_without_extension, infile)
-                logger.info("[buscador] cargado " + basename_without_extension + " de "+ infile)
+                logger.info("streamondemand.channels.buscador cargado " + basename_without_extension + " de "+ infile)
                 channel_result_itemlist = obj.search( Item() , tecleado)
                 for item in channel_result_itemlist:
                     item.title = item.title + " [COLOR grey][" + basename_without_extension + "][/COLOR]"
@@ -132,7 +132,7 @@ def do_search(item):
                 logger.error( traceback.format_exc() )
 
         else:
-            logger.info("[buscador] do_search_results, Escluso il server " + basename_without_extension)
+            logger.info("streamondemand.channels.buscador do_search_results, Escluso il server " + basename_without_extension)
 
     itemlist = sorted(itemlist, key=lambda Item: Item.title) 
 

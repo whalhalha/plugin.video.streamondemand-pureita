@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per filmsubito.tv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para filmsubito.tv
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse
 import re
@@ -30,7 +30,7 @@ def isGeneric():
 
 
 def mainlist(item):
-    logger.info("[filmsubitotv] mainlist")
+    logger.info("streamondemand.filmsubitotv mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film - Novità[/COLOR]", action="peliculas", url=sito+"film-2015-streaming.html?&page=2", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film per Genere[/COLOR]", action="genere", url=sito , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png" ))
@@ -56,7 +56,7 @@ def search(item,texto):
         return []
 
 def peliculas(item):
-    logger.info("[filmsubitotv] peliculas")
+    logger.info("streamondemand.filmsubitotv peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -89,7 +89,7 @@ def peliculas(item):
     return itemlist
 
 def serietv80(item):
-    logger.info("[filmsubitotv] serietv80")
+    logger.info("streamondemand.filmsubitotv serietv80")
     itemlist = []
 
     # Descarga la pagina
@@ -256,7 +256,7 @@ def documentari(item):
     return itemlist
 
 def serie(item):
-    logger.info("[filmsubitotv] peliculas")
+    logger.info("streamondemand.filmsubitotv peliculas")
     itemlist = []
 
     # Descarga la pagina

@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per linkbucks
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para linkbucks
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import re, sys
@@ -14,7 +14,7 @@ from core import config
 
 # Obtiene la URL que hay detrás de un enlace a linkbucks
 def get_long_url(short_url):
-    logger.info("[linkbucks.py] get_long_url(short_url='%s')" % short_url)
+    logger.info("servers.linkbucks get_long_url(short_url='%s')" % short_url)
 
     request_headers = []
     request_headers.append(["User-Agent","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; es-ES; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12"])

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per MegaHD.tv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para MegaHD.tv
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 # by DrZ3r0
 # ------------------------------------------------------------
 

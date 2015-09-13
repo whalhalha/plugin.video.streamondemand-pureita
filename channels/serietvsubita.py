@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per serietvsubita
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para serietvsubita
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -25,7 +25,7 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("[serietvsubita] mainlist")
+    logger.info("streamondemand.channels.serietvsubita mainlist")
 
     itemlist = []
     itemlist.append( Item(channel=__channel__, action="episodios" , title="[COLOR azure]Novità[/COLOR]" , url="http://serietvsubita.net/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png", folder=True))
@@ -34,7 +34,7 @@ def mainlist(item):
     return itemlist
 
 def search(item,texto):
-    logger.info("[serietvsubita] search")
+    logger.info("streamondemand.channels.serietvsubita search")
     item.url="http://serietvsubita.net/?s="+texto+"&op.x=0&op.y=0"
 
     try:
@@ -47,7 +47,7 @@ def search(item,texto):
         return []
 
 def episodios(item):
-    logger.info("[serietvsubita] episodios")
+    logger.info("streamondemand.channels.serietvsubita episodios")
     itemlist = []
 
     data = scrapertools.cachePage(item.url)
@@ -75,7 +75,7 @@ def episodios(item):
     return itemlist
 
 def series(item):
-    logger.info("[serietvsubita] series")
+    logger.info("streamondemand.channels.serietvsubita series")
     itemlist = []
 
     data = scrapertools.cachePage(item.url)
@@ -108,7 +108,7 @@ def series(item):
     return itemlist
 
 def episodiosearch(item):
-    logger.info("[serietvsubita] episodios")
+    logger.info("streamondemand.channels.serietvsubita episodios")
     itemlist = []
 
     data = scrapertools.cachePage(item.url)

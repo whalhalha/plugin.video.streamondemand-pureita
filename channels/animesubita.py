@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Canale per animesubita
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# streamondemand.- XBMC Plugin
+# Canal para animesubita
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -31,7 +31,7 @@ def isGeneric():
     return True
 
 def mainlist( item ):
-    logger.info( "[animesubita] mainlist" )
+    logger.info( "streamondemand.animesubita mainlist" )
 
     itemlist = []
 
@@ -43,7 +43,7 @@ def mainlist( item ):
     return itemlist
 
 def novedades( item ):
-    logger.info( "[animesubita] peliculas" )
+    logger.info( "streamondemand.animesubita peliculas" )
 
     itemlist = []
 
@@ -62,7 +62,7 @@ def novedades( item ):
     return itemlist
 
 def categorias(item):
-    logger.info("[animesubita] categorias")
+    logger.info("streamondemand.animesubita categorias")
 
     itemlist = []
 
@@ -80,7 +80,7 @@ def categorias(item):
     return itemlist
    
 def selection( item ):
-    logger.info( "[animesubita] peliculas" )
+    logger.info( "streamondemand.animesubita peliculas" )
 
     itemlist = []
 
@@ -97,7 +97,7 @@ def selection( item ):
     return itemlist   
 
 def episodios( item ):
-    logger.info( "[animesubita] peliculas" )
+    logger.info( "streamondemand.animesubita peliculas" )
 
     itemlist = []
 
@@ -131,7 +131,7 @@ def search( item, texto ):
 
 
 def findvideos(item):
-    logger.info("[animesubita] findvideos")
+    logger.info("streamondemand.channels.animesubita findvideos")
 
     headers.append(['Referer', item.url])
 

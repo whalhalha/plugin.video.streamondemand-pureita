@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# Stream On Demand PureITA
-# Server per adfly (acortador de url)
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para adfly (acortador de url)
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -13,7 +13,7 @@ from core import logger
 from core import config
 
 def get_long_url( short_url ):
-    logger.info("[adfly.py] get_long_url(short_url='%s')" % short_url)
+    logger.info("servers.adfly get_long_url(short_url='%s')" % short_url)
 
     request_headers = []
     request_headers.append(["User-Agent","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; es-ES; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12"])
