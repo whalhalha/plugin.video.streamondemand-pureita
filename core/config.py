@@ -2,8 +2,8 @@
 #------------------------------------------------------------
 # Parámetros de configuración (kodi)
 #------------------------------------------------------------
-# pelisalacarta
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# streamondemand-pureita
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 # Creado por: Jesús (tvalacarta@gmail.com)
 # Licencia: GPL (http://www.gnu.org/licenses/gpl-3.0.html)

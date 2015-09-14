@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import urlparse,urllib2,urllib,re
 import os
 import sys
@@ -8,7 +8,6 @@ from core.item import Item
 
 DEBUG = True
 CHANNELNAME = "channelselector"
-THUMBNAIL_REMOTE = "https://raw.githubusercontent.com/Fenice82/images/master/menubanner/"
 
 def getmainlist(preferred_thumb=""):
     logger.info("channelselector.getmainlist")
@@ -24,18 +23,19 @@ def getmainlist(preferred_thumb=""):
         idiomav = langlistv[0]
 
     # Añade los canales que forman el menú principal
-
     itemlist.append( Item(title=config.get_localized_string(30118) , channel="channelselector" , action="channeltypes", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales.png") ) )
     #itemlist.append( Item(title=config.get_localized_string(30130) , channel="novedades" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_novedades.png") ) )
     itemlist.append( Item(title="Contenuti Vari" , channel="novedades" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_novedades.png") ) )
     #itemlist.append( Item(title=config.get_localized_string(30103) , channel="buscador" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_buscar.png")) )
     itemlist.append( Item(title="Ricerca Globale" , channel="buscador" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_buscar.png")) )
-    itemlist.append( Item(title=config.get_localized_string(40103) , channel="youtube" , action="mainlist" , thumbnail = THUMBNAIL_REMOTE+"youtube.png") )
+    itemlist.append( Item(title="Oggi in TV" , channel="filmontv" , action="mainlist" , thumbnail = "http://mr.comingsoon.it/img/Logo250x90.png") )
+    itemlist.append( Item(title=config.get_localized_string(40103) , channel="youtube" , action="mainlist" , thumbnail = "http://i.imgur.com/EGIFmHu.png") )
     #if config.is_xbmc(): itemlist.append( Item(title=config.get_localized_string(30128) , channel="trailertools" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_trailers.png")) )
     itemlist.append( Item(title=config.get_localized_string(30102) , channel="favoritos" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_favoritos.png")) )
     #itemlist.append( Item(title=config.get_localized_string(30131) , channel="libreria" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
     if config.get_platform()=="rss":itemlist.append( Item(title="pyLOAD (Beta)" , channel="pyload" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"pyload.png")) )
     itemlist.append( Item(title=config.get_localized_string(30101) , channel="descargas" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_descargas.png")) )
+
     if "xbmceden" in config.get_platform():
         itemlist.append( Item(title=config.get_localized_string(30100) , channel="configuracion" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_configuracion.png"), folder=False) )
     else:
@@ -67,11 +67,10 @@ def mainlist(params,url,category):
                     import xbmcgui
                     dialog = xbmcgui.Dialog()
                     dialog.ok("Impossibile connettersi","Non è stato possibile verificare","la disponibilità di aggiornamenti")
-                    logger.info("channelselector.mainlist Si è generato un errore durante la verifica degli aggiornamenti")
-
+                    logger.info("channelselector.mainlist Fallo al verificar la actualización")
                     pass
             else:
-                logger.info("channelselector.mainlist Verifica aggiornamenti disattivata")
+                logger.info("channelselector.mainlist Verificar actualizaciones desactivado")
 
     itemlist = getmainlist()
     for elemento in itemlist:
@@ -93,11 +92,10 @@ def getchanneltypes(preferred_thumb=""):
     logger.info("channelselector getchanneltypes")
     itemlist = []
     itemlist.append( Item( title=config.get_localized_string(30121) , channel="channelselector" , action="listchannels" , category="*"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_todos")))
-    itemlist.append( Item( title="Top Channels" , channel="channelselector" , action="listchannels" , category="B"   , thumbnail=THUMBNAIL_REMOTE+"best.png"))
+    itemlist.append( Item( title="Top Channels" , channel="channelselector" , action="listchannels" , category="B"   , thumbnail="http://i.imgur.com/RzSPzSt.png"))
     itemlist.append( Item( title=config.get_localized_string(30122) , channel="channelselector" , action="listchannels" , category="F"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_peliculas")))
     itemlist.append( Item( title=config.get_localized_string(30123) , channel="channelselector" , action="listchannels" , category="S"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_series")))
     itemlist.append( Item( title=config.get_localized_string(30124) , channel="channelselector" , action="listchannels" , category="A"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_anime")))
-    #itemlist.append( Item( title=config.get_localized_string(30127) , channel="channelselector" , action="listchannels" , category="HD"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_latino")))
     itemlist.append( Item( title=config.get_localized_string(30125) , channel="channelselector" , action="listchannels" , category="D"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_documentales")))
     itemlist.append( Item( title=config.get_localized_string(30136) , channel="channelselector" , action="listchannels" , category="VOS" , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_vos")))
     #itemlist.append( Item( title=config.get_localized_string(30126) , channel="channelselector" , action="listchannels" , category="M"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_musica")))
@@ -203,11 +201,6 @@ def channels_history_list():
 def channels_list():
     itemlist = []
 
-	
-	
-	
-	
-	
     #itemlist.append( Item( viewmode="movie", title="Inserisci un URL"         , channel="tengourl"   , language="" , category="" , type="generic"  ))
     if config.get_setting("personalchannel")=="true":
         itemlist.append( Item( title=config.get_setting("personalchannelname") , channel="personal" , language="" , category="" , type="generic"  ))
@@ -219,47 +212,46 @@ def channels_list():
         itemlist.append( Item( title=config.get_setting("personalchannelname4") , channel="personal4" , language="" , category="" , type="generic"  ))
     if config.get_setting("personalchannel5")=="true":
         itemlist.append( Item( title=config.get_setting("personalchannelname5") , channel="personal5" , language="" , category="" , type="generic"  ))
-
-
-    itemlist.append( Item( title="AltaDefinizione01"      , channel="altadefinizione01"           , language="IT"    , category="B,F,S,A,HD"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"altadefinizione01.png"))
-    itemlist.append( Item( title="Altadefinizione.click" , channel="altadefinizioneclick" , language="IT" , category="F,S,A,HD" , type="generic", thumbnail=THUMBNAIL_REMOTE+"altadefinizioneclick.png"))
-    itemlist.append( Item( title="Anime Sub Ita"   , channel="animesubita"           , language="IT"    , category="A"   , type="generic" ,thumbnail=THUMBNAIL_REMOTE+"animesubita.png" ))
-    itemlist.append( Item( title="Asian Sub-Ita"      , channel="asiansubita"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"asiansubita.png"))
-    itemlist.append( Item( title="Casa-Cinema"         , channel="casacinema"           , language="IT"    , category="F,S,A"   , type="generic" , thumbnail=THUMBNAIL_REMOTE+"casacinema.png" ))
-    itemlist.append( Item( title="CineBlog 01"         , channel="cineblog01"           , language="IT"    , category="B,F,S,A,VOS,HD"   , type="generic"  ))
-    itemlist.append( Item( title="CineBlog01.FM"       , channel="cineblogfm"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"cineblogfm.png"   ))
-    itemlist.append( Item( title="Cinemagratis"        , channel="cinemagratis"       , language="IT"    , category="F"       , type="generic"     ,thumbnail=THUMBNAIL_REMOTE+"cinemagratis.png"))
-    #itemlist.append( Item( title="Cinestreaming01"    , channel="cinestreaming01"         , language="IT" , category="F"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"cinestreaming01.png" ))
-    itemlist.append( Item( title="Documentari Streaming"  , channel="documentaristreaming"           , language="IT"    , category="D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"documentaristreaming.png"   ))
-    itemlist.append( Item( title="Documoo"      , channel="documoo"           , language="IT"    , category="D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"documoo.png"   ))
-    itemlist.append( Item( title="Eurostreaming"       , channel="eurostreaming"           , language="IT"    , category="F,S"    , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"eurostreaming.png"))
-    itemlist.append( Item( title="Fastvideo.tv"        , channel="fastvideotv"       , language="IT"    , category="B,F"       , type="generic"     ,thumbnail=THUMBNAIL_REMOTE+"fastvideotv.png"))
-    itemlist.append( Item( title="FilmGratis.cc"       , channel="filmgratiscc"           , language="IT"    , category="F"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"filmgratiscc.png" ))
-    itemlist.append( Item( title="FilmStream.org"          , channel="filmstream"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"filmstream.png" ))
-    itemlist.append( Item( title="FilmStream.to"       , channel="filmstreampw"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"filmstreampw.png" ))
-    itemlist.append( Item( title="Film per tutti"      , channel="filmpertutti"           , language="IT"    , category="B,F,S,A"    , type="generic"     ))
-    itemlist.append( Item( title="Film Senza Limiti"   , channel="filmsenzalimiti"       , language="IT"    , category="B,F"        , type="generic"     ))
-    itemlist.append( Item( title="FilmSubito"          , channel="filmsubitotv"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"filmsubitotv.png" ))
-    itemlist.append( Item( title="FoxyCinema"          , channel="foxycinema"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"foxycinema.png" ))
-    itemlist.append( Item( title="Guardaserie.net"     , channel="guardaserie"       , language="IT"    , category="B,S"        , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"guardaserie.png"   ))
-    itemlist.append( Item( title="GuardareFilm"         , channel="guardarefilm"           , language="IT"    , category="F,S,A"    , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"guardarefilm.png"))
-    #itemlist.append( Item( title="Hubberfilm"          , channel="hubberfilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"hubberfilm.png"))
-    #itemlist.append( Item( title="ildocumento.it"      , channel="ildocumento"           , language="IT"    , category="D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"ildocumento.png"   ))
-    itemlist.append( Item( title="ItaFilm.tv"      , channel="itafilmtv"           , language="IT"    , category="F,S,A,D"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"itafilmtv.png"   ))
-    itemlist.append( Item( title="Italia-Film.co"      , channel="italiafilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"italiafilm.png"   ))
-    itemlist.append( Item( title="Italian-Stream"        , channel="italianstream"       , language="IT"    , category="F,S,HD"       , type="generic"     ,thumbnail=THUMBNAIL_REMOTE+"italianstream.png"))
-    itemlist.append( Item( title="Italia Serie"        , channel="italiaserie"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"italiaserie.png"))
-    itemlist.append( Item( title="ItaStreaming"      , channel="itastreaming" , language="IT" , category="F,S,A" , type="generic", thumbnail=THUMBNAIL_REMOTE+"itastreaming.png"))
-    itemlist.append( Item( title="LiberoITA"       , channel="liberoita"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"liberoita.png"))
-    itemlist.append( Item( title="LiberoStreaming"       , channel="liberostreaming"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"liberostreaming.png"))
-    itemlist.append( Item( title="Pianeta Streaming"   , channel="pianetastreaming"           , language="IT"    , category="F,S,A"   , type="generic" ,thumbnail=THUMBNAIL_REMOTE+"pianetastreaming.png" ))
-    itemlist.append( Item( title="Pirate Streaming"    , channel="piratestreaming"           , language="IT"    , category="F,S,A"   , type="generic"  ))
-    itemlist.append( Item( title="PortaleHD"    , channel="portalehd"           , language="IT"    , category="B,F,S,A"   , type="generic", thumbnail=THUMBNAIL_REMOTE+"portalehd.png"  ))
-    itemlist.append( Item( title="Serie HD"     , channel="seriehd"       , language="IT"    , category="S"        , type="generic"  ,thumbnail=THUMBNAIL_REMOTE+"seriehd.png"   ))
-    itemlist.append( Item( title="Serie TV Sub ITA"    , channel="serietvsubita"         , language="IT" , category="S"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"serietvsubita.png" ))
-    itemlist.append( Item( title="StreamBlog"    , channel="streamblog"         , language="IT" , category="S,F,A"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"streamblog.png" ))
-    itemlist.append( Item( title="Streaming01"    , channel="streaming01"         , language="IT" , category="B,F"        , type="generic" , extra="Series"  ,thumbnail=THUMBNAIL_REMOTE+"streaming01.png" ))
-    itemlist.append( Item( title="Tantifilm"        , channel="tantifilm"       , language="IT"    , category="B,F,HD"       , type="generic"     ,thumbnail=THUMBNAIL_REMOTE+"tantifilm.png"))
+    itemlist.append( Item( title="[COLOR azure]AltaDefinizione01[/COLOR]"      , channel="altadefinizione01"           , language="IT"    , category="B,F,S,A"   , type="generic"  ,thumbnail="http://www.altadefinizione01.com/wp-content/uploads/2015/04/logo.png"))
+    itemlist.append( Item( title="[COLOR azure]Altadefinizione.click[/COLOR]" , channel="altadefinizioneclick" , language="IT" , category="F,S,A" , type="generic", thumbnail="http://i.imgur.com/FSHW6Zx.png"))
+    itemlist.append( Item( title="[COLOR azure]Anime Sub Ita[/COLOR]"   , channel="animesubita"           , language="IT"    , category="A"   , type="generic" ,thumbnail="http://i.imgur.com/eSAxd4p.png" ))
+    itemlist.append( Item( title="[COLOR azure]Asian Sub-Ita[/COLOR]"      , channel="asiansubita"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail="http://asiansubita.altervista.org/wp-content/uploads/2014/11/asiansubita1.png"))
+    itemlist.append( Item( title="[COLOR azure]Casa-Cinema[/COLOR]"         , channel="casacinema"           , language="IT"    , category="F,S,A,VOS"   , type="generic" , thumbnail="http://casa-cinema.net/wp-content/themes/casacinema/images/logo-Black.png" ))
+    itemlist.append( Item( title="[COLOR azure]CineBlog 01[/COLOR]"         , channel="cineblog01"           , language="IT"    , category="B,F,S,A,VOS"   , type="generic"  ))
+    itemlist.append( Item( title="[COLOR azure]CineBlog01.FM[/COLOR]"       , channel="cineblogfm"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail="http://imgur.com/KpuunWC.png"   ))
+    itemlist.append( Item( title="[COLOR azure]Cinemagratis[/COLOR]"        , channel="cinemagratis"       , language="IT"    , category="F"       , type="generic"     ,thumbnail="http://cinemagratis.org/wp-content/uploads/2015/05/cinemagratisimmagine.png"))
+    itemlist.append( Item( title="[COLOR azure]Darkstream[/COLOR]"        , channel="darkstream"       , language="IT"    , category="B,F"       , type="generic"     ,thumbnail="http://www.darkstream.tv/wp-content/themes/newtheme17/images/header.png"))
+    itemlist.append( Item( title="[COLOR azure]Documentari Streaming[/COLOR]"  , channel="documentaristreaming"           , language="IT"    , category="D"   , type="generic"  ,thumbnail="http://i.imgur.com/AXPIqJM.jpg"   ))
+    #itemlist.append( Item( title="[COLOR azure]Documoo[/COLOR]"      , channel="documoo"           , language="IT"    , category="D"   , type="generic"  ,thumbnail="http://www.documoo.tv/wp-content/uploads/logo_documoo.jpg"   ))
+    itemlist.append( Item( title="[COLOR azure]Eurostreaming[/COLOR]"       , channel="eurostreaming"           , language="IT"    , category="F,S"    , type="generic"  ,thumbnail="http://eurostreaming.tv/wp-content/uploads/2014/03/logo2.png"))
+    itemlist.append( Item( title="[COLOR azure]Fastvideo.tv[/COLOR]"        , channel="fastvideotv"       , language="IT"    , category="B,F"       , type="generic"     ,thumbnail="http://www.fastvideo.tv/wp-content/uploads/2015/07/fastvideo.png"))
+    itemlist.append( Item( title="[COLOR azure]FilmGratis.cc[/COLOR]"       , channel="filmgratiscc"           , language="IT"    , category="F"   , type="generic"  ,thumbnail="http://filmgratis.cc/wp-content/uploads/2014/06/logofilmgratis.png" ))
+    itemlist.append( Item( title="[COLOR azure]FilmStream.org[/COLOR]"          , channel="filmstream"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail="http://i.imgur.com/kSIfR3l.jpg" ))
+    itemlist.append( Item( title="[COLOR azure]FilmStream.to[/COLOR]"       , channel="filmstreampw"           , language="IT"    , category="F,S"   , type="generic"  ,thumbnail="http://filmstream.pw/templates/tvspirit/images/logo.png" ))
+    itemlist.append( Item( title="[COLOR azure]Film per tutti[/COLOR]"      , channel="filmpertutti"           , language="IT"    , category="F,S,A"    , type="generic"     ))
+    itemlist.append( Item( title="[COLOR azure]Film Senza Limiti[/COLOR]"   , channel="filmsenzalimiti"       , language="IT"    , category="B,F"        , type="generic"     ))
+    itemlist.append( Item( title="[COLOR azure]FilmSubito[/COLOR]"          , channel="filmsubitotv"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://i.imgur.com/4x1V7dZ.png" ))
+    itemlist.append( Item( title="[COLOR azure]Foxycinema[/COLOR]"          , channel="foxycinema"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://www.foxycinema.org/images/grafica_di_struttura/home/logo/header.png" ))
+    itemlist.append( Item( title="[COLOR azure]Guardaserie.net[/COLOR]"     , channel="guardaserie"       , language="IT"    , category="S,B"        , type="generic"  ,thumbnail="http://www.guardaserie.net/wp-content/themes/guardaserie/images/new_logo.png"   ))
+    itemlist.append( Item( title="[COLOR azure]GuardareFilm[/COLOR]"         , channel="guardarefilm"           , language="IT"    , category="F,S,A"    , type="generic"  ,thumbnail="http://www.guardarefilm.tv/templates/tvSpirit1/images/logo.png"))
+    #itemlist.append( Item( title="[COLOR azure]Hubberfilm[/COLOR]"          , channel="hubberfilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://website-thumbnails.informer.com/thumbnails/280x202/h/hubberfilm.org.png"))
+    #itemlist.append( Item( title="[COLOR azure]ildocumento.it[/COLOR]"      , channel="ildocumento"           , language="IT"    , category="D"   , type="generic"  ,thumbnail="http://ildocumento.it/wp-content/themes/doc/mob-images/apple-touch-icon-144x144.png?cab6e8"   ))
+    itemlist.append( Item( title="[COLOR azure]ItaFilm.tv[/COLOR]"      , channel="itafilmtv"           , language="IT"    , category="F,S,A,D"   , type="generic"  ,thumbnail="http://www.itafilm.tv/templates/monsterfilm/images/logo.png"   ))
+    itemlist.append( Item( title="[COLOR azure]Italia-Film.co[/COLOR]"      , channel="italiafilm"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://www.italia-film.co/wp-content/uploads/2015/05/xlogo.png.pagespeed.ic.B2muY2s_A0.png"   ))
+    itemlist.append( Item( title="[COLOR azure]Italian-Stream [/COLOR]"        , channel="italianstream"       , language="IT"    , category="F,S"       , type="generic"     ,thumbnail="http://italian-stream.tv/wp-content/uploads/2014/03/logo11.png"))
+    itemlist.append( Item( title="[COLOR azure]Italia Serie[/COLOR]"        , channel="italiaserie"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://www.italiaserie.com/wp-content/uploads/2015/03/logo.png"))
+    itemlist.append( Item( title="[COLOR azure]ItaStreaming[/COLOR]"      , channel="itastreaming" , language="IT" , category="F,S,A" , type="generic", thumbnail="http://i.imgur.com/R8plE1H.png"))
+    itemlist.append( Item( title="[COLOR azure]LiberoITA[/COLOR]"       , channel="liberoita"           , language="IT"    , category="F,S,A"   , type="generic"  ,thumbnail="http://liberoita.com/wp-content/themes/sito/images/logo.png"))
+    itemlist.append( Item( title="[COLOR azure]Liberostreaming[/COLOR]" , channel="liberostreaming" , language="IT" , category="F,S,A" , type="generic", thumbnail="http://www.liberostreaming.org/wp-content/uploads/2015/01/cooltext1859870362.png"))
+    itemlist.append( Item( title="[COLOR azure]Pianeta Streaming[/COLOR]"   , channel="pianetastreaming"           , language="IT"    , category="F,S,A"   , type="generic" ,thumbnail="http://www.pianetastreaming.net/wp-content/uploads/2014/03/PianetaStreaming.png" ))
+    itemlist.append( Item( title="[COLOR azure]Pirate Streaming[/COLOR]"    , channel="piratestreaming"           , language="IT"    , category="F,S,A"   , type="generic"  ))
+    itemlist.append( Item( title="[COLOR azure]PortaleHD[/COLOR]"   , channel="portalehd"           , language="IT"    , category="F,S,A,B"   , type="generic" ,thumbnail="http://www.portalehd.net/wp-content/uploads/2015/07/logo.png" ))
+    itemlist.append( Item( title="[COLOR azure]Serie HD[/COLOR]"     , channel="seriehd"       , language="IT"    , category="S"        , type="generic"  ,thumbnail="http://i.imgur.com/yRfHoNS.png"   ))
+    itemlist.append( Item( title="[COLOR azure]Serie TV Sub ITA[/COLOR]"    , channel="serietvsubita"         , language="IT" , category="S"        , type="generic" , extra="Series"  ,thumbnail="https://scontent-ams2-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/1904147_604097543011368_1936085642_n.png?oh=8f63f742f9340428c8297d185873e21f&oe=561D7A0F" ))
+    itemlist.append( Item( title="[COLOR azure]StreamBlog[/COLOR]"    , channel="streamblog"         , language="IT" , category="S,F,A"        , type="generic" , extra="Series"  ,thumbnail="http://www.streamblog.tv/templates/Smotrikino/images/logo.png" ))
+    itemlist.append( Item( title="[COLOR azure]Streaming01[/COLOR]"    , channel="streaming01"         , language="IT" , category="B,F"        , type="generic" , extra="Series"  ,thumbnail="http://www.streaming01.com/templates/movie-groovie/images/logo.png" ))
+    itemlist.append( Item( title="[COLOR azure]Streaminfilmit[/COLOR]"    , channel="streamingfilmit"         , language="IT" , category="F"        , type="generic" , extra="Series"  ,thumbnail="http://www.streamingfilmit.com/wp-content/uploads/2015/05/bluepress11.png" ))
+    itemlist.append( Item( title="[COLOR azure]Tantifilm[/COLOR]"        , channel="tantifilm"       , language="IT"    , category="B,F"       , type="generic"     ,thumbnail="http://www.tantifilm.net/wp-content/themes/smashingMultiMediaBrown/images/logo.png"))
 
     return itemlist
 
@@ -287,12 +279,12 @@ def get_thumbnail_path(preferred_thumb=""):
             thumbnail_type="2"
         
         if thumbnail_type=="0":
-            WEB_PATH = "http://media.tvalacarta.info/pelisalacarta/posters/"
+            WEB_PATH = "http://media.tvalacarta.info/streamondemand-pureita/posters/"
         elif thumbnail_type=="1":
-            WEB_PATH = "http://media.tvalacarta.info/pelisalacarta/banners/"
+            WEB_PATH = "http://media.tvalacarta.info/streamondemand-pureita/banners/"
         elif thumbnail_type=="2":
-            WEB_PATH = "http://media.tvalacarta.info/pelisalacarta/squares/"
+            WEB_PATH = "http://media.tvalacarta.info/streamondemand-pureita/squares/"
     else:
-        WEB_PATH = "http://media.tvalacarta.info/pelisalacarta/"+preferred_thumb+"/"
+        WEB_PATH = "http://media.tvalacarta.info/streamondemand-pureita/"+preferred_thumb+"/"
 
     return WEB_PATH

@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# streamondemand-pureita - XBMC Plugin
 # Buscador de Trailers en youtube
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
@@ -421,5 +421,5 @@ def youtubeplay(params,url,category):
     
 def alertaerror():
     ventana = xbmcgui.Dialog()
-    ok= ventana.ok ("Plugin Pelisalacarta", "Uuppss...la calidad elegida en configuracion",'no esta disponible o es muy baja',"elijá otra calidad distinta y vuelva a probar")
+    ok= ventana.ok ("Plugin streamondemand-pureita", "Uuppss...la calidad elegida en configuracion",'no esta disponible o es muy baja',"elijá otra calidad distinta y vuelva a probar")
 

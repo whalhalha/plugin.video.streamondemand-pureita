@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # tvalacarta
 # XBMC Launcher (xbmc / xbmc-dharma / boxee)
-# http://blog.tvalacarta.info/plugin-xbmc/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urllib, urllib2

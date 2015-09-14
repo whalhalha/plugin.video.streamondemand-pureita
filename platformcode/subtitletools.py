@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# streamondemand-pureita - XBMC Plugin
 # Herramientas de integración con xbmc subtitles
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # Autor: bandavi
 # Este archivo utiliza el Script XBMC SUBTITLES y el modulo "regex_tvshow()"
 # cuyos autores son: amet,mr_blobby

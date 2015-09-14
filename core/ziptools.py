@@ -1,8 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# streamondemand-pureita - XBMC Plugin
 # Zip Tools
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand-pureita/
 #------------------------------------------------------------
 import base64, re, urllib, string, sys, zipfile, os, os.path
 import config

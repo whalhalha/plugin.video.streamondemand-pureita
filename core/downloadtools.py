@@ -4,8 +4,8 @@
 # Download Tools
 # Based on the code from VideoMonkey XBMC Plugin
 #------------------------------------------------------------
-# pelisalacarta
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# streamondemand-pureita
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 # Creado por:
 # Jesús (tvalacarta@gmail.com)

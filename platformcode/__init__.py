@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# streamondemand-pureita - XBMC Plugin
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import os,sys

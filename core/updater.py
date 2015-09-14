@@ -1,7 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta
+# streamondemand-pureita
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # XBMC Plugin
 #------------------------------------------------------------
 
@@ -19,11 +19,11 @@ if thumbnail_type=="":
     thumbnail_type="2"
 logger.info("thumbnail_type="+thumbnail_type)
 if thumbnail_type=="0":
-    IMAGES_PATH = 'http://media.tvalacarta.info/pelisalacarta/posters/'
+    IMAGES_PATH = 'http://media.tvalacarta.info/streamondemand-pureita/posters/'
 elif thumbnail_type=="1":
-    IMAGES_PATH = 'http://media.tvalacarta.info/pelisalacarta/banners/'
+    IMAGES_PATH = 'http://media.tvalacarta.info/streamondemand-pureita/banners/'
 elif thumbnail_type=="2":
-    IMAGES_PATH = 'http://media.tvalacarta.info/pelisalacarta/squares/'
+    IMAGES_PATH = 'http://media.tvalacarta.info/streamondemand-pureita/squares/'
 
 ## Installation path.
 ROOT_DIR = config.get_runtime_path()
@@ -94,7 +94,7 @@ def checkforupdates(plugin_mode=True):
     '''   
     <?xml version="1.0" encoding="utf-8" standalone="yes"?>
     <version>
-            <name>pelisalacarta</name>
+            <name>streamondemand-pureita</name>
             <tag>4.0     </tag>
             <version>4000</tag>
             <date>20/03/2015</date>
@@ -190,7 +190,7 @@ def checkforupdates(plugin_mode=True):
         else:
 
             import xbmcgui
-            yes_pressed = xbmcgui.Dialog().yesno( "Versión "+tag_publicada+" disponible" , "¿Quieres instalarla?" )
+            yes_pressed = xbmcgui.Dialog().yesno( "Versione "+tag_publicada+" disponibile" , "Desideri aggiornare?" )
 
             if yes_pressed:
                 params = {"version":tag_publicada}

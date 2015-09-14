@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# tvalacarta - XBMC Plugin
+# streamondemand-pureita - XBMC Plugin
 #------------------------------------------------------------
 # json_tools
 # Parsea un string en JSON probando varios módulos

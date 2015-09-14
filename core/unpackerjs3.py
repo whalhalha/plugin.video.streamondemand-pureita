@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# pelisalacarta - XBMC Plugin
+# streamondemand-pureita - XBMC Plugin
 # Descifra el empaquetado javascript PACK de Dean Edwards
 # No está bien probado, así que no garantizo que funcione aunque en los casos de este plugin va muy bien :)
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 
 import urlparse,urllib2,urllib,re
