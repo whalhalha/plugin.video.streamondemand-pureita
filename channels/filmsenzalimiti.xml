@@ -3,13 +3,13 @@
     <id>filmsenzalimiti</id>
     <name>Film Senza Limiti</name>
     <language>it</language>
-    <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/channels/filmsenzalimiti.py</update_url>
+    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/channels/filmsenzalimiti.py</update_url>
     <active>true</active>
     <include_in_global_search>true</include_in_global_search>
     <version>2</version>
     <adult>false</version>
     <date>28/08/2015</date>
-    <changes>Prima versione di Pelisalacarta 4</changes>
+    <changes>Prima versione di Stream On Demand</changes>
     <categories>
         <category>movie</category>
     </categories>

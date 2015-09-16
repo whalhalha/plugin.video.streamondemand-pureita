@@ -19,11 +19,11 @@ if thumbnail_type=="":
     thumbnail_type="2"
 logger.info("thumbnail_type="+thumbnail_type)
 if thumbnail_type=="0":
-    IMAGES_PATH = 'http://media.tvalacarta.info/streamondemand-pureita/posters/'
+    IMAGES_PATH = 'https://raw.githubusercontent.com/Fenice82/images/master/posters/'
 elif thumbnail_type=="1":
-    IMAGES_PATH = 'http://media.tvalacarta.info/streamondemand-pureita/banners/'
+    IMAGES_PATH = 'https://raw.githubusercontent.com/Fenice82/images/master/banners/'
 elif thumbnail_type=="2":
-    IMAGES_PATH = 'http://media.tvalacarta.info/streamondemand-pureita/squares/'
+    IMAGES_PATH = 'https://raw.githubusercontent.com/Fenice82/images/master/squares/'
 
 ## Installation path.
 ROOT_DIR = config.get_runtime_path()
@@ -234,7 +234,7 @@ def update(params):
     logger.info("streamondemand-pureita.core.updater ...fichero borrado")
 
 def get_channel_remote_url(channel_name):
-    _remote_channel_url_ = "https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/"
+    _remote_channel_url_ = "https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/"
     if channel_name <> "channelselector":
         _remote_channel_url_+= "channels/"
     remote_channel_url = _remote_channel_url_+channel_name+".py"
