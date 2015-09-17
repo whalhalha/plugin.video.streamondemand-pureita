@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+-# -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # streamondemand-pureita
 # Copyright 2015 tvalacarta@gmail.com
@@ -33,7 +33,8 @@ import xbmcaddon
 import channelselector
 import plugintools
 from core.item import Item
-
+#from core import config
+from core import scrapertools
 			
 def get_next_items( item ):
 
@@ -115,7 +116,7 @@ def get_next_items( item ):
 
                 # Si el canal tiene una acción "play" tiene prioridad
                 if hasattr(channel, 'play'):
-                    plugintools.log("streamondemand-pureita.platformcode.launcher Channel has its own 'play' method")
+                    plugintools.log("streamondemand-pureita.navigation.py Channel has its own 'play' method")
                     itemlist = channel.play(item)
                     if len(itemlist)>0:
                         item = itemlist[0]
@@ -131,7 +132,7 @@ def get_next_items( item ):
                         ventana_error = xbmcgui.Dialog()
                         ok = ventana_error.ok ("plugin", "No hay nada para reproducir")
                 else:
-                    plugintools.log("streamondemand-pureita.platformcode.launcher No channel 'play' method, executing core method")
+                    plugintools.log("streamondemand-pureita.navigation.py No channel 'play' method, executing core method")
 
                     # FIXME: Este error ha que tratarlo de otra manera, por al dar a volver sin ver el vídeo falla
                     # Mejor hacer el play desde la ventana
@@ -148,7 +149,7 @@ def get_next_items( item ):
 
                 # Si el canal tiene una acción "findvideos" tiene prioridad
                 if hasattr(channel, 'findvideos'):
-                    plugintools.log("streamondemand-pureita.platformcode.launcher Channel has its own 'findvideos' method")
+                    plugintools.log("streamondemand-pureita.navigation.py Channel has its own 'findvideos' method")
                     itemlist = channel.findvideos(item)
                 else:
                     itemlist = []
@@ -180,14 +181,14 @@ def get_next_items( item ):
                 ret = pDialog.create('streamondemand-pureita', 'Añadiendo episodios...')
                 pDialog.update(0, 'Añadiendo episodio...')
                 totalepisodes = len(itemlist)
-                plugintools.log ("[launcher.py] Total Episodios:"+str(totalepisodes))
+                plugintools.log ("navigation.get_next_items Total Episodios:"+str(totalepisodes))
                 i = 0
                 errores = 0
                 nuevos = 0
                 for item in itemlist:
                     i = i + 1
                     pDialog.update(i*100/totalepisodes, 'Añadiendo episodio...',item.title)
-                    plugintools.log("streamondemand-pureita.platformcode.launcher add_serie_to_library, title="+item.title)
+                    plugintools.log("streamondemand-pureita.navigation.py add_serie_to_library, title="+item.title)
                     if (pDialog.iscanceled()):
                         return
                 
@@ -200,7 +201,7 @@ def get_next_items( item ):
                         import sys
                         for line in sys.exc_info():
                             logger.error( "%s" % line )
-                        plugintools.log("streamondemand-pureita.platformcode.launcher Error al grabar el archivo "+item.title)
+                        plugintools.log("streamondemand-pureita.navigation.py Error al grabar el archivo "+item.title)
                         errores = errores + 1
                         
                 pDialog.close()
@@ -209,10 +210,10 @@ def get_next_items( item ):
                 itemlist=[]
                 if errores > 0:
                     itemlist.append(Item(title="ERRORE, la serie NON si è aggiunta alla biblioteca o la fatto in modo incompleto"))
-                    plugintools.log ("[launcher.py] No se pudo añadir "+str(errores)+" episodios")
+                    plugintools.log ("navigation.get_next_items No se pudo añadir "+str(errores)+" episodios")
                 else:
                     itemlist.append(Item(title="La serie è stata aggiunta alla biblioteca"))
-                    plugintools.log ("[launcher.py] Ningún error al añadir "+str(errores)+" episodios")
+                    plugintools.log ("navigation.get_next_items Ningún error al añadir "+str(errores)+" episodios")
                     
                 # FIXME:jesus Comentado porque no funciona bien en todas las versiones de XBMC
                 #library.update(totalepisodes,errores,nuevos)
@@ -238,6 +239,11 @@ def get_next_items( item ):
                 f.close();
                 return itemlist
             # --------------------------------------------------------------------
+            elif item.action=="download_all_episodes":
+                plugintools.log("navigation.get_next_items download_all_episodes")
+                download_all_episodes(item,channel)
+                return itemlist
+			#---------------------------------------------------------------------
             else:
 
                 if item.action=="search":
@@ -290,3 +296,308 @@ def get_window_for_item( item ):
         window = window_menu.MenuWindow("content.xml",plugintools.get_runtime_path())
 
     return window
+	
+# Parse XBMC params - based on script.module.parsedom addon    
+def get_params():
+    plugintools.log("get_params")
+    
+    param_string = sys.argv[2]
+    
+    plugintools.log("get_params "+str(param_string))
+    
+    commands = {}
+
+    if param_string:
+        split_commands = param_string[param_string.find('?') + 1:].split('&')
+    
+        for command in split_commands:
+            plugintools.log("get_params command="+str(command))
+            if len(command) > 0:
+                if "=" in command:
+                    split_command = command.split('=')
+                    key = split_command[0]
+                    value = split_command[1] #urllib.unquote_plus()
+                    commands[key] = value
+                else:
+                    commands[command] = ""
+    
+    plugintools.log("get_params "+repr(commands))
+    return commands
+
+# Extract parameters from sys.argv
+def extract_parameters():
+    plugintools.log("streamondemand-pureita.navigation.py extract_parameters")
+    #Imprime en el log los parámetros de entrada
+    plugintools.log("streamondemand-pureita.navigation.py sys.argv=%s" % str(sys.argv))
+    
+    # Crea el diccionario de parametros
+    #params = dict()
+    #if len(sys.argv)>=2 and len(sys.argv[2])>0:
+    #    params = dict(part.split('=') for part in sys.argv[ 2 ][ 1: ].split('&'))
+    params = get_params()
+    plugintools.log("streamondemand-pureita.navigation.py params=%s" % str(params))
+
+    if (params.has_key("channel")):
+        channel = urllib.unquote_plus( params.get("channel") )
+    else:
+        channel=''
+    
+    # Extrae la url de la página
+    if (params.has_key("url")):
+        url = urllib.unquote_plus( params.get("url") )
+    else:
+        url=''
+
+    # Extrae la accion
+    if (params.has_key("action")):
+        action = params.get("action")
+    else:
+        action = "selectchannel"
+
+    # Extrae el server
+    if (params.has_key("server")):
+        server = params.get("server")
+    else:
+        server = ""
+
+    # Extrae la categoria
+    if (params.has_key("category")):
+        category = urllib.unquote_plus( params.get("category") )
+    else:
+        if params.has_key("channel"):
+            category = params.get("channel")
+        else:
+            category = ""
+            
+    # Extrae el título de la serie
+    if (params.has_key("show")):
+        show = params.get("show")
+    else:
+        show = ""
+
+    # Extrae el título del video
+    if params.has_key("title"):
+        title = urllib.unquote_plus( params.get("title") )
+    else:
+        title = ""
+
+    # Extrae el título del video
+    if params.has_key("fulltitle"):
+        fulltitle = urllib.unquote_plus( params.get("fulltitle") )
+    else:
+        fulltitle = ""
+
+    if params.has_key("thumbnail"):
+        thumbnail = urllib.unquote_plus( params.get("thumbnail") )
+    else:
+        thumbnail = ""
+
+    if params.has_key("fanart"):                                                                                                                                                
+        fanart = urllib.unquote_plus( params.get("fanart") )                                                                                                                  
+    else:                                                                                                                                                                         
+        fanart = ""  
+
+    if params.has_key("plot"):
+        plot = urllib.unquote_plus( params.get("plot") )
+    else:
+        plot = ""
+
+    if params.has_key("extradata"):
+        extra = urllib.unquote_plus( params.get("extradata") )
+    else:
+        extra = ""
+
+    if params.has_key("subtitle"):
+        subtitle = urllib.unquote_plus( params.get("subtitle") )
+    else:
+        subtitle = ""
+
+    if params.has_key("viewmode"):
+        viewmode = urllib.unquote_plus( params.get("viewmode") )
+    else:
+        viewmode = ""
+
+    if params.has_key("password"):
+        password = urllib.unquote_plus( params.get("password") )
+    else:
+        password = ""
+
+    if params.has_key("show"):
+        show = urllib.unquote_plus( params.get("show") )
+    else:
+        if params.has_key("Serie"):
+            show = urllib.unquote_plus( params.get("Serie") )
+        else:
+            show = ""
+
+    return params, fanart, channel, title, fulltitle, url, thumbnail, plot, action, server, extra, subtitle, viewmode, category, show, password
+
+def episodio_ya_descargado(show_title,episode_title):
+
+    ficheros = os.listdir( "." )
+
+    for fichero in ficheros:
+        #plugintools.log("fichero="+fichero)
+        if fichero.lower().startswith(show_title.lower()) and scrapertools.find_single_match(fichero,"(\d+x\d+)")==episode_title:
+            plugintools.log("encontrado!")
+            return True
+
+    return False
+
+def download_all_episodes(item,channel,first_episode="",preferred_server="vidspot",filter_language=""):
+    plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, show="+item.show)
+    show_title = item.show
+
+    # Obtiene el listado desde el que se llamó
+    action = item.extra
+
+    # Esta marca es porque el item tiene algo más aparte en el atributo "extra"
+    if "###" in item.extra:
+        action = item.extra.split("###")[0]
+        item.extra = item.extra.split("###")[1]
+
+    exec "episode_itemlist = channel."+action+"(item)"
+
+    # Ordena los episodios para que funcione el filtro de first_episode
+    episode_itemlist = sorted(episode_itemlist, key=lambda Item: Item.title) 
+
+    from servers import servertools
+    from core import downloadtools
+    from core import scrapertools
+
+    best_server = preferred_server
+    worst_server = "moevideos"
+
+    # Para cada episodio
+    if first_episode=="":
+        empezar = True
+    else:
+        empezar = False
+
+    for episode_item in episode_itemlist:
+        try:
+            plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, episode="+episode_item.title)
+            episode_title = scrapertools.get_match(episode_item.title,"(\d+x\d+)")
+            plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, episode="+episode_title)
+        except:
+            import traceback
+            plugintools.log(traceback.format_exc())
+            continue
+
+        if first_episode!="" and episode_title==first_episode:
+            empezar = True
+
+        if episodio_ya_descargado(show_title,episode_title):
+            continue
+
+        if not empezar:
+            continue
+
+        # Extrae los mirrors
+        try:
+            mirrors_itemlist = channel.findvideos(episode_item)
+        except:
+            mirrors_itemlist = servertools.find_video_items(episode_item)
+        print mirrors_itemlist
+
+        descargado = False
+
+        new_mirror_itemlist_1 = []
+        new_mirror_itemlist_2 = []
+        new_mirror_itemlist_3 = []
+        new_mirror_itemlist_4 = []
+        new_mirror_itemlist_5 = []
+        new_mirror_itemlist_6 = []
+
+        for mirror_item in mirrors_itemlist:
+            
+            # Si está en español va al principio, si no va al final
+            if "(Español)" in mirror_item.title:
+                if best_server in mirror_item.title.lower():
+                    new_mirror_itemlist_1.append(mirror_item)
+                else:
+                    new_mirror_itemlist_2.append(mirror_item)
+            elif "(Latino)" in mirror_item.title:
+                if best_server in mirror_item.title.lower():
+                    new_mirror_itemlist_3.append(mirror_item)
+                else:
+                    new_mirror_itemlist_4.append(mirror_item)
+            elif "(VOS)" in mirror_item.title:
+                if best_server in mirror_item.title.lower():
+                    new_mirror_itemlist_3.append(mirror_item)
+                else:
+                    new_mirror_itemlist_4.append(mirror_item)
+            else:
+                if best_server in mirror_item.title.lower():
+                    new_mirror_itemlist_5.append(mirror_item)
+                else:
+                    new_mirror_itemlist_6.append(mirror_item)
+
+        mirrors_itemlist = new_mirror_itemlist_1 + new_mirror_itemlist_2 + new_mirror_itemlist_3 + new_mirror_itemlist_4 + new_mirror_itemlist_5 + new_mirror_itemlist_6
+
+        for mirror_item in mirrors_itemlist:
+            plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, mirror="+mirror_item.title)
+
+            if "(Español)" in mirror_item.title:
+                idioma="(Español)"
+                codigo_idioma="es"
+            elif "(Latino)" in mirror_item.title:
+                idioma="(Latino)"
+                codigo_idioma="lat"
+            elif "(VOS)" in mirror_item.title:
+                idioma="(VOS)"
+                codigo_idioma="vos"
+            elif "(VO)" in mirror_item.title:
+                idioma="(VO)"
+                codigo_idioma="vo"
+            else:
+                idioma="(Desconocido)"
+                codigo_idioma="desconocido"
+
+            plugintools.log("streamondemand-pureita.navigation.py filter_language=#"+filter_language+"#, codigo_idioma=#"+codigo_idioma+"#")
+            if filter_language=="" or (filter_language!="" and filter_language==codigo_idioma):
+                plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, downloading mirror")
+            else:
+                plugintools.log("streamondemand-pureita.navigation.py language "+codigo_idioma+" filtered, skipping")
+                continue
+
+            if hasattr(channel, 'play'):
+                video_items = channel.play(mirror_item)
+            else:
+                video_items = [mirror_item]
+
+            if len(video_items)>0:
+                video_item = video_items[0]
+
+                # Comprueba que esté disponible
+                video_urls, puedes, motivo = servertools.resolve_video_urls_for_playing( video_item.server , video_item.url , video_password="" , muestra_dialogo=False)
+
+                # Lo añade a la lista de descargas
+                if puedes:
+                    plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, downloading mirror started...")
+                    # El vídeo de más calidad es el último
+                    mediaurl = video_urls[len(video_urls)-1][1]
+                    devuelve = downloadtools.downloadbest(video_urls,show_title+" "+episode_title+" "+idioma+" ["+video_item.server+"]",continuar=False)
+
+                    if devuelve==0:
+                        plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, download ok")
+                        descargado = True
+                        break
+                    elif devuelve==-1:
+                        try:
+                            import xbmcgui
+                            advertencia = xbmcgui.Dialog()
+                            resultado = advertencia.ok("plugin" , "Download interrotto")
+                        except:
+                            pass
+                        return
+                    else:
+                        plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, download error, try another mirror")
+                        continue
+
+                else:
+                    plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, downloading mirror not available... trying next")
+
+        if not descargado:
+            plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, EPISODIO NO DESCARGADO "+episode_title)
+
