@@ -159,7 +159,85 @@ def get_next_items( item ):
 
                 if len(itemlist)==0:
                     itemlist = [ Item(title="No se han encontrado vídeos", thumbnail=os.path.join( plugintools.get_runtime_path() , "resources" , "images" , "thumb_error.png" )) ]
+            # ---------------add_serie_to_library-----------
+            elif item.action=="add_serie_to_library":
+                plugintools.log("navigation.get_next_items add_serie_to_library")
+                from platformcode import library
+                import xbmcgui
+                
+                # Obtiene el listado desde el que se llamó
+                action = item.extra
+                    
+                # Esta marca es porque el item tiene algo más aparte en el atributo "extra"
+                if "###" in item.extra:
+                    action = item.extra.split("###")[0]
+                    item.extra = item.extra.split("###")[1]
 
+                exec "itemlist = channel."+action+"(item)"
+
+                # Progreso
+                pDialog = xbmcgui.DialogProgress()
+                ret = pDialog.create('streamondemand-pureita', 'Añadiendo episodios...')
+                pDialog.update(0, 'Añadiendo episodio...')
+                totalepisodes = len(itemlist)
+                plugintools.log ("[launcher.py] Total Episodios:"+str(totalepisodes))
+                i = 0
+                errores = 0
+                nuevos = 0
+                for item in itemlist:
+                    i = i + 1
+                    pDialog.update(i*100/totalepisodes, 'Añadiendo episodio...',item.title)
+                    plugintools.log("streamondemand-pureita.platformcode.launcher add_serie_to_library, title="+item.title)
+                    if (pDialog.iscanceled()):
+                        return
+                
+                    try:
+                        #(titulo="",url="",thumbnail="",server="",plot="",canal="",category="Cine",Serie="",verbose=True,accion="strm",pedirnombre=True):
+                        # Añade todos menos el que dice "Añadir esta serie..." o "Descargar esta serie..."
+                        if item.action!="add_serie_to_library" and item.action!="download_all_episodes":
+                            nuevos = nuevos + library.savelibrary( titulo=item.title , url=item.url , thumbnail=item.thumbnail , server=item.server , plot=item.plot , canal=item.channel , category="Series" , Serie=item.show.strip() , verbose=False, accion="play_from_library", pedirnombre=False, subtitle=item.subtitle, extra=item.extra )
+                    except IOError:
+                        import sys
+                        for line in sys.exc_info():
+                            logger.error( "%s" % line )
+                        plugintools.log("streamondemand-pureita.platformcode.launcher Error al grabar el archivo "+item.title)
+                        errores = errores + 1
+                        
+                pDialog.close()
+                    
+                # Actualizacion de la biblioteca
+                itemlist=[]
+                if errores > 0:
+                    itemlist.append(Item(title="ERRORE, la serie NON si è aggiunta alla biblioteca o la fatto in modo incompleto"))
+                    plugintools.log ("[launcher.py] No se pudo añadir "+str(errores)+" episodios")
+                else:
+                    itemlist.append(Item(title="La serie è stata aggiunta alla biblioteca"))
+                    plugintools.log ("[launcher.py] Ningún error al añadir "+str(errores)+" episodios")
+                    
+                # FIXME:jesus Comentado porque no funciona bien en todas las versiones de XBMC
+                #library.update(totalepisodes,errores,nuevos)
+                #xbmctools.renderItems(itemlist, params, url, category)
+                    
+                #Lista con series para actualizar
+                from core import config
+                nombre_fichero_config_canal = os.path.join( config.get_library_path() , "series.xml" )
+                if not os.path.exists(nombre_fichero_config_canal):
+                    nombre_fichero_config_canal = os.path.join( config.get_data_path() , "series.xml" )
+
+                plugintools.log("nombre_fichero_config_canal="+nombre_fichero_config_canal)
+                if not os.path.exists(nombre_fichero_config_canal):
+                    f = open( nombre_fichero_config_canal , "w" )
+                else:
+                    f = open( nombre_fichero_config_canal , "r" )
+                    contenido = f.read()
+                    f.close()
+                    f = open( nombre_fichero_config_canal , "w" )
+                    f.write(contenido)
+                from platformcode import library
+                f.write( library.title_to_folder_name(item.show)+","+item.url+","+item.channel+"\n")
+                f.close();
+                return itemlist
+            # --------------------------------------------------------------------
             else:
 
                 if item.action=="search":
