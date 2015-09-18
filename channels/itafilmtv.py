@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para itafilmtv
-# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -221,6 +221,8 @@ def episodios( item ):
 
         title = scrapedepisode + " (" + lang_title + ")"
         scrapedurls = scrapedurls.replace( "playreplay", "moevideo" )
+		
+        show = item.title
 
         matches_urls = re.compile( 'href="([^"]+)"', re.DOTALL ).findall( scrapedurls )
         urls = ""
@@ -231,7 +233,7 @@ def episodios( item ):
             itemlist.append( Item( channel=__channel__, action="findvideos", title=title, url=urls[:-1], thumbnail=item.thumbnail, plot=plot, fulltitle=item.fulltitle, show=item.show ) )
 
     if config.get_library_support():
-        itemlist.append( Item(channel=__channel__, title=item.show, url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
+        itemlist.append( Item(channel=__channel__, title="Aggiungi la serie alla libreria di Kodi", url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
         itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
 			
     return itemlist
