@@ -123,15 +123,17 @@ def episodios(item):
             if len( episode ) == 1: episode = "0" + episode
 
             title = season + "x" + episode
+			
+            show = item.title
 
             ## Le pasamos a 'findvideos' la url con dos partes divididas por el caracter "?"
             ## [host+path]?[argumentos]?[Referer]
             url = item.url + "?st_num=" + scrapedseason + "&pt_num=" + scrapedepisode + "?" + item.url
 
-            itemlist.append( Item( channel=__channel__, action="findvideos", title=title, url=url, fulltitle=item.title, show=item.title, thumbnail=item.thumbnail) )
+            itemlist.append( Item( channel=__channel__, action="findvideos", title=title, url=url, fulltitle=item.title, show=item.show, thumbnail=item.thumbnail) )
 
     if config.get_library_support():
-        itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
+        itemlist.append( Item(channel=__channel__, title="Aggiungi la serie alla libreria di Kodi", url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
         itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
 			
     return itemlist
