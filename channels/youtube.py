@@ -3,7 +3,7 @@
 # streamondemand.- XBMC Plugin
 # Canal para youtube
 # Buscador simple para visonar o descargar desde YouTube
-# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import re, sys
 

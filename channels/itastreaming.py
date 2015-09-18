@@ -3,7 +3,7 @@
 # streamondemand.- XBMC Plugin
 # Canal para itastreaming
 # by DrZ3r0
-# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 import urllib2
 import urlparse

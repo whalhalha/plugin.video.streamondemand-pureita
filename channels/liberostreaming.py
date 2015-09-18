@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para liberostreaming
-# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse
 import urllib2

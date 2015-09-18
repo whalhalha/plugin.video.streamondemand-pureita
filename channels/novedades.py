@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para novedades
-# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 
