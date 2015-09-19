@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # streamondemand - XBMC Plugin
 # Canal para darkstream
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -66,7 +66,7 @@ def cat_attori(item):
     data = scrapertools.cache_page(item.url)
     
     # Extrae las entradas (carpetas)
-    patron  = '<a href="(.*?)">(.*?)</a>[^<]+<span[^>]+>[^>]+>[^>]+>[^>]+><'
+    patron  = '<a href="(.*?)">(.*?)</a>.*?<span'
     matches = re.compile(patron,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 
@@ -86,7 +86,7 @@ def cat_attrici(item):
     data = scrapertools.cache_page(item.url)
     
     # Extrae las entradas (carpetas)
-    patron  = '<a href="(.*?)">(.*?)</a>[^<]+<span'
+    patron  = '<a href="(.*?)">(.*?)</a>.*?<span'
     matches = re.compile(patron,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 
@@ -189,4 +189,3 @@ def peliculas(item):
         itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo>>[/COLOR]" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
 
     return itemlist
-
