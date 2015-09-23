@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# streamondemand-pureita
+# pelisalacarta 4
 # Copyright 2015 tvalacarta@gmail.com
 #
 # Distributed under the terms of GNU General Public License v3 (GPLv3)
 # http://www.gnu.org/licenses/gpl-3.0.html
 #------------------------------------------------------------
-# This file is part of streamondemand-pureita.
+# This file is part of pelisalacarta 4.
 #
-# streamondemand-pureita is free software: you can redistribute it and/or modify
+# pelisalacarta 4 is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# streamondemand-pureita is distributed in the hope that it will be useful,
+# pelisalacarta 4 is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with streamondemand-pureita.  If not, see <http://www.gnu.org/licenses/>.
+# along with pelisalacarta 4.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------
 
 import os
@@ -63,14 +63,14 @@ class MenuWindow(xbmcgui.WindowXML):
         self.first_time = True
                    
         self.control_list = self.getControl(100)
-
+        
         if len(self.itemlist)>0:
             item = self.itemlist[0]
             if item.thumbnail!="" and not "thumb_error" in item.thumbnail and not "thumb_folder" in item.thumbnail and not "thumb_nofolder" in item.thumbnail:
                 self.getControl(301).setImage(item.thumbnail)
                 self.getControl(302).setText(item.title)
                 self.getControl(303).setText(item.plot)
-
+        self.itemlist.insert(0,Item(title="Atrás", action="go_back",thumbnail=os.path.join(plugintools.get_runtime_path(), 'resources', "images","thumb_atras_icon.png")))
         for item in self.itemlist:
 
             list_item = xbmcgui.ListItem( item.title , iconImage=item.thumbnail, thumbnailImage=item.thumbnail)
@@ -85,6 +85,29 @@ class MenuWindow(xbmcgui.WindowXML):
 
         self.getControl(300).setLabel(self.parent_item.channel)
         self.setFocusId(100)
+        
+    def NextItem(self):
+
+      loader_image = os.path.join( plugintools.get_runtime_path(), 'resources', 'skins', 'Default', 'media', 'loader.gif')
+      loader = xbmcgui.ControlImage(1200, 19, 40, 40, loader_image)
+      self.addControl(loader)
+
+      pos = self.control_list.getSelectedPosition()
+      item = self.itemlist[pos]
+      if item.action == "go_back":
+        self.close()
+      else:
+        next_items = navigation.get_next_items( item )
+        loader.setVisible(False)
+
+        # Si no hay nada, no muestra la pantalla vacía
+        if len(next_items)>0:
+            next_window = navigation.get_window_for_item( item )
+            next_window.setItemlist(next_items)
+            next_window.setParentItem(item)
+
+            next_window.doModal()
+            del next_window
 
     def onAction(self, action):
         plugintools.log("MenuWindow.onAction action.id="+repr(action.getId())+" action.buttonCode="+repr(action.getButtonCode()))
@@ -96,33 +119,11 @@ class MenuWindow(xbmcgui.WindowXML):
             self.getControl(302).setText(item.title)
             self.getControl(303).setText(item.plot)
 
-        ## Botón izquierdo del ratón para la lista de menús de los canales y todos los sus niveles hasta el visionado o descarga.
-        if action == 100: action = ACTION_SELECT_ITEM
-
         if action == ACTION_PARENT_DIR or action==ACTION_PREVIOUS_MENU or action==ACTION_PREVIOUS_MENU2:
             self.close()
 
         if action == ACTION_SELECT_ITEM:
-
-            loader_image = os.path.join( plugintools.get_runtime_path(), 'resources', 'skins', 'Default', 'media', 'loader.gif')
-            loader = xbmcgui.ControlImage(1200, 19, 40, 40, loader_image)
-            self.addControl(loader)
-
-            pos = self.control_list.getSelectedPosition()
-            item = self.itemlist[pos]
-
-            next_items = navigation.get_next_items( item )
-            loader.setVisible(False)
-
-            # Si no hay nada, no muestra la pantalla vacía
-            if len(next_items)>0:
-                next_window = navigation.get_window_for_item( item )
-                next_window.setItemlist(next_items)
-                next_window.setParentItem(item)
-
-                next_window.doModal()
-                del next_window
-
+          self.NextItem()
     def on_playback_stopped( self ):
         plugintools.log("DetailWindow.on_playback_stopped currentTime="+str(self.custom_player.get_current_time())+", totalTime="+str(self.custom_player.get_total_time()))
         plugintools.log("DetailWindow.on_playback_stopped parent_item="+self.parent_item.tostring())
@@ -132,9 +133,9 @@ class MenuWindow(xbmcgui.WindowXML):
         pass
 
     def onClick( self, control_id ):
-        plugintools.log("ChannelWindow.onClick "+repr(control_id))
-        pass
-	
+        plugintools.log("MenuWindow.onClick "+repr(control_id))
+        self.NextItem()
+
     def onControl(self, control):
         plugintools.log("MenuWindow.onClick "+repr(control))
         pass
