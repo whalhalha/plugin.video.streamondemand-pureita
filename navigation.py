@@ -472,6 +472,9 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
         empezar = False
 
     for episode_item in episode_itemlist:
+        if episode_item.action == "add_serie_to_library" or episode_item.action == "download_all_episodes":
+            continue
+            
         try:
             plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, episode="+episode_item.title)
             #episode_title = scrapertools.get_match(episode_item.title,"(\d+x\d+)")
@@ -493,7 +496,8 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
 
         # Extrae los mirrors
         try:
-            mirrors_itemlist = channel.findvideos(episode_item)
+            #mirrors_itemlist = channel.findvideos(episode_item)
+            exec "mirrors_itemlist = channel."+episode_item.action+"(episode_item)"
         except:
             mirrors_itemlist = servertools.find_video_items(episode_item)
         print mirrors_itemlist
