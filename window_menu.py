@@ -70,7 +70,7 @@ class MenuWindow(xbmcgui.WindowXML):
                 self.getControl(301).setImage(item.thumbnail)
                 self.getControl(302).setText(item.title)
                 self.getControl(303).setText(item.plot)
-        self.itemlist.insert(0,Item(title="Atrás", action="go_back",thumbnail=os.path.join(plugintools.get_runtime_path(), 'resources', "images","thumb_atras_icon.png")))
+        self.itemlist.insert(0,Item(title="Indietro", action="go_back",thumbnail=os.path.join(plugintools.get_runtime_path(), 'resources', "images","thumb_atras_icon.png")))
         for item in self.itemlist:
 
             list_item = xbmcgui.ListItem( item.title , iconImage=item.thumbnail, thumbnailImage=item.thumbnail)
