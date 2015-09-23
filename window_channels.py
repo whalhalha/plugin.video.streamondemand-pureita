@@ -61,7 +61,7 @@ class ChannelWindow(xbmcgui.WindowXML):
             return       
         self.first_time = True                   
         self.control_list = self.getControl(100)
-        self.itemlist.insert(0,Item(title="Atrás", action="go_back",thumbnail=os.path.join(plugintools.get_runtime_path(), 'resources', "images","thumb_atras.png")))
+        self.itemlist.insert(0,Item(title="Indietro", action="go_back",thumbnail=os.path.join(plugintools.get_runtime_path(), 'resources', "images","thumb_atras.png")))
         for item in self.itemlist:
             plugintools.log(item.thumbnail)
             list_item = xbmcgui.ListItem( item.title , iconImage=item.thumbnail, thumbnailImage=item.thumbnail)
