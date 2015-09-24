@@ -27,10 +27,10 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.pianetastreaming mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi Film Inseriti[/COLOR]", action="peliculas", url="http://www.pianetastreaming.net/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Scegli Per Genere[/COLOR]", action="categorias", url="http://www.pianetastreaming.net/" , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Scegli Per Anno[/COLOR]", action="catbyyear", url="http://www.pianetastreaming.net/" , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    itemlist.append( Item(channel=__channel__, title="Ultimi Film Inseriti", action="peliculas", url="http://www.pianetastreaming.net/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
+    itemlist.append( Item(channel=__channel__, title="Scegli Per Genere", action="categorias", url="http://www.pianetastreaming.net/" , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
+    itemlist.append( Item(channel=__channel__, title="Scegli Per Anno", action="catbyyear", url="http://www.pianetastreaming.net/" , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png"))
+    itemlist.append( Item(channel=__channel__, title="Cerca...", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
     return itemlist
 
 def peliculas(item):
@@ -46,7 +46,7 @@ def peliculas(item):
     scrapertools.printMatches(matches)
 
     for scrapedurl,scrapedthumbnail,scrapedtitle in matches:
-        scrapedtitle = "[COLOR azure]" + scrapedtitle + "[/COLOR]"
+        scrapedtitle = "" + scrapedtitle + ""
         response = urllib2.urlopen(scrapedurl)
         html = response.read()
         start = html.find("<h2>")
@@ -64,7 +64,7 @@ def peliculas(item):
 
     if len(matches)>0:
         scrapedurl = urlparse.urljoin(item.url,matches[0])
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo >>[/COLOR]" , url=scrapedurl, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png" , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="Successivo >>" , url=scrapedurl, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png" , folder=True) )
 
     return itemlist
 
@@ -85,7 +85,7 @@ def categorias(item):
     scrapertools.printMatches(matches)
 
     for url,titulo in matches:
-        scrapedtitle = "[COLOR azure]" + titulo + "[/COLOR]"
+        scrapedtitle = "" + titulo + ""
         scrapedurl = urlparse.urljoin(item.url,url)
         scrapedthumbnail = ""
         scrapedplot = ""
@@ -110,7 +110,7 @@ def catbyyear(item):
     scrapertools.printMatches(matches)
 
     for url,titulo in matches:
-        scrapedtitle = "[COLOR azure]" + titulo + "[/COLOR]"
+        scrapedtitle = "" + titulo + ""
         scrapedurl = urlparse.urljoin(item.url,url)
         scrapedthumbnail = ""
         scrapedplot = ""

@@ -30,13 +30,13 @@ def isGeneric():
 def mainlist(item):
     logger.info("[italiafilm.py] mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film - Novita'[/COLOR]" , action="peliculas", url="http://www.italia-film.co/category/film-del-2015-streaming/",thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film HD[/COLOR]" , action="peliculas", url="http://www.italia-film.co/category/film-hd/",thumbnail="http://i.imgur.com/3ED6lOP.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Anime e Cartoon[/COLOR]" , action="peliculas", url="http://www.italia-film.co/category/anime-e-cartoon/", thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"))
-    #itemlist.append( Item(channel=__channel__, title="[COLOR azure]Contenuti per Genere[/COLOR]" , action="categorias", url="http://www.italia-film.co/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]" , action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Serie TV[/COLOR]" , action="peliculaserie", extra="serie", url="http://www.italia-film.co/category/telefilm/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca Serie TV...[/COLOR]" , action="search", extra="serie", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    itemlist.append( Item(channel=__channel__, title="Film - Novita'" , action="peliculas", url="http://www.italia-film.co/category/film-del-2015-streaming/",thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
+    itemlist.append( Item(channel=__channel__, title="Film HD" , action="peliculas", url="http://www.italia-film.co/category/film-hd/",thumbnail="http://i.imgur.com/3ED6lOP.png"))
+    itemlist.append( Item(channel=__channel__, title="Anime e Cartoon" , action="peliculas", url="http://www.italia-film.co/category/anime-e-cartoon/", thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"))
+    #itemlist.append( Item(channel=__channel__, title="Contenuti per Genere" , action="categorias", url="http://www.italia-film.co/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
+    itemlist.append( Item(channel=__channel__, title="Cerca..." , action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    itemlist.append( Item(channel=__channel__, title="Serie TV" , action="peliculaserie", extra="serie", url="http://www.italia-film.co/category/telefilm/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"))
+    itemlist.append( Item(channel=__channel__, title="Cerca Serie TV..." , action="search", extra="serie", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
     return itemlist
 
 def categorias(item):
@@ -58,7 +58,7 @@ def categorias(item):
         scrapedplot = ""
         scrapedthumbnail = ""
         if DEBUG: logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action='peliculas', title="[COLOR azure]" + scrapedtitle + "[/COLOR]", url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action='peliculas', title="" + scrapedtitle + "", url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     return itemlist
 
@@ -124,12 +124,12 @@ def peliculas(item):
 
         if (DEBUG): logger.info("title=["+title+"], url=["+url+"], thumbnail=["+thumbnail+"]")
 
-        itemlist.append( Item(channel=__channel__, action='findvideos', title="[COLOR azure]" + title + "[/COLOR]", url=url , thumbnail=thumbnail , fanart=thumbnail, plot=plot , viewmode="movie_with_plot", folder=True) )
+        itemlist.append( Item(channel=__channel__, action='findvideos', title="" + title + "", url=url , thumbnail=thumbnail , fanart=thumbnail, plot=plot , viewmode="movie_with_plot", folder=True) )
 
     # Siguiente
     try:
         pagina_siguiente = scrapertools.get_match(data,'<a class="next page-numbers" href="([^"]+)"')
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo >> [/COLOR]" , url=pagina_siguiente , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="Successivo >> " , url=pagina_siguiente , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
     except:
         pass
 
@@ -158,12 +158,12 @@ def peliculasx(item):
 
         if (DEBUG): logger.info("title=["+title+"], url=["+url+"], thumbnail=["+thumbnail+"]")
 
-        itemlist.append( Item(channel=__channel__, action='serie_ep', title="[COLOR azure]" + title + "[/COLOR]", url=url , thumbnail=thumbnail , fanart=thumbnail, plot=plot , viewmode="movie_with_plot", folder=True) )
+        itemlist.append( Item(channel=__channel__, action='serie_ep', title="" + title + "", url=url , thumbnail=thumbnail , fanart=thumbnail, plot=plot , viewmode="movie_with_plot", folder=True) )
 
     # Siguiente
     try:
         pagina_siguiente = scrapertools.get_match(data,'<a class="next page-numbers" href="([^"]+)"')
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo >> [/COLOR]" , url=pagina_siguiente , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="Successivo >> " , url=pagina_siguiente , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
     except:
         pass
 

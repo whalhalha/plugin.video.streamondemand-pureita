@@ -40,17 +40,17 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.streamingfilmit mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="[COLOR azure]Ultimi Film Inseriti[/COLOR]",
+                     title="Ultimi Film Inseriti",
                      action="peliculas",
                      url=host,
                      thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Film Per Categoria[/COLOR]",
+                     title="Film Per Categoria",
                      action="categorias",
                      url=host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     title="[COLOR yellow]Cerca...[/COLOR]",
+                     title="Cerca...",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -78,7 +78,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="pelicat",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR][COLOR gray]" + scrapedtot + "[/COLOR]",
+                 title="" + scrapedtitle + "" + scrapedtot + "",
                  url=scrapedurl,
                  thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png",
                  folder=True))
@@ -128,7 +128,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -144,7 +144,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="[COLOR orange]Successivo>>[/COLOR]",
+                 title="Successivo>>",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -189,7 +189,7 @@ def pelicat(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -205,7 +205,7 @@ def pelicat(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="pelicat",
-                 title="[COLOR orange]Successivo>>[/COLOR]",
+                 title="Successivo>>",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))

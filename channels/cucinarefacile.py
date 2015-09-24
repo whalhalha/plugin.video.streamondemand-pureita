@@ -28,7 +28,7 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.cucinarefacile mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Videoricette[/COLOR]", action="peliculas", url="http://www.cucinarefacile.com/tipo-ricetta/video-ricette/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
+    itemlist.append( Item(channel=__channel__, title="Videoricette", action="peliculas", url="http://www.cucinarefacile.com/tipo-ricetta/video-ricette/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
 
     
     return itemlist
@@ -62,7 +62,7 @@ def peliculas(item):
 
     if len(matches)>0:
         scrapedurl = urlparse.urljoin(item.url,matches[0])
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Avanti >>[/COLOR]" , url=scrapedurl , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="Avanti >>" , url=scrapedurl , folder=True) )
 
     return itemlist
 

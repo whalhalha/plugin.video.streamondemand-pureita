@@ -32,17 +32,17 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.documentaristreaming mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="[COLOR azure]Aggiornamenti[/COLOR]",
+                     title="Aggiornamenti",
                      action="peliculas",
                      url=sito,
                      thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Categorie[/COLOR]",
+                     title="Categorie",
                      action="categorias",
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     #title="[COLOR yellow]Cerca...[/COLOR]",
+                     #title="Cerca...",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -85,7 +85,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  viewmode="movie_with_plot",
                  thumbnail=scrapedthumbnail,
@@ -102,7 +102,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="[COLOR orange]Successivo >>[/COLOR]",
+                 title="Successivo >>",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -137,7 +137,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))

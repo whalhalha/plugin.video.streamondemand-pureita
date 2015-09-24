@@ -35,9 +35,9 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR azure]Serie TV[/COLOR]", url=host+"/serie-tv-streaming/", thumbnail="http://i.imgur.com/rO0ggX2.png" ) )
-    itemlist.append( Item( channel=__channel__, action="sottomenu", title="[COLOR orange]Sottomenu...[/COLOR]", url=host, thumbnail="http://i37.photobucket.com/albums/e88/xzener/NewIcons.png" ) )
-    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR green]Cerca...[/COLOR]", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
+    itemlist.append( Item( channel=__channel__, action="fichas", title="Serie TV", url=host+"/serie-tv-streaming/", thumbnail="http://i.imgur.com/rO0ggX2.png" ) )
+    itemlist.append( Item( channel=__channel__, action="sottomenu", title="Sottomenu...", url=host, thumbnail="http://i37.photobucket.com/albums/e88/xzener/NewIcons.png" ) )
+    itemlist.append( Item( channel=__channel__, action="search", title="Cerca...", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
 
 
     return itemlist
@@ -97,7 +97,7 @@ def fichas( item ):
     #<div class='wp-pagenavi'><span class='current'>1</span><a rel='nofollow' class='page larger' href='http://www.seriehd.org/serie-tv-streaming/page/2/'>2</a></div></div></div>
     next_page = scrapertools.find_single_match( data, "<span class='current'>\d+</span><a rel='nofollow' class='page larger' href='([^']+)'>\d+</a>" )
     if next_page != "":
-        itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR orange]Successivo>>[/COLOR]", url=next_page ) )
+        itemlist.append( Item( channel=__channel__, action="fichas", title="Successivo>>", url=next_page ) )
 
     return itemlist
 

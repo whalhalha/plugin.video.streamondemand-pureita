@@ -39,33 +39,33 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.tantifilm mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="[COLOR azure]Ultime Uscite[/COLOR]",
+                     title="Ultime Uscite",
                      action="latest",
                      url=host,
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Al Cinema[/COLOR]",
+                     title="Al Cinema",
                      action="peliculas",
                      url="%s/watch-genre/al-cinema/" % host,
                      thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]HD - Alta Definizione[/COLOR]",
+                     title="HD - Alta Definizione",
                      action="peliculas",
                      url="%s/watch-genre/hd-alta-qualita/" % host,
                      thumbnail="http://jcrent.com/apple%20tv%20final/HD.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Film Per Categoria[/COLOR]",
+                     title="Film Per Categoria",
                      action="categorias",
                      url=host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Serie TV[/COLOR]",
+                     title="Serie TV",
                      extra="serie",
                      action="peliculas",
                      url="%s/watch-genre/serie-tv" % host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
-                     title="[COLOR yellow]Cerca...[/COLOR]",
+                     title="Cerca...",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -89,7 +89,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png",
                  folder=True))
@@ -136,7 +136,7 @@ def search_peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -187,7 +187,7 @@ def peliculas(item):
             Item(channel=__channel__,
                  extra=item.extra,
                  action="peliculas",
-                 title="[COLOR orange]Successivo>>[/COLOR]",
+                 title="Successivo>>",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -223,7 +223,7 @@ def latest(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -239,7 +239,7 @@ def latest(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="latest",
-                 title="[COLOR orange]Successivo>>[/COLOR]",
+                 title="Successivo>>",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))

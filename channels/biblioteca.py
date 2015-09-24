@@ -29,11 +29,11 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.darkstream mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film per Registi[/COLOR]", action="cat_registi", url="http://www.darkstream.tv/elenco-registi/", thumbnail="http://cinema.clubefl.gr/wp-content/themes/director-theme/images/logo.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film per Attori[/COLOR]", action="cat_attori", url="http://www.darkstream.tv/elenco-attori/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/All%20Movies%20by%20Actor.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film per Attrici[/COLOR]", action="cat_attrici", url="http://www.darkstream.tv/elenco-attrici/", thumbnail="http://i.imgur.com/oRIjIiE.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Elenco Film [A-Z][/COLOR]", action="categorias", url="http://www.darkstream.tv/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/Movies%20A-Z.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    itemlist.append( Item(channel=__channel__, title="Film per Registi", action="cat_registi", url="http://www.darkstream.tv/elenco-registi/", thumbnail="http://cinema.clubefl.gr/wp-content/themes/director-theme/images/logo.png"))
+    itemlist.append( Item(channel=__channel__, title="Film per Attori", action="cat_attori", url="http://www.darkstream.tv/elenco-attori/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/All%20Movies%20by%20Actor.png"))
+    itemlist.append( Item(channel=__channel__, title="Film per Attrici", action="cat_attrici", url="http://www.darkstream.tv/elenco-attrici/", thumbnail="http://i.imgur.com/oRIjIiE.png"))
+    itemlist.append( Item(channel=__channel__, title="Elenco Film [A-Z]", action="categorias", url="http://www.darkstream.tv/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/Movies%20A-Z.png"))
+    itemlist.append( Item(channel=__channel__, title="Cerca...", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
 
     
     return itemlist
@@ -110,7 +110,7 @@ def categorias(item):
         scrapedtitle=scrapertools.decodeHtmlentities(scrapedtitle.replace("Home",""))
         scrapedtitle=scrapertools.decodeHtmlentities(scrapedtitle.replace("http://www.darkstream.tv/",""))
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"]")
-        itemlist.append( Item(channel=__channel__, action="cat_elenco", title="[COLOR azure]"+scrapedtitle+"[/COLOR]" , url=scrapedurl , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="cat_elenco", title=""+scrapedtitle+"" , url=scrapedurl , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png", folder=True) )
 
     return itemlist
 
@@ -168,7 +168,7 @@ def peliculas(item):
 
     if len(matches)>0:
         scrapedurl = urlparse.urljoin(item.url,matches[0])
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo>>[/COLOR]" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="Successivo>>" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
 
     return itemlist
 
@@ -238,7 +238,7 @@ def do_search(item):
                 channel_result_itemlist = obj.search( Item() , tecleado)
                 for item in channel_result_itemlist:
                     item.title = scrapertools.decodeHtmlentities( item.title )
-                    item.title = item.title + " [COLOR orange]su[/COLOR] [COLOR green]" + basename_without_extension + "[/COLOR]"
+                    item.title = item.title + " su" + basename_without_extension + ""
                     item.viewmode = "list"
 
                 itemlist.extend( channel_result_itemlist )

@@ -36,68 +36,68 @@ def mainlist(item):
     # Main options
     itemlist = [Item(channel=__channel__,
                      action="peliculasrobalo",
-                     title="[COLOR azure]Cinema - Novita'[/COLOR]",
+                     title="Cinema - Novita'",
                      url=sito,
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
 		Item(channel=__channel__,
                      action="peliculasrobalo",
-                     title="[COLOR azure]Alta Definizione [HD][/COLOR]",
+                     title="Alta Definizione [HD]",
                      url="http://www.cb01.eu/tag/film-hd-altadefinizione/",
                      thumbnail="http://jcrent.com/apple%20tv%20final/HD.png"),
                 Item(channel=__channel__,
                      action="menuhd",
-                     title="[COLOR azure]Menù HD[/COLOR]",
+                     title="Menù HD",
                      url=sito,
                      thumbnail="http://files.softicons.com/download/computer-icons/disks-icons-by-wil-nichols/png/256x256/Blu-Ray.png"),
                 Item(channel=__channel__,
                      action="menugeneros",
-                     title="[COLOR azure]Per Genere[/COLOR]",
+                     title="Per Genere",
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
                      action="menuanyos",
-                     title="[COLOR azure]Per Anno[/COLOR]",
+                     title="Per Anno",
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png"),
                 Item(channel=__channel__,
                      action="search",
-                     title="[COLOR yellow]Cerca Film[/COLOR]",
+                     title="Cerca Film",
                      extra="newsearch",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
                      action="listserie",
-                     title="[COLOR azure]Serie Tv - Novita'[/COLOR]",
+                     title="Serie Tv - Novita'",
                      url="http://www.cb01.eu/serietv/",
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
                      action="search",
-                     title="[COLOR yellow]Cerca Serie Tv[/COLOR]",
+                     title="Cerca Serie Tv",
                      extra="serie",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
                      action="listanime",
-                     title="[COLOR azure]Anime - Novita'[/COLOR]",
+                     title="Anime - Novita'",
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"),
                 Item(channel=__channel__,
                      action="animegenere",
-                     title="[COLOR azure]Anime - Per Genere[/COLOR]",
+                     title="Anime - Per Genere",
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Genres.png"),
                 Item(channel=__channel__,
                      action="listaletra",
-                     title="[COLOR azure]Anime - Per Lettera A-Z[/COLOR]",
+                     title="Anime - Per Lettera A-Z",
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://i.imgur.com/IjCmx5r.png"),
                 Item(channel=__channel__,
                      action="listaaz",
-                     title="[COLOR azure]Anime - Lista Completa[/COLOR]",
+                     title="Anime - Lista Completa",
                      url="http://www.cineblog01.cc/anime/lista-completa-anime-cartoon/",
                      thumbnail="http://i.imgur.com/IjCmx5r.png"),
 
                 Item(channel=__channel__,
                      action="search",
-                     title="[COLOR yellow]Cerca Anime[/COLOR]",
+                     title="Cerca Anime",
                      extra="cartoni",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -118,7 +118,7 @@ def peliculasrobalo(item):
     # Extrae las entradas (carpetas)
     patronvideos = '<div class="span4".*?<a.*?<p><img src="([^"]+)".*?'
     patronvideos += '<div class="span8">.*?<a href="([^"]+)"> <h1>([^"]+)</h1></a>.*?'
-    patronvideos += '<p><strong>.*?</strong>.*?<br />([^"]+)<a href'
+    patronvideos += '<strong>([^<]*)</strong>.*?<br />([^<+]+)'
     matches = re.compile(patronvideos, re.DOTALL).finditer(data)
 
     for match in matches:
@@ -126,7 +126,7 @@ def peliculasrobalo(item):
         scrapedurl = urlparse.urljoin(item.url, match.group(2))
         scrapedthumbnail = urlparse.urljoin(item.url, match.group(1))
         scrapedthumbnail = scrapedthumbnail.replace(" ", "%20")
-        scrapedplot = scrapertools.unescape(match.group(4))
+        scrapedplot = scrapertools.unescape("" + match.group(4) + "" + match.group(5).strip())
         scrapedplot = scrapertools.htmlclean(scrapedplot).strip()
         if DEBUG: logger.info(
             "title=[" + scrapedtitle + "], url=[" + scrapedurl + "], thumbnail=[" + scrapedthumbnail + "]")
@@ -145,7 +145,7 @@ def peliculasrobalo(item):
         scrapertools.printMatches(matches)
 
         if len(matches) > 0:
-            scrapedtitle = "[COLOR orange]Successivo>>[/COLOR]"
+            scrapedtitle = "Successivo>>"
             scrapedurl = matches[0]
             scrapedthumbnail = ""
             scrapedplot = ""
@@ -194,7 +194,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -209,7 +209,7 @@ def peliculas(item):
         scrapertools.printMatches(matches)
 
         if len(matches) > 0:
-            scrapedtitle = "[COLOR orange]Successivo>>[/COLOR]"
+            scrapedtitle = "Successivo>>"
             scrapedurl = matches[0]
             scrapedthumbnail = ""
             scrapedplot = ""
@@ -254,7 +254,7 @@ def menugeneros(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -286,7 +286,7 @@ def menuhd(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -319,7 +319,7 @@ def menuanyos(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -379,7 +379,7 @@ def listserie(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid_serie",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -390,7 +390,7 @@ def listserie(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="listserie",
-                 title="[COLOR orange]Successivo>>[/COLOR]",
+                 title="Successivo>>",
                  url=next_page,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", ))
     except:
@@ -483,7 +483,7 @@ def animegenere(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="listanime",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url= sitoanime + scrapedurl))
 
     return itemlist
@@ -527,7 +527,7 @@ def listanime(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="listanime",
-                 title="[COLOR orange]Successivo>>[/COLOR]",
+                 title="Successivo>>",
                  url=next_page,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png"))
     except:
@@ -552,7 +552,7 @@ def findvid(item):
     matches = re.compile(patron, re.DOTALL).findall(streaming)
     for scrapedurl, scrapedtitle in matches:
         print "##### findvideos Streaming ## %s ## %s ##" % (scrapedurl, scrapedtitle)
-        title = "[COLOR orange]Streaming:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+        title = "Streaming:" + item.title + "[" + scrapedtitle + "]"
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
@@ -567,7 +567,7 @@ def findvid(item):
     matches = re.compile(patron, re.DOTALL).findall(streaming_hd)
     for scrapedurl, scrapedtitle in matches:
         print "##### findvideos Streaming HD ## %s ## %s ##" % (scrapedurl, scrapedtitle)
-        title = "[COLOR yellow]Streaming HD:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+        title = "Streaming HD:" + item.title + "[" + scrapedtitle + "]"
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
@@ -582,7 +582,7 @@ def findvid(item):
     matches = re.compile(patron, re.DOTALL).findall(streaming_hd)
     for scrapedurl, scrapedtitle in matches:
         print "##### findvideos Streaming HD ## %s ## %s ##" % (scrapedurl, scrapedtitle)
-        title = "[COLOR pink]Streaming 3D:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+        title = "Streaming 3D:" + item.title + "[" + scrapedtitle + "]"
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
@@ -597,7 +597,7 @@ def findvid(item):
     matches = re.compile(patron, re.DOTALL).findall(download)
     for scrapedurl, scrapedtitle in matches:
         print "##### findvideos Download ## %s ## %s ##" % (scrapedurl, scrapedtitle)
-        title = "[COLOR aqua]Download:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+        title = "Download:" + item.title + "[" + scrapedtitle + "]"
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
@@ -612,7 +612,7 @@ def findvid(item):
     matches = re.compile(patron, re.DOTALL).findall(download_hd)
     for scrapedurl, scrapedtitle in matches:
         print "##### findvideos Download HD ## %s ## %s ##" % (scrapedurl, scrapedtitle)
-        title = "[COLOR azure]Download HD:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+        title = "Download HD:" + item.title + "[" + scrapedtitle + "]"
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
@@ -648,7 +648,7 @@ def findvid_serie(item):
         for match2 in matches2:
             scrapedurl = match2.group(1)
             scrapedtitle = match2.group(2)
-            title = item.title + " " + titulo + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+            title = item.title + " " + titulo + " [" + scrapedtitle + "]"
             itemlist.append(
                 Item(channel=__channel__,
                      action="play",
@@ -684,7 +684,7 @@ def findvid_anime(item):
                         titulo = match2.group(2)
                     scrapedurl = match2.group(1)
                     scrapedtitle = match2.group(2)
-                    title = item.title + " " + titulo + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+                    title = item.title + " " + titulo + "[" + scrapedtitle + "]"
                     itemlist.append(
                         Item(channel=__channel__,
                              action="play",

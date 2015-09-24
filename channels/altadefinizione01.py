@@ -33,22 +33,22 @@ def mainlist(item):
     logger.info("streamondemand.altadefinizione01 mainlist")
 
     itemlist = [Item(channel=__channel__,
-                     title="[COLOR azure]Ultimi film inseriti[/COLOR]",
+                     title="Ultimi film inseriti",
                      action="peliculas",
                      url=sito,
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Film Sub-Ita[/COLOR]",
+                     title="Film Sub-Ita",
                      action="peliculas",
                      url=sito+"genere/sub-ita/",
                      thumbnail="http://i.imgur.com/qUENzxl.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Categorie film[/COLOR]",
+                     title="Categorie film",
                      action="categorias",
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     title="[COLOR yellow]Cerca...[/COLOR]",
+                     title="Cerca...",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -79,7 +79,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  viewmode="movie_with_plot",
                  thumbnail=scrapedthumbnail,
@@ -96,7 +96,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="[COLOR orange]Successivo >>[/COLOR]",
+                 title="Successivo >>",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -128,7 +128,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))

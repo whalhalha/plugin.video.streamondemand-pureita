@@ -30,9 +30,9 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Home[/COLOR]", action="peliculas", url=sito, thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01" ) )
-    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Genere - Nazione[/COLOR]", action="categorias", url=sito, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png" ) )
-    itemlist.append( Item( channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search" ) )
+    itemlist.append( Item( channel=__channel__, title="Home", action="peliculas", url=sito, thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01" ) )
+    itemlist.append( Item( channel=__channel__, title="Genere - Nazione", action="categorias", url=sito, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png" ) )
+    itemlist.append( Item( channel=__channel__, title="Cerca...", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search" ) )
     return itemlist
 
 def search( item, texto ):
@@ -76,7 +76,7 @@ def peliculas( item ):
     next_page  = scrapertools.find_single_match( data, '<div class="nav-previous"><a href="(.*?)" ><span class="meta-nav">&larr;</span> Articoli precedenti</a></div>' )
 
     if next_page != "":
-        itemlist.append( Item( channel=__channel__, action="peliculas", title="[COLOR orange]Post piu' vecchi >>[/COLOR]", url=next_page, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
+        itemlist.append( Item( channel=__channel__, action="peliculas", title="Post piu' vecchi >>", url=next_page, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
 
     return itemlist
 
@@ -94,7 +94,7 @@ def categorias(item):
 
     for scrapedurl, scrapedtitle in matches:
 
-        itemlist.append( Item( channel=__channel__, action="peliculas" , title="[COLOR azure]" + scrapedtitle + "[/COLOR]", url=urlparse.urljoin( sito, scrapedurl ) ) )
+        itemlist.append( Item( channel=__channel__, action="peliculas" , title="" + scrapedtitle + "", url=urlparse.urljoin( sito, scrapedurl ) ) )
 
     return itemlist
 	

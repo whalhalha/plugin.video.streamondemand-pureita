@@ -29,10 +29,10 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.foxycinema mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi Film Inseriti[/COLOR]", action="peliculas", url="http://www.foxycinema.org/film.html", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Categoria[/COLOR]", action="categorias", url="http://www.foxycinema.org/film-per-genere.html", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Film Per Anno[/COLOR]", action="byyear", url="http://www.foxycinema.org/film-per-anno.html", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    itemlist.append( Item(channel=__channel__, title="Ultimi Film Inseriti", action="peliculas", url="http://www.foxycinema.org/film.html", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
+    itemlist.append( Item(channel=__channel__, title="Film Per Categoria", action="categorias", url="http://www.foxycinema.org/film-per-genere.html", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
+    itemlist.append( Item(channel=__channel__, title="Film Per Anno", action="byyear", url="http://www.foxycinema.org/film-per-anno.html", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
+    itemlist.append( Item(channel=__channel__, title="Cerca...", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
     
     return itemlist
 
@@ -57,7 +57,7 @@ def categorias(item):
         scrapedurl=scrapertools.decodeHtmlentities(scrapedurl.replace("#",""))
         scrapedtitle=scrapertools.decodeHtmlentities(scrapedtitle.replace("|- Cerca per Genere -|",""))
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"]")
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR azure]"+scrapedtitle+"[/COLOR]" , url=sito+scrapedurl , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title=""+scrapedtitle+"" , url=sito+scrapedurl , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png", folder=True) )
 
     return itemlist
 
@@ -81,7 +81,7 @@ def byyear(item):
         scrapedurl=scrapertools.decodeHtmlentities(scrapedurl.replace("#",""))
         scrapedtitle=scrapertools.decodeHtmlentities(scrapedtitle.replace("|- Cerca per Anno -|",""))
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"]")
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR azure]"+scrapedtitle+"[/COLOR]" , url=sito+scrapedurl , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title=""+scrapedtitle+"" , url=sito+scrapedurl , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png", folder=True) )
 
     return itemlist
 
@@ -123,7 +123,7 @@ def peliculas(item):
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         scrapedplot = ""
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="findvideos", title="[COLOR azure]"+scrapedtitle+"[/COLOR]" , url=sito+scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="findvideos", title=""+scrapedtitle+"" , url=sito+scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     # Extrae el paginador
     patronvideos  = '<a class="next" href="(.*?)">&gt;&nbsp;'
@@ -132,7 +132,7 @@ def peliculas(item):
 
     if len(matches)>0:
         scrapedurl = urlparse.urljoin(item.url,matches[0])
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo>>[/COLOR]" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="Successivo>>" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
 
     return itemlist
 
@@ -161,6 +161,6 @@ def peliculasearch(item):
 
     if len(matches)>0:
         scrapedurl = urlparse.urljoin(item.url,matches[0])
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Successivo>>[/COLOR]" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="Successivo>>" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
 
     return itemlist

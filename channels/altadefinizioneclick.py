@@ -37,11 +37,11 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Novita'[/COLOR]", action="fichas", url=host + "/nuove-uscite/" ,thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png") )
-    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Film per Genere[/COLOR]", action="genere", url=host , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png") )
-    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Film per Anno[/COLOR]", action="anno", url=host, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png" ) )
-    itemlist.append( Item( channel=__channel__, title="[COLOR azure]Film Sub-Ita[/COLOR]", action="fichas", url=host + "/sub-ita/", extra="sub" , thumbnail="http://i.imgur.com/qUENzxl.png") )
-    itemlist.append( Item( channel=__channel__, title="[COLOR orange]Cerca...[/COLOR]", action="search", url=host , thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
+    itemlist.append( Item( channel=__channel__, title="Novita'", action="fichas", url=host + "/nuove-uscite/" ,thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png") )
+    itemlist.append( Item( channel=__channel__, title="Film per Genere", action="genere", url=host , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png") )
+    itemlist.append( Item( channel=__channel__, title="Film per Anno", action="anno", url=host, thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png" ) )
+    itemlist.append( Item( channel=__channel__, title="Film Sub-Ita", action="fichas", url=host + "/sub-ita/", extra="sub" , thumbnail="http://i.imgur.com/qUENzxl.png") )
+    itemlist.append( Item( channel=__channel__, title="Cerca...", action="search", url=host , thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
 
     return itemlist
 
@@ -188,7 +188,7 @@ def fichas( item ):
     ## Paginación
     next_page = scrapertools.find_single_match( data, '<a class="next page-numbers" href="([^"]+)">' )
     if next_page != "":
-        itemlist.append( Item( channel=__channel__, action="fichas" , title="[COLOR orange]Successivo >>[/COLOR]" , url=next_page ,thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
+        itemlist.append( Item( channel=__channel__, action="fichas" , title="Successivo >>" , url=next_page ,thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
 
     return itemlist
 

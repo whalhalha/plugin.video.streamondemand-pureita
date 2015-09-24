@@ -39,28 +39,28 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.streamblog mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="[COLOR azure]Novita'[/COLOR]",
+                     title="Novita'",
                      action="peliculas",
                      url=host,
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Categorie[/COLOR]",
+                     title="Categorie",
                      action="categorias",
                      url=host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Serie TV[/COLOR]",
+                     title="Serie TV",
                      extra="serie",
                      action="peliculas",
                      url="%s/serie-tv/" % host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
-                     title="[COLOR azure]Animazione[/COLOR]",
+                     title="Animazione",
                      action="peliculas",
                      url="%s/animazione/" % host,
                      thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"),
                 Item(channel=__channel__,
-                     title="[COLOR yellow]Cerca...[/COLOR]",
+                     title="Cerca...",
                      action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
     return itemlist
@@ -91,7 +91,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -139,7 +139,7 @@ def results(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="" + scrapedtitle + "",
                  url=scrapedurl,
                  thumbnail=host + scrapedthumbnail,
                  plot=scrapedplot,
@@ -156,7 +156,7 @@ def results(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="results",
-                 title="[COLOR orange]Avanti >>[/COLOR]",
+                 title="Avanti >>",
                  url=scrapedurl,
                  folder=True))
 
@@ -205,7 +205,7 @@ def peliculas(item):
             Item(channel=__channel__,
                  extra=item.extra,
                  action="peliculas",
-                 title="[COLOR orange]Avanti >>[/COLOR]",
+                 title="Avanti >>",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))

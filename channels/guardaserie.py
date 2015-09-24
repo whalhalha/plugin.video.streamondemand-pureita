@@ -35,11 +35,11 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR azure]Serie TV[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i58.tinypic.com/2zs64cz.jpg" ) )
-    itemlist.append( Item( channel=__channel__, action="anime", title="[COLOR azure]Anime[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://2.bp.blogspot.com/-4AeDx37c3uQ/VAxIHDhm-9I/AAAAAAAABRA/BUnctEGpVYM/s1600/528900971.gif" ) )
-    itemlist.append( Item( channel=__channel__, action="cartoni", title="[COLOR azure]Cartoni Animati[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i.imgur.com/d9GffYm.png" ) )
-    itemlist.append( Item( channel=__channel__, action="progs", title="[COLOR azure]Programmi TV[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://mujakovic.weebly.com/uploads/1/4/7/9/14799472/3787546.png" ) )
-    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR yellow]Cerca...[/COLOR]" , thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search" ) )
+    itemlist.append( Item( channel=__channel__, action="fichas", title="Serie TV", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i58.tinypic.com/2zs64cz.jpg" ) )
+    itemlist.append( Item( channel=__channel__, action="anime", title="Anime", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://2.bp.blogspot.com/-4AeDx37c3uQ/VAxIHDhm-9I/AAAAAAAABRA/BUnctEGpVYM/s1600/528900971.gif" ) )
+    itemlist.append( Item( channel=__channel__, action="cartoni", title="Cartoni Animati", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i.imgur.com/d9GffYm.png" ) )
+    itemlist.append( Item( channel=__channel__, action="progs", title="Programmi TV", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://mujakovic.weebly.com/uploads/1/4/7/9/14799472/3787546.png" ) )
+    itemlist.append( Item( channel=__channel__, action="search", title="Cerca..." , thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search" ) )
 
     return itemlist
 
