@@ -52,7 +52,7 @@ def mainlist(item):
     itemlist.append( Item(channel=__channel__, title="Film per Registi [W X Y Z]", action="cat_registi_W_X_Y_Z", url="http://altadefinizione.co/registi/", thumbnail="http://cinema.clubefl.gr/wp-content/themes/director-theme/images/logo.png"))
     #itemlist.append( Item(channel=__channel__, title="Film per Attori/Attrici", action="cat_attori", url="http://altadefinizione.co/attori/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/All%20Movies%20by%20Actor.png"))
     itemlist.append( Item(channel=__channel__, title="Elenco Film [A-Z]", action="categorias", url="http://www.darkstream.tv/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/Movies%20A-Z.png"))
-    itemlist.append( Item(channel=__channel__, title="Cerca...", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    #itemlist.append( Item(channel=__channel__, title="Cerca...", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
 
     
     return itemlist
