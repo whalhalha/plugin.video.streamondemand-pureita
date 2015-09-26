@@ -249,6 +249,7 @@ def channels_list():
     itemlist.append( Item( title="PortaleHD"   , channel="portalehd"           , language="IT"    , category="F,S,A,B"   , type="generic"))
     itemlist.append( Item( title="Serie HD"     , channel="seriehd"       , language="IT"    , category="S"        , type="generic"))
     itemlist.append( Item( title="Serie TV Sub ITA"    , channel="serietvsubita"         , language="IT" , category="S"        , type="generic" , extra="Series"))
+    itemlist.append( Item( title="Storie dell'Arte"    , channel="storiedellarte"         , language="IT" , category="D"        , type="generic"))
     itemlist.append( Item( title="StreamBlog"    , channel="streamblog"         , language="IT" , category="S,F,A"        , type="generic" , extra="Series"))
     itemlist.append( Item( title="Streaming01"    , channel="streaming01"         , language="IT" , category="B,F"        , type="generic" , extra="Series"))
     itemlist.append( Item( title="Streaminfilmit"    , channel="streamingfilmit"         , language="IT" , category="F"        , type="generic" , extra="Series"))
