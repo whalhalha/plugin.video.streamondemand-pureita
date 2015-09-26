@@ -50,7 +50,7 @@ def mainlist(item):
                      url=host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     title="Cerca...",
+                     title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -144,7 +144,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="Successivo>>",
+                 title="[COLOR orange]Successivo>>[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -205,7 +205,7 @@ def pelicat(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="pelicat",
-                 title="Successivo>>",
+                 title="[COLOR orange]Successivo>>[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -244,12 +244,15 @@ def play(item):
     data = scrapertools.cache_page(item.url, headers=headers)
     data = scrapertools.decodeHtmlentities(data).replace('http://cineblog01.pw', 'http://k4pp4.pw')
 
-    url = scrapertools.find_single_match(data, r'<a\s*href="([^"]+)"><h1')
+    url = scrapertools.find_single_match(data, r'<meta http-equiv="refresh" content="\d+;\s*url=([^"]+)"')
 
     data = scrapertools.cache_page(url, headers=headers)
 
     if "go.php" in url:
-        data = scrapertools.get_match(data, 'window.location.href = "([^"]+)";')
+        try:
+            data = scrapertools.get_match(data, 'window.location.href = "([^"]+)";')
+        except IndexError:
+            data = scrapertools.get_match(data, r'<a href="([^"]+)" class="btn-wrapper">Clicca per proseguire</a>')
     elif "/link/" in url:
         from lib.jsbeautifier.unpackers import packer
         try:
@@ -271,4 +274,3 @@ def play(item):
         videoitem.channel = __channel__
 
     return itemlist
-
