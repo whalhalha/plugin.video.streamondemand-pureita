@@ -15,12 +15,9 @@ hubberfilm
 ildocumento
 italianstream
 itastreaming
-liberoita
 liberostreaming
-pianetastreaming
 serietvsubita
 seriehd
-storiedellarte
 streamblog
 youtube
 #service channels
