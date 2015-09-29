@@ -23,9 +23,9 @@ __language__ = "IT"
 sito = "http://www.altadefinizione01.com/"
 
 headers = [
-    ['User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'],
+    ['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
     ['Accept-Encoding', 'gzip, deflate'],
-    ['Host', 'www.altadefinizione01.com'],
+    ['Referer', 'http://www.altadefinizione01.com'],
     ['Connection', 'keep-alive']
 ]
 
@@ -71,6 +71,18 @@ def peliculas(item):
 
     data = anti_cloudflare(item.url)
     logger.info(data)
+	
+    ## ------------------------------------------------
+    cookies = ""
+    matches = re.compile( '(.altadefinizione01.com.*?)\n', re.DOTALL ).findall( config.get_cookie_data() )
+    for cookie in matches:
+        name = cookie.split( '\t' )[5]
+        value = cookie.split( '\t' )[6]
+        cookies+= name + "=" + value + ";"
+    headers.append( ['Cookie',cookies[:-1]] )
+    import urllib
+    _headers = urllib.urlencode( dict( headers ) )
+    ## ------------------------------------------------
 	
     # Extrae las entradas (carpetas)
     patron = '<a\s+href="([^"]+)"\s+title="[^"]*">\s+<img\s+width="[^"]*"\s+height="[^"]*"\s+src="([^"]+)"\s+class="[^"]*"\s+alt="([^"]+)"'
