@@ -4,9 +4,11 @@
 # Canal para cineblog01
 # http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
+import urllib2
 import urlparse
 import sys
 import re
+import time
 
 from servers import servertools
 from core import scrapertools
@@ -21,6 +23,14 @@ __title__ = "CineBlog 01"
 __language__ = "IT"
 
 sito = "http://www.cb01.eu"
+
+headers = [
+    ['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
+    ['Accept-Encoding', 'gzip, deflate'],
+    ['Referer', 'http://www.cb01.eu'],
+    ['Connection', 'keep-alive']
+]
+
 sitoanime = "http://www.cineblog01.cc"
 
 DEBUG = config.get_setting("debug")
@@ -36,7 +46,7 @@ def mainlist(item):
     # Main options
     itemlist = [Item(channel=__channel__,
                      action="peliculasrobalo",
-                     title="Cinema - Novita'",
+                     title="[COLOR azure]Cinema - Novita'[/COLOR]",
                      url=sito,
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
@@ -46,17 +56,17 @@ def mainlist(item):
                      thumbnail="http://jcrent.com/apple%20tv%20final/HD.png"),
                 Item(channel=__channel__,
                      action="menuhd",
-                     title="Menù HD",
+                     title="[COLOR azure]Menù HD[/COLOR]",
                      url=sito,
                      thumbnail="http://files.softicons.com/download/computer-icons/disks-icons-by-wil-nichols/png/256x256/Blu-Ray.png"),
                 Item(channel=__channel__,
                      action="menugeneros",
-                     title="Per Genere",
+                     title="[COLOR azure]Per Genere[/COLOR]",
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
                      action="menuanyos",
-                     title="Per Anno",
+                     title="[COLOR azure]Per Anno[/COLOR]",
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Movie%20Year.png"),
                 Item(channel=__channel__,
@@ -66,7 +76,7 @@ def mainlist(item):
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
                      action="listserie",
-                     title="Serie Tv - Novita'",
+                     title="[COLOR azure]Serie Tv - Novita'[/COLOR]",
                      url="http://www.cb01.eu/serietv/",
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
@@ -76,22 +86,22 @@ def mainlist(item):
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
                      action="listanime",
-                     title="Anime - Novita'",
+                     title="[COLOR azure]Anime - Novita'[/COLOR]",
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"),
                 Item(channel=__channel__,
                      action="animegenere",
-                     title="Anime - Per Genere",
+                     title="[COLOR azure]Anime - Per Genere[/COLOR]",
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/Genres.png"),
                 Item(channel=__channel__,
                      action="listaletra",
-                     title="Anime - Per Lettera A-Z",
+                     title="[COLOR azure]Anime - Per Lettera A-Z[/COLOR]",
                      url="http://www.cineblog01.cc/anime/",
                      thumbnail="http://i.imgur.com/IjCmx5r.png"),
                 Item(channel=__channel__,
                      action="listaaz",
-                     title="Anime - Lista Completa",
+                     title="[COLOR azure]Anime - Lista Completa[/COLOR]",
                      url="http://www.cineblog01.cc/anime/lista-completa-anime-cartoon/",
                      thumbnail="http://i.imgur.com/IjCmx5r.png"),
 
@@ -112,7 +122,8 @@ def peliculasrobalo(item):
         item.url = sito
 
     # Descarga la página
-    data = scrapertools.cache_page(item.url)
+    # data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Extrae las entradas (carpetas)
@@ -176,7 +187,8 @@ def peliculas(item):
         item.url = sito
 
     # Descarga la página
-    data = scrapertools.cache_page(item.url)
+    # data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Extrae las entradas (carpetas)
@@ -197,7 +209,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -236,7 +248,8 @@ def menugeneros(item):
     logger.info("[cineblog01.py] menugeneros")
     itemlist = []
 
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
+    # data = scrapertools.cache_page(item.url)
     logger.info(data)
 
     # Narrow search by selecting only the combo
@@ -269,7 +282,8 @@ def menuhd(item):
     logger.info("[cineblog01.py] menugeneros")
     itemlist = []
 
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
+    # data = scrapertools.cache_page(item.url)
     logger.info(data)
 
     # Narrow search by selecting only the combo
@@ -290,7 +304,7 @@ def menuhd(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title=scrapedtitle,
+                 title=crapedtitle,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -302,7 +316,8 @@ def menuanyos(item):
     logger.info("[cineblog01.py] menuvk")
     itemlist = []
 
-    data = scrapertools.cache_page(item.url)
+    # data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Narrow search by selecting only the combo
@@ -363,7 +378,7 @@ def listserie(item):
     itemlist = []
 
     # Descarga la página
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Extrae las entradas (carpetas)
@@ -407,7 +422,7 @@ def listaaz(item):
     logger.info("[cineblog01.py] listaaz")
     itemlist = []
 
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Narrow search by selecting only the combo
@@ -440,7 +455,7 @@ def listaletra(item):
     logger.info("[cineblog01.py] listaaz")
     itemlist = []
 
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Narrow search by selecting only the combo
@@ -472,7 +487,7 @@ def animegenere(item):
     logger.info("[cineblog01.py] animegenere")
     itemlist = []
 
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Narrow search by selecting only the combo
@@ -501,7 +516,7 @@ def listanime(item):
     itemlist = []
 
     # Descarga la página
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Extrae las entradas (carpetas)
@@ -550,7 +565,7 @@ def findvid(item):
     itemlist = []
 
     ## Descarga la página
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     data = scrapertools.decodeHtmlentities(data).replace('http://cineblog01.pw', 'http://k4pp4.pw')
 
     ## Extrae las entradas
@@ -643,7 +658,7 @@ def findvid_serie(item):
     itemlist = []
 
     ## Descarga la página
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     data = scrapertools.decodeHtmlentities(data).replace('http://cineblog01.pw', 'http://k4pp4.pw')
 
     patron1 = '<p(?:\s*style="[^"]*")?>(?:<strong>)?([^<]+)(<a.*?)(?:</strong>)?</p>'
@@ -676,7 +691,7 @@ def findvid_anime(item):
     itemlist = []
 
     ## Descarga la página
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     data = scrapertools.decodeHtmlentities(data).replace('http://cineblog01.pw', 'http://k4pp4.pw')
 
     patron1 = '(?:<p>|<td bgcolor="#ECEAE1">)<span class="txt_dow">(.*?)(?:</p>)?(?:\s*</span>)?\s*</td>'
@@ -709,7 +724,7 @@ def findvid_anime(item):
 def play(item):
     logger.info("[cineblog01.py] play")
 
-    data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
 
     print "##############################################################"
     if "go.php" in item.url:
@@ -744,3 +759,20 @@ def play(item):
         videoitem.channel = __channel__
 
     return itemlist
+
+
+def anti_cloudflare(url):
+    # global headers
+
+    try:
+        resp_headers = scrapertools.get_headers_from_response(url, headers=headers)
+        resp_headers = dict(resp_headers)
+    except urllib2.HTTPError, e:
+        resp_headers = e.headers
+
+    if 'refresh' in resp_headers:
+        time.sleep(int(resp_headers['refresh'][:1]))
+
+        scrapertools.get_headers_from_response(sito + "/" + resp_headers['refresh'][7:], headers=headers)
+
+    return scrapertools.cache_page(url, headers=headers)
