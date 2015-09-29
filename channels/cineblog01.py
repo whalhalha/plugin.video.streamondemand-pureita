@@ -304,7 +304,7 @@ def menuhd(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title=crapedtitle,
+                 title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
