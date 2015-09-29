@@ -23,9 +23,9 @@ __language__ = "IT"
 sito = "http://www.altadefinizione01.com/"
 
 headers = [
-    ['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
+    ['User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'],
     ['Accept-Encoding', 'gzip, deflate'],
-    ['Referer', 'http://www.altadefinizione01.com'],
+    ['Host', 'www.altadefinizione01.com'],
     ['Connection', 'keep-alive']
 ]
 
@@ -164,7 +164,8 @@ def findvid(item):
     logger.info("[altadefinizione01.py] findvideos")
 
     ## Descarga la página
-    data = scrapertools.cache_page(item.url)
+    #data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     data = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
     if data != "":
         from core import unpackerjs3
