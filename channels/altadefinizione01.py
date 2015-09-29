@@ -22,6 +22,13 @@ __language__ = "IT"
 
 sito = "http://www.altadefinizione01.com/"
 
+headers = [
+    ['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
+    ['Accept-Encoding', 'gzip, deflate'],
+    ['Referer', 'http://www.altadefinizione01.com'],
+    ['Connection', 'keep-alive']
+]
+
 DEBUG = config.get_setting("debug")
 
 
@@ -60,8 +67,11 @@ def peliculas(item):
     itemlist = []
 
     # Descarga la pagina
-    data = scrapertools.cache_page(item.url)
+    #data = scrapertools.cache_page(item.url)
 
+    data = anti_cloudflare(item.url)
+    logger.info(data)
+	
     # Extrae las entradas (carpetas)
     patron = '<a\s+href="([^"]+)"\s+title="[^"]*">\s+<img\s+width="[^"]*"\s+height="[^"]*"\s+src="([^"]+)"\s+class="[^"]*"\s+alt="([^"]+)"'
     matches = re.compile(patron, re.DOTALL).findall(data)
@@ -108,7 +118,8 @@ def categorias(item):
     logger.info("streamondemand.altadefinizione01 categorias")
     itemlist = []
 
-    data = scrapertools.cache_page(item.url)
+    #data = scrapertools.cache_page(item.url)
+    data = anti_cloudflare(item.url)
     logger.info(data)
 
     # Narrow search by selecting only the combo
@@ -173,3 +184,19 @@ def findvid(item):
         itemlist = servertools.find_video_items(item=item)
 
     return itemlist
+	
+def anti_cloudflare(url):
+    # global headers
+
+    try:
+        resp_headers = scrapertools.get_headers_from_response(url, headers=headers)
+        resp_headers = dict(resp_headers)
+    except urllib2.HTTPError, e:
+        resp_headers = e.headers
+
+    if 'refresh' in resp_headers:
+        time.sleep(int(resp_headers['refresh'][:1]))
+
+        scrapertools.get_headers_from_response(sito + "/" + resp_headers['refresh'][7:], headers=headers)
+
+    return scrapertools.cache_page(url, headers=headers)
