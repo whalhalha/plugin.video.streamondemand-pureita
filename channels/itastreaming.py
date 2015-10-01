@@ -3,7 +3,7 @@
 # streamondemand.- XBMC Plugin
 # Canal para itastreaming
 # by DrZ3r0
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urllib2
 import urlparse
@@ -43,22 +43,22 @@ def mainlist(item):
     logger.info("streamondemand.itastreaming mainlist")
 
     itemlist = [Item(channel=__channel__,
-                     title="Ultimi film inseriti",
+                     title="[COLOR azure]Ultimi film inseriti[/COLOR]",
                      action="peliculas",
                      url=sito,
                      thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
                 Item(channel=__channel__,
-                     title="Categorie film",
+                     title="[COLOR azure]Categorie film[/COLOR]",
                      action="categorias",
                      url=sito,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
                      action="listaaz",
-                     title="Film - Lista A-Z",
+                     title="[COLOR azure]Film - Lista A-Z[/COLOR]",
                      url=sito,
                      thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/A-Z.png"),
                 Item(channel=__channel__,
-                     title="Cerca...",
+                     title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -107,7 +107,9 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid",
-                 title="" + scrapedtitle + "",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  viewmode="movie_with_plot",
                  thumbnail=scrapedthumbnail,
@@ -124,7 +126,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="Successivo >>",
+                 title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -155,7 +157,9 @@ def peliculas_search(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid",
-                 title="" + scrapedtitle + "",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  viewmode="movie_with_plot",
                  thumbnail=scrapedthumbnail,
@@ -172,7 +176,7 @@ def peliculas_search(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas_search",
-                 title="Successivo >>",
+                 title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -203,7 +207,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="" + scrapedtitle + "",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -232,7 +236,7 @@ def listaaz(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="" + scrapedtitle + "",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -272,10 +276,10 @@ def findvid(item):
                 Item(channel=__channel__,
                      action="play",
                      server='googlevideo',
-                     title=item.title + " " + scrapedtitle + "",
+                     title=item.title + " [COLOR azure]" + scrapedtitle + "[/COLOR]",
                      url=scrapedurl,
-                     fulltitle=item.title,
-                     show=item.title,
+                     fulltitle=item.fulltitle,
+                     show=item.show,
                      folder=False))
     else:
         patron = r'<div id="usual1" class="usual1">\s*<p><iframe\s*(?:width="[^"]+")?\s*(?:height="[^"]+")?\s*src="([^"]+)"'
@@ -297,10 +301,10 @@ def findvid(item):
                         Item(channel=__channel__,
                              action="play",
                              server='googlevideo',
-                             title=item.title + " " + scrapedtitle + "",
+                             title=item.title + " [COLOR azure]" + scrapedtitle + "[/COLOR]",
                              url=scrapedurl,
-                             fulltitle=item.title,
-                             show=item.title,
+                             fulltitle=item.fulltitle,
+                             show=item.show,
                              folder=False))
 
     return itemlist

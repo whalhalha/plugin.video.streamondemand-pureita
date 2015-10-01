@@ -2,16 +2,15 @@
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para guardaserie - Thank you robalo!
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
-import urlparse,urllib2,urllib,re
-import os, sys
+import re
+import sys
 
 from core import logger
 from core import config
 from core import scrapertools
 from core.item import Item
-from servers import servertools
 
 __channel__ = "guardaserie"
 __category__ = "S"
@@ -35,11 +34,11 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, action="fichas", title="Serie TV", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i58.tinypic.com/2zs64cz.jpg" ) )
-    itemlist.append( Item( channel=__channel__, action="anime", title="Anime", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://2.bp.blogspot.com/-4AeDx37c3uQ/VAxIHDhm-9I/AAAAAAAABRA/BUnctEGpVYM/s1600/528900971.gif" ) )
-    itemlist.append( Item( channel=__channel__, action="cartoni", title="Cartoni Animati", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i.imgur.com/d9GffYm.png" ) )
-    itemlist.append( Item( channel=__channel__, action="progs", title="Programmi TV", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://mujakovic.weebly.com/uploads/1/4/7/9/14799472/3787546.png" ) )
-    itemlist.append( Item( channel=__channel__, action="search", title="Cerca..." , thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search" ) )
+    itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR azure]Serie TV[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i58.tinypic.com/2zs64cz.jpg" ) )
+    itemlist.append( Item( channel=__channel__, action="anime", title="[COLOR azure]Anime[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://2.bp.blogspot.com/-4AeDx37c3uQ/VAxIHDhm-9I/AAAAAAAABRA/BUnctEGpVYM/s1600/528900971.gif" ) )
+    itemlist.append( Item( channel=__channel__, action="cartoni", title="[COLOR azure]Cartoni Animati[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://i.imgur.com/d9GffYm.png" ) )
+    itemlist.append( Item( channel=__channel__, action="progs", title="[COLOR azure]Programmi TV[/COLOR]", url=host + "/lista-serie-tv-guardaserie/" , thumbnail="http://mujakovic.weebly.com/uploads/1/4/7/9/14799472/3787546.png" ) )
+    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR yellow]Cerca...[/COLOR]" , thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search" ) )
 
     return itemlist
 
@@ -74,7 +73,7 @@ def fichas( item ):
 
     for scrapedurl, scrapedtitle in matches:
 
-        itemlist.append( Item( channel=__channel__, action="episodios", title=scrapedtitle, fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle ) )
+        itemlist.append( Item( channel=__channel__, action="episodios", title= scrapedtitle , fulltitle=scrapedtitle, show=scrapedtitle, url=scrapedurl ) )
 
     return itemlist
 
@@ -93,7 +92,7 @@ def anime( item ):
 
     for scrapedurl, scrapedtitle in matches:
 
-        itemlist.append( Item( channel=__channel__, action="episodios", title=scrapedtitle, fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle, thumbnail="http://www.itrentenni.com/wp-content/uploads/2015/02/tv-series.jpg" ) )
+        itemlist.append( Item( channel=__channel__, action="episodios", title= scrapedtitle , fulltitle=scrapedtitle, show=scrapedtitle, url=scrapedurl, thumbnail="http://www.itrentenni.com/wp-content/uploads/2015/02/tv-series.jpg" ) )
 
     return itemlist
 
@@ -112,7 +111,7 @@ def cartoni( item ):
 
     for scrapedurl, scrapedtitle in matches:
 
-        itemlist.append( Item( channel=__channel__, action="episodios", title=scrapedtitle, fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle, thumbnail="http://www.itrentenni.com/wp-content/uploads/2015/02/tv-series.jpg" ) )
+        itemlist.append( Item( channel=__channel__, action="episodios", title= scrapedtitle , fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle, thumbnail="http://www.itrentenni.com/wp-content/uploads/2015/02/tv-series.jpg" ) )
 
     return itemlist
 
@@ -131,7 +130,7 @@ def progs( item ):
 
     for scrapedurl, scrapedtitle in matches:
 
-        itemlist.append( Item( channel=__channel__, action="episodios",title=scrapedtitle, fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle, thumbnail="http://www.itrentenni.com/wp-content/uploads/2015/02/tv-series.jpg" ) )
+        itemlist.append( Item( channel=__channel__, action="episodios",title= scrapedtitle, fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle, thumbnail="http://www.itrentenni.com/wp-content/uploads/2015/02/tv-series.jpg" ) )
 
     return itemlist
 
@@ -154,7 +153,7 @@ def cerca( item ):
 
            scrapedtitle = scrapedtitle[7:]
            
-        itemlist.append( Item( channel=__channel__, action="episodios",title=scrapedtitle, fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle , thumbnail=scrapedthumbnail ) )
+        itemlist.append( Item( channel=__channel__, action="episodios",title= scrapedtitle , fulltitle=scrapedtitle, url=scrapedurl, show=scrapedtitle ) )
 
     return itemlist
 
@@ -181,19 +180,17 @@ def episodios(item):
             if len( episode ) == 1: episode = "0" + episode
 
             title = season + "x" + episode + " - " + item.title
-			
-            show = item.title
 
             ## Le pasamos a 'findvideos' la url con tres partes divididas por el caracter "?"
             ## [host+path]?[argumentos]?[Referer]
             url = host + "/wp-admin/admin-ajax.php?action=get_episode&id=" + serie_id + "&season=" + scrapedseason + "&episode=" + scrapedepisode + "?" + item.url 
 
-            itemlist.append( Item( channel=__channel__, action="findvideos", title=title, url=url, fulltitle=item.title, show=item.show ) )
+            itemlist.append( Item( channel=__channel__, action="findvideos", title= title, url=url, fulltitle=item.title, show=item.title, thumbnail=item.thumbnail ) )
 
     if config.get_library_support():
-        itemlist.append( Item(channel=__channel__, title="Aggiungi la serie alla libreria di Kodi", url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
-        itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
-			
+        itemlist.append( Item(channel=__channel__, title= item.title , url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
+        itemlist.append( Item(channel=__channel__, title="[COLOR azure]Scarica tutti gli episodi della serie[/COLOR]", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
+
     return itemlist
 
 def findvideos( item ):
@@ -217,6 +214,7 @@ def findvideos( item ):
 
     title = "[" + server + "] " + item.title
 
-    itemlist.append( Item( channel=__channel__, action="play",title=title, url=url, server=server , fulltitle=item.fulltitle, show=item.show, folder=False ) )
+    itemlist.append( Item( channel=__channel__, action="play",title= title , url=url, server=server , fulltitle=item.fulltitle, show=item.show, folder=False ) )
 
     return itemlist
+

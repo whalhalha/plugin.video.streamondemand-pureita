@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para seriehd - based on guardaserie channel
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -35,9 +35,9 @@ def mainlist( item ):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, action="fichas", title="Serie TV", url=host+"/serie-tv-streaming/", thumbnail="http://i.imgur.com/rO0ggX2.png" ) )
-    itemlist.append( Item( channel=__channel__, action="sottomenu", title="Sottomenu...", url=host, thumbnail="http://i37.photobucket.com/albums/e88/xzener/NewIcons.png" ) )
-    itemlist.append( Item( channel=__channel__, action="search", title="Cerca...", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
+    itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR azure]Serie TV[/COLOR]", url=host+"/serie-tv-streaming/", thumbnail="http://i.imgur.com/rO0ggX2.png" ) )
+    itemlist.append( Item( channel=__channel__, action="sottomenu", title="[COLOR orange]Sottomenu...[/COLOR]", url=host, thumbnail="http://i37.photobucket.com/albums/e88/xzener/NewIcons.png" ) )
+    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR green]Cerca...[/COLOR]", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search") )
 
 
     return itemlist
@@ -97,7 +97,7 @@ def fichas( item ):
     #<div class='wp-pagenavi'><span class='current'>1</span><a rel='nofollow' class='page larger' href='http://www.seriehd.org/serie-tv-streaming/page/2/'>2</a></div></div></div>
     next_page = scrapertools.find_single_match( data, "<span class='current'>\d+</span><a rel='nofollow' class='page larger' href='([^']+)'>\d+</a>" )
     if next_page != "":
-        itemlist.append( Item( channel=__channel__, action="fichas", title="Successivo>>", url=next_page ) )
+        itemlist.append( Item( channel=__channel__, action="fichas", title="[COLOR orange]Successivo>>[/COLOR]", url=next_page ) )
 
     return itemlist
 
@@ -123,17 +123,15 @@ def episodios(item):
             if len( episode ) == 1: episode = "0" + episode
 
             title = season + "x" + episode
-			
-            show = item.title
 
             ## Le pasamos a 'findvideos' la url con dos partes divididas por el caracter "?"
             ## [host+path]?[argumentos]?[Referer]
             url = item.url + "?st_num=" + scrapedseason + "&pt_num=" + scrapedepisode + "?" + item.url
 
-            itemlist.append( Item( channel=__channel__, action="findvideos", title=title, url=url, fulltitle=item.title, show=item.show, thumbnail=item.thumbnail) )
+            itemlist.append( Item( channel=__channel__, action="findvideos", title=title, url=url, fulltitle=item.fulltitle, show=item.show, thumbnail=item.thumbnail) )
 
     if config.get_library_support():
-        itemlist.append( Item(channel=__channel__, title="Aggiungi la serie alla libreria di Kodi", url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
+        itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
         itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
 			
     return itemlist
@@ -168,6 +166,7 @@ def play( item ):
 
     for videoitem in itemlist:
         videoitem.title = item.show
+        videoitem.show = item.show
         videoitem.fulltitle = item.fulltitle
         videoitem.thumbnail = item.thumbnail
         videoitem.channel = __channel__

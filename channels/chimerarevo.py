@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
-# Canal para cucinarefacile
+# Canal para chimerarevo
 # http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
@@ -13,12 +13,18 @@ from core import scrapertools
 from core.item import Item
 from servers import servertools
 
-__channel__ = "cucinarefacile"
+__channel__ = "chimerarevo"
 __category__ = "D"
 __type__ = "generic"
-__title__ = "cucinarefacile (IT)"
+__title__ = "chimerarevo (IT)"
 __language__ = "IT"
 
+headers = [
+    ['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
+    ['Accept-Encoding', 'gzip, deflate'],
+    ['Referer', 'http://www.chimerarevo.com/'],
+    ['Connection', 'keep-alive']
+]
 
 DEBUG = config.get_setting("debug")
 
@@ -26,37 +32,36 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("streamondemand.cucinarefacile mainlist")
+    logger.info("streamondemand.chimerarevo mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Videoricette[/COLOR]", action="peliculas", url="http://www.cucinarefacile.com/tipo-ricetta/video-ricette/", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]News, guide e recensioni tecnologiche[/COLOR]", action="peliculas", url="http://www.chimerarevo.com/video/", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
 
     
     return itemlist
 
 def peliculas(item):
-    logger.info("streamondemand.cucinarefacile peliculas")
+    logger.info("streamondemand.chimerarevo peliculas")
     itemlist = []
 
     # Descarga la pagina
-    data = scrapertools.cache_page(item.url)
+    data = scrapertools.cache_page(item.url,headers=headers)
 
     # Extrae las entradas (carpetas)
-    patron  = '<div class="post-thumb single-img-box">\s*'
-    patron  += '<a href="(.*?)"><img[^=]+=[^=]+=[^=]+="(.*?)"[^>]+></a>\s*'
-    patron  += '</div>\s*'
-    patron  += '<div[^>]+>\s*'
-    patron  += '<h2>[^>]+>(.*?)</a>'
+    patron = '<article[^>]+>.*?'
+    patron+= 'href="([^"]+)".*?'
+    patron+= 'ng-src="([^"]+)".*?'
+    patron+= '<h2[^>]+>([^<]+)<'
     matches = re.compile(patron,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 
     for scrapedurl,scrapedthumbnail,scrapedtitle in matches:
-        scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
-        scrapedplot = ""
+        scrapedtitle = scrapedtitle.strip()
+        scrapedplot = scrapedtitle
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
         itemlist.append( Item(channel=__channel__, action="findvideos", fulltitle=scrapedtitle, show=scrapedtitle, title=scrapedtitle, url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     # Extrae el paginador
-    patronvideos  = 'a class="nextpostslink" rel="next" href="(.*?)">&raquo;'
+    patronvideos  = '<span ng-if="(.*?)">Mostra più Post'
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
     scrapertools.printMatches(matches)
 

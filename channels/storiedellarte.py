@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# ------------------------------------------------------------
+#------------------------------------------------------------
 # streamondemand.- XBMC Plugin
-# Canal para cineblog01
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# ------------------------------------------------------------
+# Canal para storiedellarte
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
+#------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
 
@@ -28,7 +28,7 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.storiedellarte mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="Video Art", action="peliculas", url="http://storiedellarte.com/category/video", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Video Art[/COLOR]", action="peliculas", url="http://storiedellarte.com/category/video", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"))
 
     
     return itemlist
@@ -71,3 +71,4 @@ def peliculas(item):
         itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR orange]Avanti >>[/COLOR]" , url=scrapedurl , folder=True) )
 
     return itemlist
+

@@ -2,7 +2,7 @@
 #----------------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # ayuda - Videos de ayuda y tutoriales para pelisalacarta
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # contribuci?n de jurrabi
 #----------------------------------------------------------------------
 import re

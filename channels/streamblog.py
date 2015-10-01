@@ -2,7 +2,7 @@
 # ------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -39,28 +39,28 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.streamblog mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="Novita'",
+                     title="[COLOR azure]Novita'[/COLOR]",
                      action="peliculas",
                      url=host,
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
-                     title="Categorie",
+                     title="[COLOR azure]Categorie[/COLOR]",
                      action="categorias",
                      url=host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
                 Item(channel=__channel__,
-                     title="Serie TV",
+                     title="[COLOR azure]Serie TV[/COLOR]",
                      extra="serie",
                      action="peliculas",
                      url="%s/serie-tv/" % host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
-                     title="Animazione",
+                     title="[COLOR azure]Animazione[/COLOR]",
                      action="peliculas",
                      url="%s/animazione/" % host,
                      thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"),
                 Item(channel=__channel__,
-                     title="Cerca...",
+                     title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
     return itemlist
@@ -91,7 +91,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="" + scrapedtitle + "",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -139,7 +139,7 @@ def results(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="" + scrapedtitle + "",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=host + scrapedthumbnail,
                  plot=scrapedplot,
@@ -156,7 +156,7 @@ def results(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="results",
-                 title="Avanti >>",
+                 title="[COLOR orange]Avanti >>[/COLOR]",
                  url=scrapedurl,
                  folder=True))
 
@@ -187,6 +187,8 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="episodios" if item.extra == "serie" else "findvideos",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail=host + scrapedthumbnail,
@@ -205,7 +207,7 @@ def peliculas(item):
             Item(channel=__channel__,
                  extra=item.extra,
                  action="peliculas",
-                 title="Avanti >>",
+                 title="[COLOR orange]Avanti >>[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -235,12 +237,12 @@ def episodios(item):
                      url=item.url,
                      thumbnail=item.thumbnail,
                      extra=data,
-                     fulltitle=item.title,
-                     show=item.title))
+                     fulltitle=item.fulltitle,
+                     show=item.show))
 
     if config.get_library_support():
-        itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.title) )
-        itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.title) )
+        itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
+        itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
 
     return itemlist
 
@@ -261,3 +263,4 @@ def findvid_serie(item):
         videoitem.channel = __channel__
 
     return itemlist
+

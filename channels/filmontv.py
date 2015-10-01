@@ -28,13 +28,13 @@ def mainlist(item):
     logger.info("streamondemand.filmontv mainlist")
     itemlist = []
 
-    itemlist.append( Item(channel=__channel__, title="[COLOR red]IN ONDA ADESSO", action="tvoggi", url="http://www.comingsoon.it/filmtv/", thumbnail="http://a2.mzstatic.com/eu/r30/Purple/v4/3d/63/6b/3d636b8d-0001-dc5c-a0b0-42bdf738b1b4/icon_256.png"))
-    itemlist.append( Item(channel=__channel__, title="Mattina", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=mt", thumbnail="http://www.creattor.com/files/23/787/morning-pleasure-icons-screenshots-17.png"))
-    itemlist.append( Item(channel=__channel__, title="Pomeriggio", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=pm", thumbnail="http://icons.iconarchive.com/icons/custom-icon-design/weather/256/Sunny-icon.png"))
-    itemlist.append( Item(channel=__channel__, title="Preserale", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=pr", thumbnail="https://s.evbuc.com/https_proxy?url=http%3A%2F%2Ftriumphbar.com%2Fimages%2Fhappyhour_icon.png&sig=ADR2i7_K2FSfbQ6b3dy12Xjgkq9NCEdkKg"))
-    itemlist.append( Item(channel=__channel__, title="Prima serata", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=ps", thumbnail="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Occupations-Pizza-Deliveryman-Male-Light-icon.png"))
-    itemlist.append( Item(channel=__channel__, title="Seconda serata", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=ss", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
-    itemlist.append( Item(channel=__channel__, title="Notte", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=nt", thumbnail="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Status-weather-clear-night-icon.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR red]IN ONDA ADESSO[/COLOR]", action="tvoggi", url="http://www.comingsoon.it/filmtv/", thumbnail="http://a2.mzstatic.com/eu/r30/Purple/v4/3d/63/6b/3d636b8d-0001-dc5c-a0b0-42bdf738b1b4/icon_256.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Mattina[/COLOR]", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=mt", thumbnail="http://www.creattor.com/files/23/787/morning-pleasure-icons-screenshots-17.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Pomeriggio[/COLOR]", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=pm", thumbnail="http://icons.iconarchive.com/icons/custom-icon-design/weather/256/Sunny-icon.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Preserale[/COLOR]", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=pr", thumbnail="https://s.evbuc.com/https_proxy?url=http%3A%2F%2Ftriumphbar.com%2Fimages%2Fhappyhour_icon.png&sig=ADR2i7_K2FSfbQ6b3dy12Xjgkq9NCEdkKg"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Prima serata[/COLOR]", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=ps", thumbnail="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Occupations-Pizza-Deliveryman-Male-Light-icon.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Seconda serata[/COLOR]", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=ss", thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Notte[/COLOR]", action="tvoggi", url="http://www.comingsoon.it/filmtv/?range=nt", thumbnail="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Status-weather-clear-night-icon.png"))
 
     return itemlist
 
@@ -57,7 +57,7 @@ def tvoggi(item):
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         titolo = scrapedtitle.replace(" ","+")
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"]")
-        itemlist.append( Item(channel=__channel__, action="do_search", extra=titolo, title= scrapedtitle + "   " + scrapedtv + "" , url=scrapedurl , thumbnail=scrapedthumbnail, folder=True) )
+        itemlist.append( Item(channel=__channel__, action="do_search", extra=titolo, title= scrapedtitle + "[COLOR yellow]   " + scrapedtv + "[/COLOR]" , url=scrapedurl , thumbnail=scrapedthumbnail, folder=True) )
 
     return itemlist
 
@@ -129,7 +129,7 @@ def do_search(item):
                 logger.info("streamondemand.channels.buscador cargado " + basename_without_extension + " de "+ infile)
                 channel_result_itemlist = obj.search( Item() , tecleado)
                 for item in channel_result_itemlist:
-                    item.title = item.title + " [COLOR green]Guarda in streaming"
+                    item.title = item.title + " [COLOR green]Guarda in streaming[/COLOR]"
                     item.viewmode = "list"
 
                 itemlist.extend( channel_result_itemlist )

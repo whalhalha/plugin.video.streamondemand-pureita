@@ -40,12 +40,12 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.streamingfilmit mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="Ultimi Film Inseriti",
+                     title="[COLOR azure]Ultimi Film Inseriti[/COLOR]",
                      action="peliculas",
                      url=host,
                      thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01"),
                 Item(channel=__channel__,
-                     title="Film Per Categoria",
+                     title="[COLOR azure]Film Per Categoria[/COLOR]",
                      action="categorias",
                      url=host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"),
@@ -78,7 +78,7 @@ def categorias(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="pelicat",
-                 title="" + scrapedtitle + "" + scrapedtot + "",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR][COLOR gray]" + scrapedtot + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png",
                  folder=True))
@@ -128,7 +128,9 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="" + scrapedtitle + "",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -189,7 +191,9 @@ def pelicat(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
-                 title="" + scrapedtitle + "",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -231,8 +235,8 @@ def findvideos(item):
                  action="play",
                  title=title,
                  url=scrapedurl,
-                 fulltitle=item.title,
-                 show=item.title,
+                 fulltitle=item.fulltitle,
+                 show=item.show,
                  folder=False))
 
     return itemlist
@@ -269,6 +273,7 @@ def play(item):
 
     for videoitem in itemlist:
         videoitem.title = item.show
+        videoitem.show = item.show
         videoitem.fulltitle = item.fulltitle
         videoitem.thumbnail = item.thumbnail
         videoitem.channel = __channel__

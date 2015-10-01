@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse
 import urllib2
@@ -29,11 +29,11 @@ def isGeneric():
 def mainlist(item):
     logger.info("[piratestreaming.py] mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="Aggiornamenti" , action="peliculas", url="http://www.piratestreaming.co/film-aggiornamenti.php", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01" ))
-    itemlist.append( Item(channel=__channel__, title="Contenuti per Genere" , action="categorias", url="http://www.piratestreaming.co/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
-    itemlist.append( Item(channel=__channel__, title="Archivio Serie TV" , action="categoryarchive", url="http://www.piratestreaming.co/archivio-serietv.php", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/TV%20Series.png"))
-    itemlist.append( Item(channel=__channel__, title="Serie TV" , extra="serie", action="peliculas", url="http://www.piratestreaming.co/serietv-aggiornamenti.php", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"))
-    itemlist.append( Item(channel=__channel__, title="Cerca...", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Aggiornamenti[/COLOR]" , action="peliculas", url="http://www.piratestreaming.co/film-aggiornamenti.php", thumbnail="http://dc584.4shared.com/img/XImgcB94/s7/13feaf0b538/saquinho_de_pipoca_01" ))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Contenuti per Genere[/COLOR]" , action="categorias", url="http://www.piratestreaming.co/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/All%20Movies%20by%20Genre.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Archivio Serie TV[/COLOR]" , action="categoryarchive", url="http://www.piratestreaming.co/archivio-serietv.php", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/TV%20Series.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Serie TV[/COLOR]" , extra="serie", action="peliculas", url="http://www.piratestreaming.co/serietv-aggiornamenti.php", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca...[/COLOR]", action="search", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"))
     return itemlist
 
 def peliculas(item):
@@ -50,9 +50,7 @@ def peliculas(item):
 
     for scrapedurl,scrapedthumbnail,scrapedtitle in matches:
         logger.info("scrapedurl="+scrapedurl)
-        title = scrapertools.decodeHtmlentities( scrapedtitle )
-        if scrapedtitle.startswith(""):
-            scrapedtitle=scrapedtitle[0:]
+        scrapedtitle = scrapertools.decodeHtmlentities( scrapedtitle )
 
         try:
             res = urllib2.urlopen(scrapedurl)
@@ -63,7 +61,7 @@ def peliculas(item):
         except:
             scrapedplot= "Trama non disponibile"
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="findvid_serie" if item.extra == "serie" else "findvideos", title=title, url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="findvid_serie" if item.extra == "serie" else "findvideos", fulltitle=scrapedtitle, show=scrapedtitle, title=scrapedtitle, url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     # Extrae el paginador
     patronvideos  = '<td align="center">[^<]+</td>[^<]+<td align="center">\s*<a href="([^"]+)">[^<]+</a>'
@@ -72,7 +70,7 @@ def peliculas(item):
 
     if len(matches)>0:
         scrapedurl = urlparse.urljoin(item.url,matches[0])
-        itemlist.append( Item(channel=__channel__,  extra=item.extra, action="peliculas", title="Successivo >>" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
+        itemlist.append( Item(channel=__channel__,  extra=item.extra, action="peliculas", title="[COLOR orange]Successivo >>[/COLOR]" , url=scrapedurl , thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", folder=True) )
 
     return itemlist
     
@@ -85,11 +83,11 @@ def categorias(item):
     scrapertools.printMatches(matches)
 
     for scrapedurl,scrapedtitle in matches:
-        scrapedtitle="" + scrapedtitle + ""
+        scrapedtitle="[COLOR azure]" + scrapedtitle + "[/COLOR]"
         scrapedplot = ""
         scrapedthumbnail = ""
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="peliculas", title="" + scrapedtitle + "", url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="peliculas", title="[COLOR azure]" + scrapedtitle + "[/COLOR]", url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     return itemlist
 
@@ -103,11 +101,11 @@ def categoryarchive(item):
     scrapertools.printMatches(matches)
 
     for scrapedurl,scrapedtitle in matches:
-        scrapedtitle="" + scrapedtitle + ""
+        scrapedtitle="[COLOR azure]" + scrapedtitle + "[/COLOR]"
         scrapedplot = ""
         scrapedthumbnail = ""
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="findvid_serie", title="" + scrapedtitle + "", url=scrapedurl , thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/TV%20Series.png" , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="findvid_serie", fulltitle=scrapedtitle, show=scrapedtitle, title="[COLOR azure]" + scrapedtitle + "[/COLOR]", url=scrapedurl , thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/TV%20Series.png" , plot=scrapedplot , folder=True) )
 
     return itemlist
 
@@ -144,7 +142,7 @@ def cerca(item):
         scrapedplot = ""
         scrapedthumbnail = ""
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"]")
-        itemlist.append( Item(channel=__channel__, action="findvideos",title="" + scrapedtitle + "" , url=scrapedurl , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="findvideos", fulltitle=scrapedtitle, show=scrapedtitle, title="[COLOR azure]" + scrapedtitle + "[/COLOR]" , url=scrapedurl , folder=True) )
 
     return itemlist
 
@@ -193,3 +191,4 @@ def findvid_serie(item):
             itemlist.extend(li)
 
     return itemlist
+

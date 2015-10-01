@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para serietvsubita
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import urlparse,urllib2,urllib,re
 import os, sys
@@ -28,9 +28,9 @@ def mainlist(item):
     logger.info("streamondemand.channels.serietvsubita mainlist")
 
     itemlist = []
-    itemlist.append( Item(channel=__channel__, action="episodios" , title="Novità" , url="http://serietvsubita.net/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png", folder=True))
-    itemlist.append( Item(channel=__channel__, action="series"    , title="Indice A-Z" , url="http://serietvsubita.net/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/A-Z.png", folder=True))
-    itemlist.append( Item(channel=__channel__, action="search"    , title="Cerca...", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search", folder=True))
+    itemlist.append( Item(channel=__channel__, action="episodios" , title="[COLOR azure]Novità[/COLOR]" , url="http://serietvsubita.net/", thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png", folder=True))
+    itemlist.append( Item(channel=__channel__, action="series"    , title="[COLOR azure]Indice A-Z[/COLOR]" , url="http://serietvsubita.net/", thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/A-Z.png", folder=True))
+    itemlist.append( Item(channel=__channel__, action="search"    , title="[COLOR yellow]Cerca...[/COLOR]", thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search", folder=True))
     return itemlist
 
 def search(item,texto):
@@ -64,13 +64,13 @@ def episodios(item):
         if scrapedtitle.startswith("Link to "):
             scrapedtitle = scrapedtitle[8:]
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="findvideos", title="" + scrapedtitle + "" , url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="findvideos", fulltitle=scrapedtitle, show=scrapedtitle, title="[COLOR azure]" + scrapedtitle + "[/COLOR]" , url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     ## paginación
     patron = '<div id="navigation">.*?\d+</a> <a href="([^"]+)"'
     matches = re.compile(patron,re.DOTALL).findall(data)
     for scrapedurl in matches:
-        itemlist.append( Item(channel=__channel__, title="Post più vecchi...", url=scrapedurl, action="episodios", extra=item.extra, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
+        itemlist.append( Item(channel=__channel__, title="[COLOR orange]Post più vecchi...[/COLOR]", url=scrapedurl, action="episodios", extra=item.extra, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
 
     return itemlist
 
@@ -96,13 +96,13 @@ def series(item):
         plot = ""
 
         if (DEBUG): logger.info("title=["+title+"], url=["+url+"], thumbnail=["+thumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="episodiosearch", title="" + title + "", url=url , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png", folder=True))
+        itemlist.append( Item(channel=__channel__, action="episodiosearch", title="[COLOR azure]" + title + "[/COLOR]", url=url , thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png", folder=True))
 
     ## paginación
     patron = '<div id="navigation">.*?\d+</a> <a href="([^"]+)"'
     matches = re.compile(patron,re.DOTALL).findall(data)
     for scrapedurl in matches:
-        itemlist.append( Item(channel=__channel__, title="Episodi precedenti...", url=scrapedurl, action="series", extra=item.extra, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
+        itemlist.append( Item(channel=__channel__, title="[COLOR orange]Episodi precedenti...[/COLOR]", url=scrapedurl, action="series", extra=item.extra, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
 
 
     return itemlist
@@ -122,12 +122,12 @@ def episodiosearch(item):
         scrapedplot = ""
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         if (DEBUG): logger.info("title=["+scrapedtitle+"], url=["+scrapedurl+"], thumbnail=["+scrapedthumbnail+"]")
-        itemlist.append( Item(channel=__channel__, action="findvideos", title="" + scrapedtitle + "" , url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
+        itemlist.append( Item(channel=__channel__, action="findvideos", fulltitle=scrapedtitle, show=scrapedtitle, title="[COLOR azure]" + scrapedtitle + "[/COLOR]" , url=scrapedurl , thumbnail=scrapedthumbnail , plot=scrapedplot , folder=True) )
 
     ## paginación
     patron = '<div id="navigation">.*?\d+</a> <a href="([^"]+)"'
     matches = re.compile(patron,re.DOTALL).findall(data)
     for scrapedurl in matches:
-        itemlist.append( Item(channel=__channel__, title="Episodi precedenti...", url=scrapedurl, action="episodios", extra=item.extra, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
+        itemlist.append( Item(channel=__channel__, title="[COLOR orange]Episodi precedenti...[/COLOR]", url=scrapedurl, action="episodios", extra=item.extra, thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png") )
 
     return itemlist

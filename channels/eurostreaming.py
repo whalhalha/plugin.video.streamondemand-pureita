@@ -2,7 +2,7 @@
 # ------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canale per eurostreaming.tv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urlparse
 import re
@@ -32,22 +32,22 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.eurostreaming mainlist")
     itemlist = [Item(channel=__channel__,
-                     title="Film - Archivio",
+                     title="[COLOR azure]Film - Archivio[/COLOR]",
                      action="peliculas",
                      url="%s/category/film-in-streaming-vk-putlocker/" % host,
                      thumbnail="http://repository-butchabay.googlecode.com/svn/branches/eden/skin.cirrus.extended.v2/extras/moviegenres/All%20Movies.png"),
                 Item(channel=__channel__,
-                     title="Serie TV",
+                     title="[COLOR azure]Serie TV[/COLOR]",
                      action="serietv",
                      url="%s/category/serie-tv-archive/" % host,
                      thumbnail="http://xbmc-repo-ackbarr.googlecode.com/svn/trunk/dev/skin.cirrus%20extended%20v2/extras/moviegenres/New%20TV%20Shows.png"),
                 Item(channel=__channel__,
-                     title="Anime / Cartoni",
+                     title="[COLOR azure]Anime / Cartoni[/COLOR]",
                      action="serietv",
                      url="%s/category/anime-cartoni-animati/" % host,
                      thumbnail="http://orig09.deviantart.net/df5a/f/2014/169/2/a/fist_of_the_north_star_folder_icon_by_minacsky_saya-d7mq8c8.png"),
                 Item(channel=__channel__,
-                     title="Cerca...",
+                     title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
@@ -77,6 +77,8 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
@@ -93,7 +95,7 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
-                 title="Successivo >>",
+                 title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -124,6 +126,8 @@ def serietv(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="episodios",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
@@ -140,7 +144,7 @@ def serietv(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="serietv",
-                 title="Successivo >>",
+                 title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                  folder=True))
@@ -212,8 +216,8 @@ def episodios(item):
         load_episodios()
 
     if config.get_library_support():
-        itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.title) )
-        itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.title) )
+        itemlist.append( Item(channel=__channel__, title=item.title, url=item.url, action="add_serie_to_library", extra="episodios", show=item.show) )
+        itemlist.append( Item(channel=item.channel, title="Scarica tutti gli episodi della serie", url=item.url, action="download_all_episodes", extra="episodios", show=item.show) )
 
     return itemlist
 
@@ -234,3 +238,5 @@ def findvid_serie(item):
         videoitem.channel = __channel__
 
     return itemlist
+
+

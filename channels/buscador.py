@@ -23,7 +23,7 @@ def mainlist(item,preferred_thumbnail="squares"):
     logger.info("streamondemand.channels.buscador mainlist")
 
     itemlist = []
-    itemlist.append( Item(channel=__channel__ , action="search"  , title="Effettuare una nuova ricerca..." ))
+    itemlist.append( Item(channel=__channel__ , action="search"  , title="[COLOR yellow]Effettuare una nuova ricerca...[/COLOR]" ))
 
     saved_searches_list = get_saved_searches(item.channel)
 
@@ -31,7 +31,7 @@ def mainlist(item,preferred_thumbnail="squares"):
         itemlist.append( Item(channel=__channel__ , action="do_search"  , title=' "'+saved_search_text+'"', extra=saved_search_text ))
 
     if len(saved_searches_list)>0:
-        itemlist.append( Item(channel=__channel__ , action="clear_saved_searches"  , title="Elimina cronologia ricerche" ))
+        itemlist.append( Item(channel=__channel__ , action="clear_saved_searches"  , title="[COLOR red]Elimina cronologia ricerche[/COLOR]" ))
 
     return itemlist
 
@@ -112,7 +112,7 @@ def do_search(item):
                 logger.info("streamondemand.channels.buscador cargado " + basename_without_extension + " de "+ infile)
                 channel_result_itemlist = obj.search( Item() , tecleado)
                 for item in channel_result_itemlist:
-                    item.title = item.title + " su " + basename_without_extension + ""
+                    item.title = item.title + " [COLOR orange]su[/COLOR] [COLOR green]" + basename_without_extension + "[/COLOR]"
                     item.viewmode = "list"
 
                 itemlist.extend( channel_result_itemlist )

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <channel>
-    <id>biblioteca</id>
-    <name>Biblioteca</name>
+    <id>bibliotecaattori</id>
+    <name>Bibliotecaattori</name>
     <language>it</language>
-    <update_url>https://raw.githubusercontent.com/Fenice82/plugin.video.streamondemand-pureita/master/channels/bibliotecaattori.py</update_url>
+    <update_url>https://raw.githubusercontent.com/Zanzibar82/plugin.video.streamondemand/master/channels/bibliotecaattori.py</update_url>
     <active>true</active>
-    <include_in_global_search>false</include_in_global_search>
+    <include_in_global_search>true</include_in_global_search>
     <version>1</version>
     <adult>false</version>
-    <date>27/09/2015</date>
-    <changes>commented out search</changes>
+    <date>25/09/2015</date>
+    <changes>Sfoglia i contenuti sul web</changes>
     <categories>
         <category>movie</category>
         <category>serie</category>

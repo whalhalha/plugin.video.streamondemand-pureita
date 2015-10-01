@@ -2,7 +2,7 @@
 # ------------------------------------------------------------
 # streamondemand.- XBMC Plugin
 # Canal para cineblog01
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
 import urllib2
 import urlparse
@@ -144,6 +144,8 @@ def peliculasrobalo(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
@@ -209,6 +211,8 @@ def peliculas(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
@@ -270,7 +274,7 @@ def menugeneros(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -304,7 +308,7 @@ def menuhd(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -338,7 +342,7 @@ def menuanyos(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculasrobalo",
-                 title=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -398,7 +402,9 @@ def listserie(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid_serie",
-                 title=scrapedtitle,
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot))
@@ -443,6 +449,8 @@ def listaaz(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid_anime",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail="http://www.justforpastime.net/uploads/3/8/1/5/38155083/273372_orig.jpg",
@@ -505,7 +513,7 @@ def animegenere(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="listanime",
-                 title=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=sitoanime + scrapedurl))
 
     return itemlist
@@ -539,6 +547,8 @@ def listanime(item):
         itemlist.append(
             Item(channel=__channel__,
                  action="findvid_anime",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
@@ -581,8 +591,8 @@ def findvid(item):
                  action="play",
                  title=title,
                  url=scrapedurl,
-                 fulltitle=item.title,
-                 show=item.title,
+                 fulltitle=item.fulltitle,
+                 show=item.show,
                  folder=False))
 
     streaming_hd = scrapertools.find_single_match(data, '<strong>Streaming HD[^<]+</strong>(.*?)<table height="30">')
@@ -596,8 +606,8 @@ def findvid(item):
                  action="play",
                  title=title,
                  url=scrapedurl,
-                 fulltitle=item.title,
-                 show=item.title,
+                 fulltitle=item.fulltitle,
+                 show=item.show,
                  folder=False))
 
     streaming_3D = scrapertools.find_single_match(data, '<strong>Streaming 3D[^<]+</strong>(.*?)<table height="30">')
@@ -611,8 +621,8 @@ def findvid(item):
                  action="play",
                  title=title,
                  url=scrapedurl,
-                 fulltitle=item.title,
-                 show=item.title,
+                 fulltitle=item.fulltitle,
+                 show=item.show,
                  folder=False))
 
     download = scrapertools.find_single_match(data, '<strong>Download:</strong>(.*?)<table height="30">')
@@ -626,8 +636,8 @@ def findvid(item):
                  action="play",
                  title=title,
                  url=scrapedurl,
-                 fulltitle=item.title,
-                 show=item.title,
+                 fulltitle=item.fulltitle,
+                 show=item.show,
                  folder=False))
 
     download_hd = scrapertools.find_single_match(data,
@@ -642,8 +652,8 @@ def findvid(item):
                  action="play",
                  title=title,
                  url=scrapedurl,
-                 fulltitle=item.title,
-                 show=item.title,
+                 fulltitle=item.fulltitle,
+                 show=item.show,
                  folder=False))
 
     if len(itemlist) == 0:
@@ -678,8 +688,8 @@ def findvid_serie(item):
                      action="play",
                      title=title,
                      url=scrapedurl,
-                     fulltitle=item.title,
-                     show=item.title,
+                     fulltitle=item.fulltitle,
+                     show=item.show,
                      folder=False))
 
     return itemlist
@@ -714,8 +724,8 @@ def findvid_anime(item):
                              action="play",
                              title=title,
                              url=scrapedurl,
-                             fulltitle=item.title,
-                             show=item.title,
+                             fulltitle=item.fulltitle,
+                             show=item.show,
                              folder=False))
 
     return itemlist
@@ -755,6 +765,7 @@ def play(item):
     for videoitem in itemlist:
         videoitem.title = item.show
         videoitem.fulltitle = item.fulltitle
+        videoitem.show = item.show
         videoitem.thumbnail = item.thumbnail
         videoitem.channel = __channel__
 
@@ -776,3 +787,4 @@ def anti_cloudflare(url):
         scrapertools.get_headers_from_response(sito + "/" + resp_headers['refresh'][7:], headers=headers)
 
     return scrapertools.cache_page(url, headers=headers)
+

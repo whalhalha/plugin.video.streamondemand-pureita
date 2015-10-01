@@ -3,7 +3,7 @@
 # streamondemand.- XBMC Plugin
 # Canal para youtube
 # Buscador simple para visonar o descargar desde YouTube
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 #------------------------------------------------------------
 import re, sys
 
@@ -58,7 +58,7 @@ def mainlist(item):
 
     itemlist = []
 
-    itemlist.append( Item( channel=__channel__, action="search", title="Cerca musica, trailers, concerti e spettacoli su YouTube ...", thumbnail="http://i.klepeer.com/icons/you_tube_icon.png" ) )
+    itemlist.append( Item( channel=__channel__, action="search", title="[COLOR azure]Cerca musica, trailers, concerti e spettacoli su [/COLOR]You[COLOR red]Tube[/COLOR] ...", thumbnail="http://i.klepeer.com/icons/you_tube_icon.png" ) )
 
     return itemlist
 
