@@ -25,19 +25,23 @@ def getmainlist(preferred_thumb=""):
     # Añade los canales que forman el menú principal
     itemlist.append( Item(title=config.get_localized_string(30118) , channel="channelselector" , action="channeltypes", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales.png") ) )
     #itemlist.append( Item(title=config.get_localized_string(30130) , channel="novedades" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_novedades.png") ) )
-    itemlist.append( Item(title="Contenuti Vari" , channel="novedades" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_novedades.png") ) )
+
     #itemlist.append( Item(title=config.get_localized_string(30103) , channel="buscador" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_buscar.png")) )
     itemlist.append( Item(title="Ricerca Globale" , channel="buscador" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_buscar.png")) )
+    itemlist.append( Item(title="Biblioteca" , channel="biblioteca" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
+    #itemlist.append( Item(title="Biblioteca Registi" , channel="bibliotecaregisti" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
+    #itemlist.append( Item(title="Biblioteca Attori" , channel="bibliotecaattori" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
     itemlist.append( Item(title="Oggi in TV" , channel="filmontv" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_filmontv.png")) )
-    #itemlist.append( Item(title="Biblioteca" , channel="biblioteca" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
-    itemlist.append( Item(title="Biblioteca Attori" , channel="bibliotecaattori" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
-    itemlist.append( Item(title="Biblioteca Registi" , channel="bibliotecaregisti" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
+    itemlist.append( Item(title="Contenuti Vari" , channel="novedades" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_novedades.png") ) )
+
+
+
     itemlist.append( Item(title=config.get_localized_string(40103) , channel="youtube" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_youtube.png")) )
     #if config.is_xbmc(): itemlist.append( Item(title=config.get_localized_string(30128) , channel="trailertools" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_trailers.png")) )
     itemlist.append( Item(title=config.get_localized_string(30102) , channel="favoritos" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_favoritos.png")) )
+    #itemlist.append( Item(title=config.get_localized_string(30131) , channel="libreria" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
     if config.get_platform()=="rss":itemlist.append( Item(title="pyLOAD (Beta)" , channel="pyload" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"pyload.png")) )
     itemlist.append( Item(title=config.get_localized_string(30101) , channel="descargas" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_descargas.png")) )
-
     if "xbmceden" in config.get_platform():
         itemlist.append( Item(title=config.get_localized_string(30100) , channel="configuracion" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_configuracion.png"), folder=False) )
     else:
@@ -222,6 +226,7 @@ def channels_list():
     itemlist.append( Item( title="CineBlog 01"         , channel="cineblog01"           , language="IT"    , category="B,F,S,A,VOS"   , type="generic"  ))
     itemlist.append( Item( title="CineBlog01.FM"       , channel="cineblogfm"           , language="IT"    , category="F,S"   , type="generic"))
     itemlist.append( Item( title="Cinemagratis"        , channel="cinemagratis"       , language="IT"    , category="F"       , type="generic"))
+    itemlist.append( Item( title="Chimerarevo"        , channel="chimerarevo"       , language="IT"    , category="D"       , type="generic"))
     itemlist.append( Item( title="CucinareFacile"        , channel="cucinarefacile"       , language="IT"    , category="D"       , type="generic"))
     itemlist.append( Item( title="Darkstream"        , channel="darkstream"       , language="IT"    , category="B,F"       , type="generic"))
     itemlist.append( Item( title="Documentari Streaming"  , channel="documentaristreaming"           , language="IT"    , category="D"   , type="generic"))
@@ -245,6 +250,7 @@ def channels_list():
     itemlist.append( Item( title="Italia Serie"        , channel="italiaserie"           , language="IT"    , category="F,S,A"   , type="generic"))
     itemlist.append( Item( title="ItaStreaming"      , channel="itastreaming" , language="IT" , category="F,S,A" , type="generic"))
     itemlist.append( Item( title="LiberoITA"       , channel="liberoita"           , language="IT"    , category="F,S,A"   , type="generic"))
+    itemlist.append( Item( title="Multiplayer"        , channel="multiplayer"       , language="IT"    , category="D"       , type="generic"))
     itemlist.append( Item( title="Liberostreaming" , channel="liberostreaming" , language="IT" , category="F,S,A" , type="generic"))
     itemlist.append( Item( title="Pianeta Streaming"   , channel="pianetastreaming"           , language="IT"    , category="F,S,A"   , type="generic"))
     itemlist.append( Item( title="Pirate Streaming"    , channel="piratestreaming"           , language="IT"    , category="F,S,A"   , type="generic"  ))
@@ -256,7 +262,7 @@ def channels_list():
     itemlist.append( Item( title="Streaming01"    , channel="streaming01"         , language="IT" , category="B,F"        , type="generic" , extra="Series"))
     itemlist.append( Item( title="Streaminfilmit"    , channel="streamingfilmit"         , language="IT" , category="F"        , type="generic" , extra="Series"))
     itemlist.append( Item( title="Tantifilm"        , channel="tantifilm"       , language="IT"    , category="B,F"       , type="generic"))
-
+    itemlist.append( Item( title="Bibliotrailer"        , channel="bibliotrailer"       , language="IT"    , category="D"       , type="generic"))
     return itemlist
 
 def addfolder(nombre,channelname,accion,category="",thumbnailname="",thumbnail="",folder=True):
