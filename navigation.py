@@ -33,8 +33,10 @@ import xbmcaddon
 import channelselector
 import plugintools
 from core.item import Item
-#from core import config
+from core import config
 from core import scrapertools
+
+config.verify_directories_created()
 			
 def get_next_items( item ):
 
