@@ -11,12 +11,14 @@ documoo
 eurostreaming
 filmgratiscc
 filmstreampw
+filmsubitotv
 guardaserie
 hubberfilm
 ildocumento
 italiaserie
 itastreaming
 liberostreaming
+multiplayer
 serietvsubita
 seriehd
 storiedellarte
@@ -33,3 +35,5 @@ biblioteca
 bibliotecaregisti
 bibliotecaattori
 chimerarevo
+webshortfilms
+bibliotrailer
