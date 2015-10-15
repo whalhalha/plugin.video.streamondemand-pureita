@@ -481,6 +481,8 @@ def download_all_episodes(item,channel,first_episode="",preferred_server="vidspo
             plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, episode="+episode_item.title)
             #episode_title = scrapertools.get_match(episode_item.title,"(\d+x\d+)")
             episode_title = episode_item.title
+            episode_title = re.sub(r"\[COLOR [^]]*\]", "", episode_title)
+            episode_title = re.sub(r"\[/COLOR\]", "", episode_title)
             plugintools.log("streamondemand-pureita.navigation.py download_all_episodes, episode="+episode_title)
         except:
             import traceback

@@ -25,23 +25,20 @@ def getmainlist(preferred_thumb=""):
     # Añade los canales que forman el menú principal
     itemlist.append( Item(title=config.get_localized_string(30118) , channel="channelselector" , action="channeltypes", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales.png") ) )
     #itemlist.append( Item(title=config.get_localized_string(30130) , channel="novedades" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_novedades.png") ) )
-
     #itemlist.append( Item(title=config.get_localized_string(30103) , channel="buscador" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_buscar.png")) )
-    itemlist.append( Item(title="Ricerca Globale" , channel="buscador" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_buscar.png")) )
-    itemlist.append( Item(title="Biblioteca" , channel="biblioteca" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
+    itemlist.append( Item(title="Ricerca Globale" , channel="biblioteca" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_buscar.png")) )
+    #itemlist.append( Item(title="Biblioteca" , channel="buscador" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
     #itemlist.append( Item(title="Biblioteca Registi" , channel="bibliotecaregisti" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
     #itemlist.append( Item(title="Biblioteca Attori" , channel="bibliotecaattori" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
     itemlist.append( Item(title="Oggi in TV" , channel="filmontv" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_filmontv.png")) )
     itemlist.append( Item(title="Contenuti Vari" , channel="novedades" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_novedades.png") ) )
-
-
-
     itemlist.append( Item(title=config.get_localized_string(40103) , channel="youtube" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_youtube.png")) )
     #if config.is_xbmc(): itemlist.append( Item(title=config.get_localized_string(30128) , channel="trailertools" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_trailers.png")) )
     itemlist.append( Item(title=config.get_localized_string(30102) , channel="favoritos" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_favoritos.png")) )
     #itemlist.append( Item(title=config.get_localized_string(30131) , channel="libreria" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_biblioteca.png")) )
     if config.get_platform()=="rss":itemlist.append( Item(title="pyLOAD (Beta)" , channel="pyload" , action="mainlist" , thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"pyload.png")) )
     itemlist.append( Item(title=config.get_localized_string(30101) , channel="descargas" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_descargas.png")) )
+
     if "xbmceden" in config.get_platform():
         itemlist.append( Item(title=config.get_localized_string(30100) , channel="configuracion" , action="mainlist", thumbnail = urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_configuracion.png"), folder=False) )
     else:
@@ -111,7 +108,6 @@ def getchanneltypes(preferred_thumb=""):
     #itemlist.append( Item( title=config.get_localized_string(30127) , channel="channelselector" , action="listchannels" , category="G"   , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"thumb_canales_servidores.png")))
     #itemlist.append( Item( title=config.get_localized_string(30134) , channel="channelselector" , action="listchannels" , category="NEW" , thumbnail=urlparse.urljoin(get_thumbnail_path(preferred_thumb),"novedades.png")))
     return itemlist
-    
 def channeltypes(params,url,category):
     logger.info("channelselector.mainlist channeltypes")
 
@@ -183,7 +179,6 @@ def filterchannels(category,preferred_thumb=""):
             idiomav=""
 
         channelslist = channels_list()
-    
         for channel in channelslist:
             # Pasa si no ha elegido "todos" y no está en la categoría elegida
             if category<>"*" and category not in channel.category:
@@ -218,6 +213,7 @@ def channels_list():
         itemlist.append( Item( title=config.get_setting("personalchannelname4") , channel="personal4" , language="" , category="" , type="generic"  ))
     if config.get_setting("personalchannel5")=="true":
         itemlist.append( Item( title=config.get_setting("personalchannelname5") , channel="personal5" , language="" , category="" , type="generic"  ))
+    #itemlist.append( Item( title="[COLOR red]SkyStreaming[/COLOR]"        , channel="skystreaming"       , language="IT"    , category="B,F"       , type="generic"))    
     itemlist.append( Item( title="AltaDefinizione01"      , channel="altadefinizione01"           , language="IT"    , category="B,F,S,A"   , type="generic"))
     itemlist.append( Item( title="Altadefinizione.click" , channel="altadefinizioneclick" , language="IT" , category="F,S,A" , type="generic"))
     itemlist.append( Item( title="Anime Sub Ita"   , channel="animesubita"           , language="IT"    , category="A"   , type="generic"))
@@ -240,6 +236,7 @@ def channels_list():
     itemlist.append( Item( title="Film Senza Limiti"   , channel="filmsenzalimiti"       , language="IT"    , category="B,F"        , type="generic"     ))
     itemlist.append( Item( title="FilmSubito"          , channel="filmsubitotv"           , language="IT"    , category="F,S,A"   , type="generic"))
     itemlist.append( Item( title="Foxycinema"          , channel="foxycinema"           , language="IT"    , category="F,S,A"   , type="generic"))
+    itemlist.append( Item( title="FuturamaITA Streaming"      , channel="futuramaita"           , language="IT"    , category="F,S,A"   , type="generic"))
     itemlist.append( Item( title="Guardaserie.net"     , channel="guardaserie"       , language="IT"    , category="S,B"        , type="generic"))
     itemlist.append( Item( title="GuardareFilm"         , channel="guardarefilm"           , language="IT"    , category="F,S,A"    , type="generic"))
     #itemlist.append( Item( title="Hubberfilm"          , channel="hubberfilm"           , language="IT"    , category="F,S,A"   , type="generic"))
@@ -257,12 +254,16 @@ def channels_list():
     itemlist.append( Item( title="PortaleHD"   , channel="portalehd"           , language="IT"    , category="F,S,A,B"   , type="generic"))
     itemlist.append( Item( title="Serie HD"     , channel="seriehd"       , language="IT"    , category="S"        , type="generic"))
     itemlist.append( Item( title="Serie TV Sub ITA"    , channel="serietvsubita"         , language="IT" , category="S"        , type="generic" , extra="Series"))
+    itemlist.append( Item( title="SimpsonITA Streaming"      , channel="simpsonita"           , language="IT"    , category="F,S,A"   , type="generic"))
     itemlist.append( Item( title="Storie dell'Arte"    , channel="storiedellarte"         , language="IT" , category="D"        , type="generic"))
     itemlist.append( Item( title="StreamBlog"    , channel="streamblog"         , language="IT" , category="S,F,A"        , type="generic" , extra="Series"))
     itemlist.append( Item( title="Streaming01"    , channel="streaming01"         , language="IT" , category="B,F"        , type="generic" , extra="Series"))
     itemlist.append( Item( title="Streaminfilmit"    , channel="streamingfilmit"         , language="IT" , category="F"        , type="generic" , extra="Series"))
     itemlist.append( Item( title="Tantifilm"        , channel="tantifilm"       , language="IT"    , category="B,F"       , type="generic"))
+    itemlist.append( Item( title="Webshortfilms"        , channel="webshortfilms"       , language="IT"    , category="F,D"       , type="generic"))
     itemlist.append( Item( title="Bibliotrailer"        , channel="bibliotrailer"       , language="IT"    , category="D"       , type="generic"))
+    #itemlist.append( Item( title="Tuttolooneytunes"        , channel="tuttolooneytunes"       , language="IT"    , category="A,D"       , type="generic"))
+
     return itemlist
 
 def addfolder(nombre,channelname,accion,category="",thumbnailname="",thumbnail="",folder=True):
@@ -271,14 +272,14 @@ def addfolder(nombre,channelname,accion,category="",thumbnailname="",thumbnail="
             category = unicode( nombre, "utf-8" ).encode("iso-8859-1")
         except:
             pass
-    
+   
+
     import xbmc
     import xbmcgui
     import xbmcplugin
     listitem = xbmcgui.ListItem( nombre , iconImage="DefaultFolder.png", thumbnailImage=thumbnail)
     itemurl = '%s?channel=%s&action=%s&category=%s' % ( sys.argv[ 0 ] , channelname , accion , category )
     xbmcplugin.addDirectoryItem( handle = int(sys.argv[ 1 ]), url = itemurl , listitem=listitem, isFolder=folder)
-
 def get_thumbnail_path(preferred_thumb=""):
 
     WEB_PATH = ""
