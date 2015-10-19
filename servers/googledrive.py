@@ -65,7 +65,7 @@ def find_videos(data):
     encontrados = set()
     devuelve = []
 
-    patronvideos = r'//drive.google.com/file/d/([a-zA-Z0-9_-]+)'
+    patronvideos = r'.google.com/file/d/([a-zA-Z0-9_-]+)'
     logger.info("[googledrive.py] find_videos #" + patronvideos + "#")
 
     matches = re.compile(patronvideos, re.DOTALL).findall(data)
@@ -73,6 +73,16 @@ def find_videos(data):
     for media_id in matches:
         titulo = "[googledrive]"
         url = 'https://drive.google.com/file/d/%s/preview' % media_id
+        if url not in encontrados:
+            logger.info("  url=" + url)
+            devuelve.append([titulo, url, 'googledrive'])
+            encontrados.add(url)
+        else:
+            logger.info("  url duplicada=" + url)
+
+    for media_id in matches:
+        titulo = "[googledrive]"
+        url = 'https://docs.google.com/file/d/%s/preview' % media_id
         if url not in encontrados:
             logger.info("  url=" + url)
             devuelve.append([titulo, url, 'googledrive'])

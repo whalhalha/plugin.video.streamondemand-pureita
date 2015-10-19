@@ -87,8 +87,19 @@ class ChannelWindow(xbmcgui.WindowXML):
             self.close()
 
         if action == ACTION_SELECT_ITEM:
+            from core import config
+	
+            skin_selector = config.get_setting("skin_selector")
+            if skin_selector == "":
+                skin_selector = "0"
+         
+            if skin_selector == "0":
 
-            loader_image = os.path.join( plugintools.get_runtime_path(), 'resources', 'skins', 'Default', 'media', 'loader.gif')
+                loader_image = os.path.join( plugintools.get_runtime_path(), 'resources', 'skins', 'Default', 'media', 'loader.gif')
+            if skin_selector == "1":
+
+                loader_image = os.path.join( plugintools.get_runtime_path(), 'resources', 'skins', 'Default', 'media', 'loader-1.gif')				 
+				 
             loader = xbmcgui.ControlImage(1200, 19, 40, 40, loader_image)
             self.addControl(loader)
 

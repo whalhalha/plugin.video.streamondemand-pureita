@@ -279,24 +279,48 @@ def get_next_items( item ):
     return itemlist
 
 def get_window_for_item( item ):
-    plugintools.log("navigation.get_window_for_item item.channel="+item.channel+", item.action=="+item.action)
+     plugintools.log("navigation.get_window_for_item item.channel="+item.channel+", item.action=="+item.action)
+     from core import config
+	
+     skin_selector = config.get_setting("skin_selector")
+     if skin_selector == "":
+        skin_selector = "0"
+         
+     if skin_selector == "0":
 
-    # El menú principal va con banners + titulo
-    if item.channel=="navigation" or (item.channel=="novedades" and item.action=="mainlist") or (item.channel=="buscador" and item.action=="mainlist") or (item.channel=="channelselector" and item.action=="channeltypes"):
-        import window_channels
-        window = window_channels.ChannelWindow("banner.xml",plugintools.get_runtime_path())
+		# El menú principal va con banners + titulo
+		if item.channel=="navigation" or (item.channel=="novedades" and item.action=="mainlist") or (item.channel=="buscador" and item.action=="mainlist") or (item.channel=="channelselector" and item.action=="channeltypes"):
+			import window_channels
+			window = window_channels.ChannelWindow("banner.xml",plugintools.get_runtime_path())
 
-    # El listado de canales va con banners sin título
-    elif item.channel=="channelselector" and item.action=="listchannels":
-        import window_channels
-        window = window_channels.ChannelWindow("channels.xml",plugintools.get_runtime_path())
+		# El listado de canales va con banners sin título
+		elif item.channel=="channelselector" and item.action=="listchannels":
+			import window_channels
+			window = window_channels.ChannelWindow("channels.xml",plugintools.get_runtime_path())
 
-    # El resto va con el aspecto normal
-    else:
-        import window_menu
-        window = window_menu.MenuWindow("content.xml",plugintools.get_runtime_path())
+		# El resto va con el aspecto normal
+		else:
+			import window_menu
+			window = window_menu.MenuWindow("content.xml",plugintools.get_runtime_path())
+			
+     if skin_selector == "1":
 
-    return window
+		# El menú principal va con banners + titulo
+		if item.channel=="navigation" or (item.channel=="novedades" and item.action=="mainlist") or (item.channel=="buscador" and item.action=="mainlist") or (item.channel=="channelselector" and item.action=="channeltypes"):
+			import window_channels
+			window = window_channels.ChannelWindow("banner-1.xml",plugintools.get_runtime_path())
+
+		# El listado de canales va con banners sin título
+		elif item.channel=="channelselector" and item.action=="listchannels":
+			import window_channels
+			window = window_channels.ChannelWindow("channels-1.xml",plugintools.get_runtime_path())
+
+		# El resto va con el aspecto normal
+		else:
+			import window_menu
+			window = window_menu.MenuWindow("content-1.xml",plugintools.get_runtime_path())
+
+     return window
 	
 # Parse XBMC params - based on script.module.parsedom addon    
 def get_params():

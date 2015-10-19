@@ -4,17 +4,17 @@
 # Canal para cineblog01
 # http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
 # ------------------------------------------------------------
+import re
+import sys
+import time
 import urllib2
 import urlparse
-import sys
-import re
-import time
 
-from servers import servertools
-from core import scrapertools
-from core import logger
 from core import config
+from core import logger
+from core import scrapertools
 from core.item import Item
+from servers import servertools
 
 __channel__ = "cineblog01"
 __category__ = "F,S,A"
@@ -72,7 +72,6 @@ def mainlist(item):
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca Film[/COLOR]",
-                     extra="newsearch",
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
                      action="listserie",
@@ -104,7 +103,6 @@ def mainlist(item):
                      title="[COLOR azure]Anime - Lista Completa[/COLOR]",
                      url="http://www.cineblog01.cc/anime/lista-completa-anime-cartoon/",
                      thumbnail="http://i.imgur.com/IjCmx5r.png"),
-
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca Anime[/COLOR]",
@@ -362,12 +360,9 @@ def search(item, texto):
         if item.extra == "cartoni":
             item.url = "http://www.cineblog01.cc/anime/?s=" + texto
             return listanime(item)
-        if item.extra == "newsearch":
-            item.url = "http://www.cb01.eu/?s=" + texto
-            return peliculasrobalo(item)
         else:
             item.url = "http://www.cb01.eu/?s=" + texto
-            return peliculas(item)
+            return peliculasrobalo(item)
 
     # Se captura la excepción, para no interrumpir al buscador global si un canal falla
     except:
@@ -401,7 +396,7 @@ def listserie(item):
         # Añade al listado de XBMC
         itemlist.append(
             Item(channel=__channel__,
-                 action="findvid_serie",
+                 action="episodios",
                  fulltitle=scrapedtitle,
                  show=scrapedtitle,
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
@@ -420,6 +415,101 @@ def listserie(item):
                  thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png", ))
     except:
         pass
+
+    return itemlist
+
+
+def episodios(item):
+    def load_episodios(html, item, itemlist, lang_title):
+        for data in scrapertools.decodeHtmlentities(html).splitlines():
+            ## Extrae las entradas
+            end = data.find('<a ')
+            if end > 0:
+                scrapedtitle = re.sub(r'<[^>]*>', '', data[:end]).strip()
+            else:
+                scrapedtitle = ''
+            if scrapedtitle == '':
+                patron = '<a\s*href="[^"]+"\s*target="_blank">([^<]+)</a>'
+                scrapedtitle = scrapertools.find_single_match(data, patron).strip()
+            title = scrapertools.find_single_match(scrapedtitle, '\d+[^\d]+\d+')
+            if title == '':
+                title = scrapedtitle
+            if title != '':
+                itemlist.append(
+                    Item(channel=__channel__,
+                         action="findvid_serie",
+                         title=title + " (" + lang_title + ")",
+                         url=item.url,
+                         thumbnail=item.thumbnail,
+                         extra=data,
+                         fulltitle=item.fulltitle,
+                         show=item.show))
+
+    logger.info("[cineblog01.py] episodios")
+
+    itemlist = []
+
+    ## Descarga la página
+    data = anti_cloudflare(item.url)
+
+    start = data.find('<td bgcolor="#ECEAE1">')
+    end = data.find('</td>', start)
+
+    data = data[start:end]
+
+    lang_titles = []
+    starts = []
+    patron = r"STAGION[I|E].*?ITA"
+    matches = re.compile(patron).finditer(data)
+    for match in matches:
+        season_title = match.group()
+        if season_title != '':
+            lang_titles.append('SUB ITA' if 'SUB' in season_title.upper() else 'ITA')
+            starts.append(match.end())
+
+    i = 1
+    len_lang_titles = len(lang_titles)
+
+    while i <= len_lang_titles:
+        inizio = starts[i - 1]
+        fine = starts[i] if i < len_lang_titles else -1
+
+        html = data[inizio:fine]
+        lang_title = lang_titles[i - 1]
+
+        load_episodios(html, item, itemlist, lang_title)
+
+        i += 1
+
+    if len(itemlist) == 0:
+        patron = r'<div class="sp-head(?: unfolded)?" title="Expand">([^<]+)</div>\s*<div class="sp-body(?: folded)?">(.*?)<div class="spdiv">\[chiudi\]</div>'
+        matches = re.compile(patron, re.DOTALL).findall(data)
+        for lang_title, match in matches:
+            lang_title = 'SUB ITA' if 'SUB' in lang_title.upper() else 'ITA'
+            load_episodios(match, item, itemlist, lang_title)
+
+        if len(itemlist) == 0:
+            patron = '<strong>([^<]+)</strong></p>\s*(?:<p>&nbsp;</p>\s*)+(.*?)<p>&nbsp;</p>'
+            matches = re.compile(patron, re.DOTALL).findall(data)
+            for lang_title, match in matches:
+                lang_title = 'SUB ITA' if 'SUB' in lang_title.upper() else 'ITA'
+                load_episodios(match, item, itemlist, lang_title)
+
+    if config.get_library_support() and len(itemlist) != 0:
+        itemlist.append(
+            Item(channel=__channel__,
+                 title=item.title,
+                 url=item.url,
+                 action="add_serie_to_library",
+                 extra="episodios",
+                 show=item.show))
+        itemlist.append(
+            Item(channel=item.channel,
+                 title="Scarica tutti gli episodi della serie",
+                 url=item.url,
+                 action="download_all_episodes",
+                 extra="episodios",
+                 show=item.show))
 
     return itemlist
 
@@ -612,9 +702,9 @@ def findvid(item):
 
     streaming_3D = scrapertools.find_single_match(data, '<strong>Streaming 3D[^<]+</strong>(.*?)<table height="30">')
     patron = '<td><a href="([^"]+)" target="_blank">([^<]+)</a></td>'
-    matches = re.compile(patron, re.DOTALL).findall(streaming_hd)
+    matches = re.compile(patron, re.DOTALL).findall(streaming_3D)
     for scrapedurl, scrapedtitle in matches:
-        print "##### findvideos Streaming HD ## %s ## %s ##" % (scrapedurl, scrapedtitle)
+        print "##### findvideos Streaming 3D ## %s ## %s ##" % (scrapedurl, scrapedtitle)
         title = "[COLOR pink]Streaming 3D:[/COLOR] " + item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
         itemlist.append(
             Item(channel=__channel__,
@@ -668,29 +758,24 @@ def findvid_serie(item):
     itemlist = []
 
     ## Descarga la página
-    data = anti_cloudflare(item.url)
-    data = scrapertools.decodeHtmlentities(data).replace('http://cineblog01.pw', 'http://k4pp4.pw')
+    data = item.extra
+    data = data.replace('http://cineblog01.pw', 'http://k4pp4.pw')
 
-    patron1 = '<p(?:\s*style="[^"]*")?>(?:<strong>)?([^<]+)(<a.*?)(?:</strong>)?</p>'
-    patron2 = '<a\s*href="([^"]+)"\s*target="_blank">([^<]+)</a>'
-    matches1 = re.compile(patron1, re.DOTALL).finditer(data)
-    for match1 in matches1:
-        titulo = match1.group(1)
-        links = match1.group(2)
-        ## Extrae las entradas
-        matches2 = re.compile(patron2, re.DOTALL).finditer(links)
-        for match2 in matches2:
-            scrapedurl = match2.group(1)
-            scrapedtitle = match2.group(2)
-            title = item.title + " " + titulo + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
-            itemlist.append(
-                Item(channel=__channel__,
-                     action="play",
-                     title=title,
-                     url=scrapedurl,
-                     fulltitle=item.fulltitle,
-                     show=item.show,
-                     folder=False))
+    patron = '<a\s*href="([^"]+)"\s*target="_blank">([^<]+)</a>'
+    ## Extrae las entradas
+    matches = re.compile(patron, re.DOTALL).finditer(data)
+    for match in matches:
+        scrapedurl = match.group(1)
+        scrapedtitle = match.group(2)
+        title = item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]"
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="play",
+                 title=title,
+                 url=scrapedurl,
+                 fulltitle=item.fulltitle,
+                 show=item.show,
+                 folder=False))
 
     return itemlist
 
@@ -734,16 +819,16 @@ def findvid_anime(item):
 def play(item):
     logger.info("[cineblog01.py] play")
 
-    data = anti_cloudflare(item.url)
-
     print "##############################################################"
     if "go.php" in item.url:
+        data = anti_cloudflare(item.url)
         try:
             data = scrapertools.get_match(data, 'window.location.href = "([^"]+)";')
         except IndexError:
             data = scrapertools.get_match(data, r'<a href="([^"]+)" class="btn-wrapper">Clicca per proseguire</a>')
         print "##### play go.php data ##\n%s\n##" % data
     elif "/link/" in item.url:
+        data = anti_cloudflare(item.url)
         from lib.jsbeautifier.unpackers import packer
 
         try:
