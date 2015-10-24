@@ -1,3 +1,7 @@
+5.2.1
+
+Minor Fix
+
 5.2.0
 
  - Aggiunta nuova skin attivabile dal menu Configurazione.
