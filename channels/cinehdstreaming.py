@@ -37,9 +37,9 @@ def isGeneric():
 def mainlist(item):
     logger.info("streamondemand.cinehdstreaming mainlist")
     itemlist = []
-    itemlist.append( Item(channel=__channel__, title="[COLOR red]Ultimi Film Inseriti[/COLOR]", action="peliculas", url="https://cinehdstreaming.wordpress.com/", thumbnail="https://cinehdstreaming.files.wordpress.com/2015/11/cinema-news.jpg"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Categorie[/COLOR]", action="categorias", url="https://cinehdstreaming.wordpress.com/", thumbnail="https://cinehdstreaming.files.wordpress.com/2015/11/stream.jpg"))
-    itemlist.append( Item(channel=__channel__, title="[COLOR green]Cerca[/COLOR]", action="search", thumbnail="https://cinehdstreaming.files.wordpress.com/2015/11/cerca-un-film.jpg"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Ultimi Film Inseriti[/COLOR]", action="peliculas", url="https://cinehdstreaming.wordpress.com/"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR azure]Categorie[/COLOR]", action="categorias", url="https://cinehdstreaming.wordpress.com/"))
+    itemlist.append( Item(channel=__channel__, title="[COLOR yellow]Cerca[/COLOR]", action="search"))
     
     return itemlist
 
